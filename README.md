@@ -1,2 +1,2 @@
-# WEAVE-Apertif-QC-plots
+# wa-plots
 This repository aims to allow people to visualize WEAVE-Apertif quality control plots
