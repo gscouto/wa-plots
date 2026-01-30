@@ -174,5 +174,5 @@ table_rows = make_table_rows(objects)
 
 html = text.replace("<!-- TABLE_ROWS -->", table_rows)
 
-with open("index_alt.html", "w") as f:
+with open("index.html", "w") as f:
     f.write(html)
