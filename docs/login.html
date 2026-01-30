@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Login</title>
+</head>
+<body>
+
+<h2>Login</h2>
+<input type="password" id="password" placeholder="Password">
+<button onclick="login()">Login</button>
+
+<p id="msg" style="color:red;"></p>
+
+<script>
+  // SHA-256 hash of your password
+  // Example password: "galaxy123"
+  const PASSWORD_HASH =
+    "a66b8b488af1644f8a0a2d93cc2528de4be90326e01b6a01bc666fd9bc259e4a"; // example ONLY
+
+  async function sha256(str) {
+    const buf = new TextEncoder().encode(str);
+    const hash = await crypto.subtle.digest("SHA-256", buf);
+    return Array.from(new Uint8Array(hash))
+      .map(b => b.toString(16).padStart(2, "0"))
+      .join("");
+  }
+
+  async function login() {
+    const pw = document.getElementById("password").value;
+    const hash = await sha256(pw);
+
+    if (hash === PASSWORD_HASH) {
+      localStorage.setItem("loggedIn", "true");
+      window.location.href = "index_alt.html";
+    } else {
+      document.getElementById("msg").textContent = "Wrong password";
+    }
+  }
+</script>
+
+</body>
+</html>
