@@ -89,6 +89,33 @@ def sort_objects(objects):
 
 
 text = f'''
+<script>
+  if (localStorage.getItem("loggedIn") !== "true") {{
+    window.location.href = "login.html";
+  }}
+</script>
+
+<button id="logout-btn" onclick="logout()">Logout</button>
+
+<style>
+  #logout-btn {{
+    position: fixed;
+    top: 12px;
+    right: 16px;
+    padding: 6px 12px;
+    font-size: 14px;
+    cursor: pointer;
+  }}
+</style>
+
+<script>
+  function logout() {{
+    localStorage.removeItem("loggedIn");
+    localStorage.removeItem("loginTime");
+    window.location.href = "login.html";
+  }}
+</script>
+
     <html>
        <head>
           <title>WEAVE Apertif Quality Assurance</title>
