@@ -1,0 +1,1407 @@
+
+<script>
+  if (localStorage.getItem("loggedIn") !== "true") {
+    window.location.href = "login.html";
+  }
+</script>
+
+<button id="logout-btn" onclick="logout()">Logout</button>
+
+<style>
+  #logout-btn {
+    position: fixed;
+    top: 12px;
+    right: 16px;
+    padding: 6px 12px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+</style>
+
+<script>
+  function logout() {
+    localStorage.removeItem("loggedIn");
+    localStorage.removeItem("loginTime");
+    window.location.href = "login.html";
+  }
+</script>
+
+    <html>
+       <head>
+          <title>WEAVE Apertif Quality Assurance</title>
+    
+        <!-- CSS style to set alternate table
+                row using color -->
+        <style>
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+    
+            th, td {
+                text-align: left;
+                padding: 8px;
+            }
+    
+            tr:nth-child(even) {
+                background-color: Moccasin;
+            }
+        </style>
+    
+       </head>
+    
+       <body>
+          <h1>Welcome to WEAVE-Apertif quality control data</h1>
+          <p>
+             Here you can find the links to quality control plots of the WEAVE LIFU data observed.
+          </p>
+          <p>
+             For details on WEAVE, please take a look into the 
+             <a href="https://ingconfluence.ing.iac.es/confluence/display/WEAV/The+WEAVE+Project" 
+             target="_blank">WEAVE main website</a>.
+          </p>
+          <p>
+             Below you can find the links for the quality control plots of each galaxy observed so far using LIFU data.
+             <a href="WA_QC_plots_doc.pdf" target="_blank">In this document</a> 
+             you can find further information about these plots.
+          </p>
+          
+          
+    <label for="cpsSelect"><b>Select CPS version:</b></label>
+    <select id="cpsSelect" onchange="location = this.value;">
+        <option value="index.html">All versions</option><option value="index_CPSv0.90_APSv1.3.html">CPSv0.90_APSv1.3</option><option value="index_CPSv0.91_APSv1.3.html" selected>CPSv0.91_APSv1.3</option><option value="index_CPSv0.92_APSv1.3.html">CPSv0.92_APSv1.3</option><option value="index_CPSv0.93_APSv1.62.html">CPSv0.93_APSv1.62</option>
+    </select>
+    
+    
+    
+    
+        <table>
+        <colgroup>
+        <col style="width:250px">
+        <col style="width:300px">
+        <col style="width:250px">
+        <col style="width:250px">
+        <col style="width:250px">
+        <col style="width:300px">
+        </colgroup>
+        <tr>
+        <th><b>WEAVE ID (CNAME)</b></th>
+        <th><b>Galaxy name (NED)</b></th>
+        <th><b>OB ID</b></th>
+        <th><b>LIFU MODE</b></th>
+        <th><b>Observation date</b></th>
+        <th><b>Trimester</b></th>
+        <th><b>Notes</b></th>
+        </tr>
+        
+        
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11103_2024-01-05_WVE_10151144+5640197_LOWRES.html" target="_blank">WVE_10151144+5640197</a></td>
+            <td>NGC 3164</td>
+            <td>11103</td>
+            <td>LOWRES</td>
+            <td>2024-01-05</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11104_2024-02-04_WVE_10252423+5531298_LOWRES.html" target="_blank">WVE_10252423+5531298</a></td>
+            <td>CGCG 266-044</td>
+            <td>11104</td>
+            <td>LOWRES</td>
+            <td>2024-02-04</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11105_2024-01-10_WVE_11264048+5344482_LOWRES.html" target="_blank">WVE_11264048+5344482</a></td>
+            <td>UGC 06446</td>
+            <td>11105</td>
+            <td>LOWRES</td>
+            <td>2024-01-10</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11106_2024-02-06_WVE_11432727+5242399_LOWRES.html" target="_blank">WVE_11432727+5242399</a></td>
+            <td>NGC 3829</td>
+            <td>11106</td>
+            <td>LOWRES</td>
+            <td>2024-02-06</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11107_2024-02-07_WVE_11572488+5755480_LOWRES.html" target="_blank">WVE_11572488+5755480</a></td>
+            <td>UGC 06931</td>
+            <td>11107</td>
+            <td>LOWRES</td>
+            <td>2024-02-07</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11108_2024-02-08_WVE_12045909+5806259_LOWRES.html" target="_blank">WVE_12045909+5806259</a></td>
+            <td>UGC 07070</td>
+            <td>11108</td>
+            <td>LOWRES</td>
+            <td>2024-02-08</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11109_2024-02-11_WVE_12052097+6309240_LOWRES.html" target="_blank">WVE_12052097+6309240</a></td>
+            <td>UGC 07079</td>
+            <td>11109</td>
+            <td>LOWRES</td>
+            <td>2024-02-11</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11110_2024-02-07_WVE_12093019+5306179_LOWRES.html" target="_blank">WVE_12093019+5306179</a></td>
+            <td>NGC 4142</td>
+            <td>11110</td>
+            <td>LOWRES</td>
+            <td>2024-02-07</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11112_2024-03-10_WVE_12141807+5936557_LOWRES.html" target="_blank">WVE_12141807+5936557</a></td>
+            <td>NGC 4195</td>
+            <td>11112</td>
+            <td>LOWRES</td>
+            <td>2024-03-10</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11113_2024-01-06_WVE_12204755+5805328_LOWRES.html" target="_blank">WVE_12204755+5805328</a></td>
+            <td>NGC 4290</td>
+            <td>11113</td>
+            <td>LOWRES</td>
+            <td>2024-01-06</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11114_2024-03-16_WVE_12204755+5805328_HIGHRES.html" target="_blank">WVE_12204755+5805328</a></td>
+            <td>NGC 4290</td>
+            <td>11114</td>
+            <td>HIGHRES</td>
+            <td>2024-03-16</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11115_2024-03-07_WVE_12204755+5805328_HIGHRES.html" target="_blank">WVE_12204755+5805328</a></td>
+            <td>NGC 4290</td>
+            <td>11115</td>
+            <td>HIGHRES</td>
+            <td>2024-03-07</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11116_2024-03-06_WVE_12204745+5805348_HIGHRES.html" target="_blank">WVE_12204745+5805348</a></td>
+            <td>NGC 4290</td>
+            <td>11116</td>
+            <td>HIGHRES</td>
+            <td>2024-03-06</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11117_2024-04-08_WVE_12210551+6105144_LOWRES.html" target="_blank">WVE_12210551+6105144</a></td>
+            <td>UGC 07406</td>
+            <td>11117</td>
+            <td>LOWRES</td>
+            <td>2024-04-08</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11123_2024-04-05_WVE_12442620+3707163_HIGHRES.html" target="_blank">WVE_12442620+3707163</a></td>
+            <td>NGC 4662</td>
+            <td>11123</td>
+            <td>HIGHRES</td>
+            <td>2024-04-05</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11124_2024-04-01_WVE_12442620+3707163_HIGHRES.html" target="_blank">WVE_12442620+3707163</a></td>
+            <td>NGC 4662</td>
+            <td>11124</td>
+            <td>HIGHRES</td>
+            <td>2024-04-01</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11125_2024-03-07_WVE_12442609+3707179_HIGHRES.html" target="_blank">WVE_12442609+3707179</a></td>
+            <td>NGC 4662</td>
+            <td>11125</td>
+            <td>HIGHRES</td>
+            <td>2024-03-07</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11126_2024-02-14_WVE_12484587+3519577_LOWRES.html" target="_blank">WVE_12484587+3519577</a></td>
+            <td>NGC 4711</td>
+            <td>11126</td>
+            <td>LOWRES</td>
+            <td>2024-02-14</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11129_2024-04-08_WVE_13001614+3615150_LOWRES.html" target="_blank">WVE_13001614+3615150</a></td>
+            <td>IC 4028</td>
+            <td>11129</td>
+            <td>LOWRES</td>
+            <td>2024-04-08</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11130_2024-02-03_WVE_13060586+5336488_LOWRES.html" target="_blank">WVE_13060586+5336488</a></td>
+            <td>SBS 1303+538C</td>
+            <td>11130</td>
+            <td>LOWRES</td>
+            <td>2024-02-03</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11135_2024-03-18_WVE_13154712+3150470_LOWRES.html" target="_blank">WVE_13154712+3150470</a></td>
+            <td>KUG 1313+321</td>
+            <td>11135</td>
+            <td>LOWRES</td>
+            <td>2024-03-18</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11138_2024-04-14_WVE_13223247+5449057_LOWRES.html" target="_blank">WVE_13223247+5449057</a></td>
+            <td>CGCG 271-034</td>
+            <td>11138</td>
+            <td>LOWRES</td>
+            <td>2024-04-14</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11141_2024-02-11_WVE_13355522+3535177_LOWRES.html" target="_blank">WVE_13355522+3535177</a></td>
+            <td>NGC 5240</td>
+            <td>11141</td>
+            <td>LOWRES</td>
+            <td>2024-02-11</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11142_2024-04-16_WVE_13355522+3535177_HIGHRES.html" target="_blank">WVE_13355522+3535177</a></td>
+            <td>NGC 5240</td>
+            <td>11142</td>
+            <td>HIGHRES</td>
+            <td>2024-04-16</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11143_2024-04-07_WVE_13355522+3535177_HIGHRES.html" target="_blank">WVE_13355522+3535177</a></td>
+            <td>NGC 5240</td>
+            <td>11143</td>
+            <td>HIGHRES</td>
+            <td>2024-04-07</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11144_2024-05-04_WVE_13355511+3535193_HIGHRES.html" target="_blank">WVE_13355511+3535193</a></td>
+            <td>NGC 5240</td>
+            <td>11144</td>
+            <td>HIGHRES</td>
+            <td>2024-05-04</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11146_2024-02-05_WVE_13494434+3959053_LOWRES.html" target="_blank">WVE_13494434+3959053</a></td>
+            <td>NGC 5313</td>
+            <td>11146</td>
+            <td>LOWRES</td>
+            <td>2024-02-05</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11147_2024-03-16_WVE_13494434+3959053_HIGHRES.html" target="_blank">WVE_13494434+3959053</a></td>
+            <td>NGC 5313</td>
+            <td>11147</td>
+            <td>HIGHRES</td>
+            <td>2024-03-16</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11148_2024-03-07_WVE_13494434+3959053_HIGHRES.html" target="_blank">WVE_13494434+3959053</a></td>
+            <td>NGC 5313</td>
+            <td>11148</td>
+            <td>HIGHRES</td>
+            <td>2024-03-07</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11149_2024-03-31_WVE_13494426+3959067_HIGHRES.html" target="_blank">WVE_13494426+3959067</a></td>
+            <td>NGC 5313</td>
+            <td>11149</td>
+            <td>HIGHRES</td>
+            <td>2024-03-31</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11150_2024-02-14_WVE_13531785+3329270_LOWRES.html" target="_blank">WVE_13531785+3329270</a></td>
+            <td>NGC 5347</td>
+            <td>11150</td>
+            <td>LOWRES</td>
+            <td>2024-02-14</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11151_2024-04-15_WVE_13531785+3329270_HIGHRES.html" target="_blank">WVE_13531785+3329270</a></td>
+            <td>NGC 5347</td>
+            <td>11151</td>
+            <td>HIGHRES</td>
+            <td>2024-04-15</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11153_2024-04-07_WVE_13531798+3329276_HIGHRES.html" target="_blank">WVE_13531798+3329276</a></td>
+            <td>NGC 5347</td>
+            <td>11153</td>
+            <td>HIGHRES</td>
+            <td>2024-04-07</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11154_2024-05-28_WVE_13543522+3826579_LOWRES.html" target="_blank">WVE_13543522+3826579</a></td>
+            <td>NGC 5361</td>
+            <td>11154</td>
+            <td>LOWRES</td>
+            <td>2024-05-28</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11155_2024-02-07_WVE_13565101+3747501_LOWRES.html" target="_blank">WVE_13565101+3747501</a></td>
+            <td>NGC 5378</td>
+            <td>11155</td>
+            <td>LOWRES</td>
+            <td>2024-02-07</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11156_2024-04-08_WVE_13565101+3747501_HIGHRES.html" target="_blank">WVE_13565101+3747501</a></td>
+            <td>NGC 5378</td>
+            <td>11156</td>
+            <td>HIGHRES</td>
+            <td>2024-04-08</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11157_2024-04-14_WVE_13565101+3747501_HIGHRES.html" target="_blank">WVE_13565101+3747501</a></td>
+            <td>NGC 5378</td>
+            <td>11157</td>
+            <td>HIGHRES</td>
+            <td>2024-04-14</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11158_2024-04-07_WVE_13565089+3747515_HIGHRES.html" target="_blank">WVE_13565089+3747515</a></td>
+            <td>NGC 5378</td>
+            <td>11158</td>
+            <td>HIGHRES</td>
+            <td>2024-04-07</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11161_2024-04-02_WVE_14004368+3153390_LOWRES.html" target="_blank">WVE_14004368+3153390</a></td>
+            <td>IC 4357</td>
+            <td>11161</td>
+            <td>LOWRES</td>
+            <td>2024-04-02</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11162_2024-06-11_WVE_14030104+3445285_LOWRES.html" target="_blank">WVE_14030104+3445285</a></td>
+            <td>NGC 5440</td>
+            <td>11162</td>
+            <td>LOWRES</td>
+            <td>2024-06-11</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11165_2024-04-15_WVE_14030121+3445285_HIGHRES.html" target="_blank">WVE_14030121+3445285</a></td>
+            <td>NGC 5440</td>
+            <td>11165</td>
+            <td>HIGHRES</td>
+            <td>2024-04-15</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11171_2024-05-28_WVE_14202648+3511199_LOWRES.html" target="_blank">WVE_14202648+3511199</a></td>
+            <td>NGC 5579</td>
+            <td>11171</td>
+            <td>LOWRES</td>
+            <td>2024-05-28</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11172_2024-03-05_WVE_14224668+3759427_LOWRES.html" target="_blank">WVE_14224668+3759427</a></td>
+            <td>UGC 09213</td>
+            <td>11172</td>
+            <td>LOWRES</td>
+            <td>2024-03-05</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11174_2024-05-14_WVE_14295836+3652237_LOWRES.html" target="_blank">WVE_14295836+3652237</a></td>
+            <td>UGC 09320</td>
+            <td>11174</td>
+            <td>LOWRES</td>
+            <td>2024-05-14</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11176_2024-04-05_WVE_14323835+3140125_LOWRES.html" target="_blank">WVE_14323835+3140125</a></td>
+            <td>NGC 5672</td>
+            <td>11176</td>
+            <td>LOWRES</td>
+            <td>2024-04-05</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11177_2024-03-11_WVE_14375993+4006221_LOWRES.html" target="_blank">WVE_14375993+4006221</a></td>
+            <td>UGC 09429</td>
+            <td>11177</td>
+            <td>LOWRES</td>
+            <td>2024-03-11</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11179_2024-06-13_WVE_14532830+5204341_LOWRES.html" target="_blank">WVE_14532830+5204341</a></td>
+            <td>NGC 5783</td>
+            <td>11179</td>
+            <td>LOWRES</td>
+            <td>2024-06-13</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11180_2024-04-16_WVE_14550702+3343278_LOWRES.html" target="_blank">WVE_14550702+3343278</a></td>
+            <td>IC 4520</td>
+            <td>11180</td>
+            <td>LOWRES</td>
+            <td>2024-04-16</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/11182_2024-08-08_WVE_14593554+4919390_LOWRES.html" target="_blank">WVE_14593554+4919390</a></td>
+            <td>KUG 1457+495</td>
+            <td>11182</td>
+            <td>LOWRES</td>
+            <td>2024-08-08</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12808_2024-06-08_WVE_14030104+3445285_HIGHRES.html" target="_blank">WVE_14030104+3445285</a></td>
+            <td>NGC 5440</td>
+            <td>12808</td>
+            <td>HIGHRES</td>
+            <td>2024-06-08</td>
+            <td>2023B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12003_2024-08-30_WVE_02260048+3928152_LOWRES.html" target="_blank">WVE_02260048+3928152</a></td>
+            <td>UGC 01886</td>
+            <td>12003</td>
+            <td>LOWRES</td>
+            <td>2024-08-30</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12004_2024-09-11_WVE_02260048+3928152_HIGHRES.html" target="_blank">WVE_02260048+3928152</a></td>
+            <td>UGC 01886</td>
+            <td>12004</td>
+            <td>HIGHRES</td>
+            <td>2024-09-11</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12015_2024-01-30_WVE_02401918+3215442_LOWRES.html" target="_blank">WVE_02401918+3215442</a></td>
+            <td>UGC 02156</td>
+            <td>12015</td>
+            <td>LOWRES</td>
+            <td>2024-01-30</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12016_2024-08-10_WVE_02423559+3445486_LOWRES.html" target="_blank">WVE_02423559+3445486</a></td>
+            <td>NGC 1050</td>
+            <td>12016</td>
+            <td>LOWRES</td>
+            <td>2024-08-10</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12029_2024-02-11_WVE_16214230+5505098_LOWRES.html" target="_blank">WVE_16214230+5505098</a></td>
+            <td>NGC 6143</td>
+            <td>12029</td>
+            <td>LOWRES</td>
+            <td>2024-02-11</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12030_2024-04-02_WVE_16341493+5256278_LOWRES.html" target="_blank">WVE_16341493+5256278</a></td>
+            <td>UGC 10456</td>
+            <td>12030</td>
+            <td>LOWRES</td>
+            <td>2024-04-02</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12034_2024-03-10_WVE_07270406+8010412_LOWRES.html" target="_blank">WVE_07270406+8010412</a></td>
+            <td>NGC 2336</td>
+            <td>12034</td>
+            <td>LOWRES</td>
+            <td>2024-03-10</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12037_2024-03-08_WVE_09220268+5058356_LOWRES.html" target="_blank">WVE_09220268+5058356</a></td>
+            <td>NGC 2841</td>
+            <td>12037</td>
+            <td>LOWRES</td>
+            <td>2024-03-08</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12039_2024-04-08_WVE_09553317+6903551_LOWRES.html" target="_blank">WVE_09553317+6903551</a></td>
+            <td>MESSIER 081</td>
+            <td>12039</td>
+            <td>LOWRES</td>
+            <td>2024-04-08</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12040_2024-02-15_WVE_09555246+6940469_LOWRES.html" target="_blank">WVE_09555246+6940469</a></td>
+            <td>MESSIER 082</td>
+            <td>12040</td>
+            <td>LOWRES</td>
+            <td>2024-02-15</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12041_2024-03-09_WVE_10031912+6844015_LOWRES.html" target="_blank">WVE_10031912+6844015</a></td>
+            <td>SDSS J100319.31+684404.2</td>
+            <td>12041</td>
+            <td>LOWRES</td>
+            <td>2024-03-09</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12043_2024-03-10_WVE_11260858+4335097_LOWRES.html" target="_blank">WVE_11260858+4335097</a></td>
+            <td>NGC 3675</td>
+            <td>12043</td>
+            <td>LOWRES</td>
+            <td>2024-03-10</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12044_2024-03-17_WVE_11332114+4701452_LOWRES.html" target="_blank">WVE_11332114+4701452</a></td>
+            <td>NGC 3726</td>
+            <td>12044</td>
+            <td>LOWRES</td>
+            <td>2024-03-17</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12045_2024-04-29_WVE_11524944+4407146_LOWRES.html" target="_blank">WVE_11524944+4407146</a></td>
+            <td>NGC 3938</td>
+            <td>12045</td>
+            <td>LOWRES</td>
+            <td>2024-04-29</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12046_2024-02-08_WVE_11531364+6040322_LOWRES.html" target="_blank">WVE_11531364+6040322</a></td>
+            <td>NGC 3945</td>
+            <td>12046</td>
+            <td>LOWRES</td>
+            <td>2024-02-08</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12047_2024-04-09_WVE_11534902+5219366_LOWRES.html" target="_blank">WVE_11534902+5219366</a></td>
+            <td>NGC 3953</td>
+            <td>12047</td>
+            <td>LOWRES</td>
+            <td>2024-04-09</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12048_2024-04-09_WVE_11573598+5322290_LOWRES.html" target="_blank">WVE_11573598+5322290</a></td>
+            <td>MESSIER 109</td>
+            <td>12048</td>
+            <td>LOWRES</td>
+            <td>2024-04-09</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12050_2024-04-04_WVE_12053422+5032211_LOWRES.html" target="_blank">WVE_12053422+5032211</a></td>
+            <td>NGC 4088</td>
+            <td>12050</td>
+            <td>LOWRES</td>
+            <td>2024-04-04</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12051_2024-04-04_WVE_12060116+4728420_LOWRES.html" target="_blank">WVE_12060116+4728420</a></td>
+            <td>NGC 4096</td>
+            <td>12051</td>
+            <td>LOWRES</td>
+            <td>2024-04-04</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12052_2024-03-09_WVE_12080602+6510270_LOWRES.html" target="_blank">WVE_12080602+6510270</a></td>
+            <td>NGC 4125</td>
+            <td>12052</td>
+            <td>LOWRES</td>
+            <td>2024-03-09</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12053_2024-03-17_WVE_12110435+5029049_LOWRES.html" target="_blank">WVE_12110435+5029049</a></td>
+            <td>NGC 4157</td>
+            <td>12053</td>
+            <td>LOWRES</td>
+            <td>2024-03-17</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12054_2024-04-09_WVE_12153917+3619366_LOWRES.html" target="_blank">WVE_12153917+3619366</a></td>
+            <td>NGC 4214</td>
+            <td>12054</td>
+            <td>LOWRES</td>
+            <td>2024-04-09</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12055_2024-03-06_WVE_12155090+4705303_LOWRES.html" target="_blank">WVE_12155090+4705303</a></td>
+            <td>NGC 4217</td>
+            <td>12055</td>
+            <td>LOWRES</td>
+            <td>2024-03-06</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12056_2024-03-17_WVE_12172966+3748257_LOWRES.html" target="_blank">WVE_12172966+3748257</a></td>
+            <td>NGC 4244</td>
+            <td>12056</td>
+            <td>LOWRES</td>
+            <td>2024-03-17</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12057_2024-02-13_WVE_12185762+4718135_LOWRES.html" target="_blank">WVE_12185762+4718135</a></td>
+            <td>MESSIER 106</td>
+            <td>12057</td>
+            <td>LOWRES</td>
+            <td>2024-02-13</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12058_2024-02-08_WVE_12395930+6136328_LOWRES.html" target="_blank">WVE_12395930+6136328</a></td>
+            <td>NGC 4605</td>
+            <td>12058</td>
+            <td>LOWRES</td>
+            <td>2024-02-08</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12059_2024-03-06_WVE_13132754+3635370_LOWRES.html" target="_blank">WVE_13132754+3635370</a></td>
+            <td>NGC 5033</td>
+            <td>12059</td>
+            <td>LOWRES</td>
+            <td>2024-03-06</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12060_2024-03-09_WVE_13154927+4201457_LOWRES.html" target="_blank">WVE_13154927+4201457</a></td>
+            <td>MESSIER 063</td>
+            <td>12060</td>
+            <td>LOWRES</td>
+            <td>2024-03-09</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12061_2024-03-17_WVE_13295271+4711426_LOWRES.html" target="_blank">WVE_13295271+4711426</a></td>
+            <td>MESSIER 051a</td>
+            <td>12061</td>
+            <td>LOWRES</td>
+            <td>2024-03-17</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12062_2024-04-03_WVE_13295958+4715583_LOWRES.html" target="_blank">WVE_13295958+4715583</a></td>
+            <td>MESSIER 051b</td>
+            <td>12062</td>
+            <td>LOWRES</td>
+            <td>2024-04-03</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12065_2024-04-04_WVE_15062956+5545482_LOWRES.html" target="_blank">WVE_15062956+5545482</a></td>
+            <td>NGC 5866</td>
+            <td>12065</td>
+            <td>LOWRES</td>
+            <td>2024-04-04</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12066_2024-03-12_WVE_15512523+6218361_LOWRES.html" target="_blank">WVE_15512523+6218361</a></td>
+            <td>NGC 6015</td>
+            <td>12066</td>
+            <td>LOWRES</td>
+            <td>2024-03-12</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12067_2024-03-10_WVE_17492642+7008397_LOWRES.html" target="_blank">WVE_17492642+7008397</a></td>
+            <td>NGC 6503</td>
+            <td>12067</td>
+            <td>LOWRES</td>
+            <td>2024-03-10</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12132_2024-02-05_WVE_12030960+4431528_LOWRES.html" target="_blank">WVE_12030960+4431528</a></td>
+            <td>NGC 4051</td>
+            <td>12132</td>
+            <td>LOWRES</td>
+            <td>2024-02-05</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12248_2024-04-09_WVE_10195500+4532591_LOWRES.html" target="_blank">WVE_10195500+4532591</a></td>
+            <td>NGC 3198</td>
+            <td>12248</td>
+            <td>LOWRES</td>
+            <td>2024-04-09</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12809_2024-05-09_WVE_14031259+5420553_LOWRES.html" target="_blank">WVE_14031259+5420553</a></td>
+            <td>MESSIER 101</td>
+            <td>12809</td>
+            <td>LOWRES</td>
+            <td>2024-05-09</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/13958_2024-06-09_WVE_16205967+5558135_LOWRES.html" target="_blank">WVE_16205967+5558135</a></td>
+            <td>NGC 6136</td>
+            <td>13958</td>
+            <td>LOWRES</td>
+            <td>2024-06-09</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12706_2024-05-04_WVE_15015092+4752315_HIGHRES.html" target="_blank">WVE_15015092+4752315</a></td>
+            <td>NGC 5830</td>
+            <td>12706</td>
+            <td>HIGHRES</td>
+            <td>2024-05-04</td>
+            <td>2024A2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12707_2024-05-06_WVE_15015078+4752329_HIGHRES.html" target="_blank">WVE_15015078+4752329</a></td>
+            <td>NGC 5830</td>
+            <td>12707</td>
+            <td>HIGHRES</td>
+            <td>2024-05-06</td>
+            <td>2024A2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12708_2024-06-05_WVE_15074838+5511084_LOWRES.html" target="_blank">WVE_15074838+5511084</a></td>
+            <td>UGC 09737</td>
+            <td>12708</td>
+            <td>LOWRES</td>
+            <td>2024-06-05</td>
+            <td>2024A2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12709_2024-05-13_WVE_15075184+5445098_LOWRES.html" target="_blank">WVE_15075184+5445098</a></td>
+            <td>NGC 5874</td>
+            <td>12709</td>
+            <td>LOWRES</td>
+            <td>2024-05-13</td>
+            <td>2024A2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12710_2024-05-12_WVE_15075184+5445098_HIGHRES.html" target="_blank">WVE_15075184+5445098</a></td>
+            <td>NGC 5874</td>
+            <td>12710</td>
+            <td>HIGHRES</td>
+            <td>2024-05-12</td>
+            <td>2024A2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12711_2024-05-27_WVE_15075184+5445098_HIGHRES.html" target="_blank">WVE_15075184+5445098</a></td>
+            <td>NGC 5874</td>
+            <td>12711</td>
+            <td>HIGHRES</td>
+            <td>2024-05-27</td>
+            <td>2024A2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12712_2024-06-06_WVE_15075198+5445115_HIGHRES.html" target="_blank">WVE_15075198+5445115</a></td>
+            <td>NGC 5874</td>
+            <td>12712</td>
+            <td>HIGHRES</td>
+            <td>2024-06-06</td>
+            <td>2024A2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12713_2024-05-03_WVE_15332784+5633349_LOWRES.html" target="_blank">WVE_15332784+5633349</a></td>
+            <td>NGC 5963</td>
+            <td>12713</td>
+            <td>LOWRES</td>
+            <td>2024-05-03</td>
+            <td>2024A2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12714_2024-05-27_WVE_15332784+5633349_HIGHRES.html" target="_blank">WVE_15332784+5633349</a></td>
+            <td>NGC 5963</td>
+            <td>12714</td>
+            <td>HIGHRES</td>
+            <td>2024-05-27</td>
+            <td>2024A2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12716_2024-05-12_WVE_15332776+5633369_HIGHRES.html" target="_blank">WVE_15332776+5633369</a></td>
+            <td>NGC 5963</td>
+            <td>12716</td>
+            <td>HIGHRES</td>
+            <td>2024-05-12</td>
+            <td>2024A2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12718_2024-07-30_WVE_21285119+3150137_LOWRES.html" target="_blank">WVE_21285119+3150137</a></td>
+            <td>UGC 11753</td>
+            <td>12718</td>
+            <td>LOWRES</td>
+            <td>2024-07-30</td>
+            <td>2024A2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12719_2024-06-02_WVE_22043076+4124403_LOWRES.html" target="_blank">WVE_22043076+4124403</a></td>
+            <td>UGC 11897</td>
+            <td>12719</td>
+            <td>LOWRES</td>
+            <td>2024-06-02</td>
+            <td>2024A2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12720_2024-08-27_WVE_22081056+4110383_LOWRES.html" target="_blank">WVE_22081056+4110383</a></td>
+            <td>UGC 11919</td>
+            <td>12720</td>
+            <td>LOWRES</td>
+            <td>2024-08-27</td>
+            <td>2024A2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12722_2024-08-06_WVE_22081056+4110383_HIGHRES.html" target="_blank">WVE_22081056+4110383</a></td>
+            <td>UGC 11919</td>
+            <td>12722</td>
+            <td>HIGHRES</td>
+            <td>2024-08-06</td>
+            <td>2024A2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12723_2024-08-13_WVE_22081048+4110404_HIGHRES.html" target="_blank">WVE_22081048+4110404</a></td>
+            <td>UGC 11919</td>
+            <td>12723</td>
+            <td>HIGHRES</td>
+            <td>2024-08-13</td>
+            <td>2024A2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12725_2024-07-29_WVE_22092746+4059229_HIGHRES.html" target="_blank">WVE_22092746+4059229</a></td>
+            <td>UGC 11927</td>
+            <td>12725</td>
+            <td>HIGHRES</td>
+            <td>2024-07-29</td>
+            <td>2024A2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12726_2024-07-30_WVE_22092746+4059229_HIGHRES.html" target="_blank">WVE_22092746+4059229</a></td>
+            <td>UGC 11927</td>
+            <td>12726</td>
+            <td>HIGHRES</td>
+            <td>2024-07-30</td>
+            <td>2024A2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12727_2024-08-11_WVE_22092735+4059246_HIGHRES.html" target="_blank">WVE_22092735+4059246</a></td>
+            <td>UGC 11927</td>
+            <td>12727</td>
+            <td>HIGHRES</td>
+            <td>2024-08-11</td>
+            <td>2024A2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12728_2024-08-31_WVE_22224020+3758392_LOWRES.html" target="_blank">WVE_22224020+3758392</a></td>
+            <td>UGC 12009</td>
+            <td>12728</td>
+            <td>LOWRES</td>
+            <td>2024-08-31</td>
+            <td>2024A2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12729_2024-08-29_WVE_22224020+3758392_HIGHRES.html" target="_blank">WVE_22224020+3758392</a></td>
+            <td>UGC 12009</td>
+            <td>12729</td>
+            <td>HIGHRES</td>
+            <td>2024-08-29</td>
+            <td>2024A2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12730_2024-08-30_WVE_22224020+3758392_HIGHRES.html" target="_blank">WVE_22224020+3758392</a></td>
+            <td>UGC 12009</td>
+            <td>12730</td>
+            <td>HIGHRES</td>
+            <td>2024-08-30</td>
+            <td>2024A2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12731_2024-08-12_WVE_22224012+3758412_HIGHRES.html" target="_blank">WVE_22224012+3758412</a></td>
+            <td>UGC 12009</td>
+            <td>12731</td>
+            <td>HIGHRES</td>
+            <td>2024-08-12</td>
+            <td>2024A2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12732_2024-08-01_WVE_22275051+2905454_LOWRES.html" target="_blank">WVE_22275051+2905454</a></td>
+            <td>NGC 7286</td>
+            <td>12732</td>
+            <td>LOWRES</td>
+            <td>2024-08-01</td>
+            <td>2024A2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12733_2024-06-09_WVE_22275051+2905454_HIGHRES.html" target="_blank">WVE_22275051+2905454</a></td>
+            <td>NGC 7286</td>
+            <td>12733</td>
+            <td>HIGHRES</td>
+            <td>2024-06-09</td>
+            <td>2024A2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12734_2024-07-31_WVE_22275051+2905454_HIGHRES.html" target="_blank">WVE_22275051+2905454</a></td>
+            <td>NGC 7286</td>
+            <td>12734</td>
+            <td>HIGHRES</td>
+            <td>2024-07-31</td>
+            <td>2024A2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12735_2024-08-29_WVE_22275059+2905472_HIGHRES.html" target="_blank">WVE_22275059+2905472</a></td>
+            <td>NGC 7286</td>
+            <td>12735</td>
+            <td>HIGHRES</td>
+            <td>2024-08-29</td>
+            <td>2024A2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12737_2024-09-01_WVE_23520990+3116358_LOWRES.html" target="_blank">WVE_23520990+3116358</a></td>
+            <td>NGC 7773</td>
+            <td>12737</td>
+            <td>LOWRES</td>
+            <td>2024-09-01</td>
+            <td>2024A2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12740_2024-05-15_WVE_16095869+0042334_LOWRES.html" target="_blank">WVE_16095869+0042334</a></td>
+            <td>NGC 6070</td>
+            <td>12740</td>
+            <td>LOWRES</td>
+            <td>2024-05-15</td>
+            <td>2024A2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12742_2024-07-13_WVE_18194641+7434063_LOWRES.html" target="_blank">WVE_18194641+7434063</a></td>
+            <td>NGC 6643</td>
+            <td>12742</td>
+            <td>LOWRES</td>
+            <td>2024-07-13</td>
+            <td>2024A2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/12745_2024-09-03_WVE_20371413+6606200_LOWRES.html" target="_blank">WVE_20371413+6606200</a></td>
+            <td>NGC 6951</td>
+            <td>12745</td>
+            <td>LOWRES</td>
+            <td>2024-09-03</td>
+            <td>2024A2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.91_APSv1.3/14027_2024-06-08_WVE_22092746+4059229_LOWRES.html" target="_blank">WVE_22092746+4059229</a></td>
+            <td>UGC 11927</td>
+            <td>14027</td>
+            <td>LOWRES</td>
+            <td>2024-06-08</td>
+            <td>2024A2</td>
+            <td></td>
+        </tr>
+        
+        
+        </table>
+    
+          <p>
+            &nbsp
+          </p>
+          <p>
+             If you have any questions, please send an email to gcouto at aip.de
+          </p>
+    
+       </body>
+    </html>
+    

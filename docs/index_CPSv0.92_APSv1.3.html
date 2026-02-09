@@ -1,0 +1,197 @@
+
+<script>
+  if (localStorage.getItem("loggedIn") !== "true") {
+    window.location.href = "login.html";
+  }
+</script>
+
+<button id="logout-btn" onclick="logout()">Logout</button>
+
+<style>
+  #logout-btn {
+    position: fixed;
+    top: 12px;
+    right: 16px;
+    padding: 6px 12px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+</style>
+
+<script>
+  function logout() {
+    localStorage.removeItem("loggedIn");
+    localStorage.removeItem("loginTime");
+    window.location.href = "login.html";
+  }
+</script>
+
+    <html>
+       <head>
+          <title>WEAVE Apertif Quality Assurance</title>
+    
+        <!-- CSS style to set alternate table
+                row using color -->
+        <style>
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+    
+            th, td {
+                text-align: left;
+                padding: 8px;
+            }
+    
+            tr:nth-child(even) {
+                background-color: Moccasin;
+            }
+        </style>
+    
+       </head>
+    
+       <body>
+          <h1>Welcome to WEAVE-Apertif quality control data</h1>
+          <p>
+             Here you can find the links to quality control plots of the WEAVE LIFU data observed.
+          </p>
+          <p>
+             For details on WEAVE, please take a look into the 
+             <a href="https://ingconfluence.ing.iac.es/confluence/display/WEAV/The+WEAVE+Project" 
+             target="_blank">WEAVE main website</a>.
+          </p>
+          <p>
+             Below you can find the links for the quality control plots of each galaxy observed so far using LIFU data.
+             <a href="WA_QC_plots_doc.pdf" target="_blank">In this document</a> 
+             you can find further information about these plots.
+          </p>
+          
+          
+    <label for="cpsSelect"><b>Select CPS version:</b></label>
+    <select id="cpsSelect" onchange="location = this.value;">
+        <option value="index.html">All versions</option><option value="index_CPSv0.90_APSv1.3.html">CPSv0.90_APSv1.3</option><option value="index_CPSv0.91_APSv1.3.html">CPSv0.91_APSv1.3</option><option value="index_CPSv0.92_APSv1.3.html" selected>CPSv0.92_APSv1.3</option><option value="index_CPSv0.93_APSv1.62.html">CPSv0.93_APSv1.62</option>
+    </select>
+    
+    
+    
+    
+        <table>
+        <colgroup>
+        <col style="width:250px">
+        <col style="width:300px">
+        <col style="width:250px">
+        <col style="width:250px">
+        <col style="width:250px">
+        <col style="width:300px">
+        </colgroup>
+        <tr>
+        <th><b>WEAVE ID (CNAME)</b></th>
+        <th><b>Galaxy name (NED)</b></th>
+        <th><b>OB ID</b></th>
+        <th><b>LIFU MODE</b></th>
+        <th><b>Observation date</b></th>
+        <th><b>Trimester</b></th>
+        <th><b>Notes</b></th>
+        </tr>
+        
+        
+        <tr>
+            <td><a href="./CPSv0.92_APSv1.3/12005_2024-09-10_WVE_02260048+3928152_HIGHRES.html" target="_blank">WVE_02260048+3928152</a></td>
+            <td>UGC 01886</td>
+            <td>12005</td>
+            <td>HIGHRES</td>
+            <td>2024-09-10</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.92_APSv1.3/12006_2024-09-06_WVE_02260042+3928169_HIGHRES.html" target="_blank">WVE_02260042+3928169</a></td>
+            <td>UGC 01886</td>
+            <td>12006</td>
+            <td>HIGHRES</td>
+            <td>2024-09-06</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.92_APSv1.3/12012_2024-09-08_WVE_02342580+3257160_HIGHRES.html" target="_blank">WVE_02342580+3257160</a></td>
+            <td>NGC 0974</td>
+            <td>12012</td>
+            <td>HIGHRES</td>
+            <td>2024-09-08</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.92_APSv1.3/12013_2024-09-06_WVE_02342580+3257160_HIGHRES.html" target="_blank">WVE_02342580+3257160</a></td>
+            <td>NGC 0974</td>
+            <td>12013</td>
+            <td>HIGHRES</td>
+            <td>2024-09-06</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.92_APSv1.3/12019_2024-09-06_WVE_02423551+3445505_HIGHRES.html" target="_blank">WVE_02423551+3445505</a></td>
+            <td>NGC 1050</td>
+            <td>12019</td>
+            <td>HIGHRES</td>
+            <td>2024-09-06</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.92_APSv1.3/12705_2024-05-10_WVE_15015092+4752315_HIGHRES.html" target="_blank">WVE_15015092+4752315</a></td>
+            <td>NGC 5830</td>
+            <td>12705</td>
+            <td>HIGHRES</td>
+            <td>2024-05-10</td>
+            <td>2024A2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.92_APSv1.3/12715_2024-05-11_WVE_15332784+5633349_HIGHRES.html" target="_blank">WVE_15332784+5633349</a></td>
+            <td>NGC 5963</td>
+            <td>12715</td>
+            <td>HIGHRES</td>
+            <td>2024-05-11</td>
+            <td>2024A2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.92_APSv1.3/12741_2024-09-09_WVE_17271155+1132370_LOWRES.html" target="_blank">WVE_17271155+1132370</a></td>
+            <td>NGC 6368</td>
+            <td>12741</td>
+            <td>LOWRES</td>
+            <td>2024-09-09</td>
+            <td>2024A2</td>
+            <td></td>
+        </tr>
+        
+        
+        </table>
+    
+          <p>
+            &nbsp
+          </p>
+          <p>
+             If you have any questions, please send an email to gcouto at aip.de
+          </p>
+    
+       </body>
+    </html>
+    

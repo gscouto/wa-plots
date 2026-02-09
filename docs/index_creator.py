@@ -1,4 +1,34 @@
 import os
+from collections import defaultdict
+import re
+
+
+def group_by_cps(objects):
+    grouped = defaultdict(list)
+    for o in objects:
+        grouped[o["cps_dir"]].append(o)
+    return grouped
+
+
+def keep_latest_cps_per_obid(objects):
+    """
+    For each OBID, keep only the object with the highest CPS version.
+    """
+    latest = {}
+
+    for o in objects:
+        obid = o["ob_id"]
+        cps = o["cps_dir"]
+        cps_version = parse_cps_version(cps)
+
+        if obid not in latest:
+            latest[obid] = (cps_version, o)
+        else:
+            if cps_version > latest[obid][0]:
+                latest[obid] = (cps_version, o)
+
+    # return only the object dicts
+    return [v[1] for v in latest.values()]
 
 
 def list_cps_dirs(root_dir):
@@ -15,6 +45,29 @@ def list_txt_files(txt_dir):
         for f in os.listdir(txt_dir)
         if f.endswith(".txt")
     )
+
+
+def make_dropdown(cps_pages, current=None):
+    options = []
+
+    # "All CPS" option
+    selected = ' selected' if current is None else ''
+    options.append(
+        f'<option value="index.html"{selected}>All versions</option>'
+    )
+
+    for cps, fname in cps_pages:
+        selected = ' selected' if cps == current else ''
+        options.append(
+            f'<option value="{fname}"{selected}>{cps}</option>'
+        )
+
+    return f"""
+    <label for="cpsSelect"><b>Select CPS version:</b></label>
+    <select id="cpsSelect" onchange="location = this.value;">
+        {''.join(options)}
+    </select>
+    """
 
 
 def make_table_rows(objects):
@@ -36,6 +89,17 @@ def make_table_rows(objects):
     return "\n".join(rows)
 
 
+def parse_cps_version(cps_name):
+    """
+    Extract CPS version number from directory name.
+    Example: CPSv0.92_APSv1.4 -> 0.92
+    """
+    m = re.search(r"CPSv([\d.]+)", cps_name)
+    if m is None:
+        raise ValueError(f"Cannot parse CPS version from '{cps_name}'")
+    return float(m.group(1))
+
+
 def read_all_cps_dirs(root_dir):
     all_objects = []
 
@@ -48,14 +112,13 @@ def read_all_cps_dirs(root_dir):
 
 def read_objects(txtfile, txt_dir):
     with open(txtfile, 'r') as f:
-        # remove empty lines and strip whitespace
         lines = [l.strip() for l in f if l.strip()]
 
     if len(lines) % 6 != 0:
         raise ValueError("Input file does not have enough information")
 
     base = os.path.splitext(os.path.basename(txtfile))[0]
-    html_path = os.path.join(txt_dir, base + ".html")
+    html_path = os.path.join(txt_dir, base + ".html").replace(os.sep, "/")
 
     return {
         "weave_id": lines[0],
@@ -64,7 +127,8 @@ def read_objects(txtfile, txt_dir):
         "mode": lines[3],
         "date": lines[4],
         "trimester": lines[5],
-        "html_file": html_path
+        "html_file": html_path,
+        "cps_dir": os.path.basename(txt_dir),
     }
 
 
@@ -86,6 +150,38 @@ def sort_objects(objects):
         objects,
         key=lambda o: (o["trimester"], int(o["ob_id"]))
     )
+
+
+def write_cps_pages(grouped_objects, html_template, cps_pages):
+    for cps_dir, objs in grouped_objects.items():
+        objs = sort_objects(objs)
+        rows = make_table_rows(objs)
+
+        dropdown_html = make_dropdown(cps_pages, current=cps_dir)
+
+        html = html_template.replace("<!-- CPS_DROPDOWN -->", dropdown_html)
+        html = html.replace("<!-- TABLE_ROWS -->", rows)
+
+        fname = f"index_{cps_dir}.html"
+        with open(fname, "w") as f:
+            f.write(html)
+
+
+def write_main_index(objects, html_template, cps_pages):
+    # 🔹 Keep only latest CPS per OBID
+    filtered = keep_latest_cps_per_obid(objects)
+
+    # 🔹 Sort as before
+    filtered = sort_objects(filtered)
+
+    rows = make_table_rows(filtered)
+    dropdown_html = make_dropdown(cps_pages, current=None)
+
+    html = html_template.replace("<!-- CPS_DROPDOWN -->", dropdown_html)
+    html = html.replace("<!-- TABLE_ROWS -->", rows)
+
+    with open("index.html", "w") as f:
+        f.write(html)
 
 
 text = f'''
@@ -155,6 +251,8 @@ text = f'''
              <a href="WA_QC_plots_doc.pdf" target="_blank">In this document</a> 
              you can find further information about these plots.
           </p>
+          
+          <!-- CPS_DROPDOWN -->
     
     
     
@@ -192,14 +290,20 @@ text = f'''
     </html>
     '''
 
-root_dir = "."   # or wherever the CPS directories live
+root_dir = "."
 
 objects = read_all_cps_dirs(root_dir)
 objects = sort_objects(objects)
 
-table_rows = make_table_rows(objects)
+grouped = group_by_cps(objects)
 
-html = text.replace("<!-- TABLE_ROWS -->", table_rows)
+cps_pages = sorted(
+    ((cps, f"index_{cps}.html") for cps in grouped),
+    key=lambda x: parse_cps_version(x[0])
+)
 
-with open("index.html", "w") as f:
-    f.write(html)
+write_cps_pages(grouped, text, cps_pages)
+write_main_index(objects, text, cps_pages)
+
+# with open("index.html", "w") as f:
+#     f.write(index_html)

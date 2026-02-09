@@ -1,0 +1,153 @@
+
+<script>
+  if (localStorage.getItem("loggedIn") !== "true") {
+    window.location.href = "login.html";
+  }
+</script>
+
+<button id="logout-btn" onclick="logout()">Logout</button>
+
+<style>
+  #logout-btn {
+    position: fixed;
+    top: 12px;
+    right: 16px;
+    padding: 6px 12px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+</style>
+
+<script>
+  function logout() {
+    localStorage.removeItem("loggedIn");
+    localStorage.removeItem("loginTime");
+    window.location.href = "login.html";
+  }
+</script>
+
+    <html>
+       <head>
+          <title>WEAVE Apertif Quality Assurance</title>
+    
+        <!-- CSS style to set alternate table
+                row using color -->
+        <style>
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+    
+            th, td {
+                text-align: left;
+                padding: 8px;
+            }
+    
+            tr:nth-child(even) {
+                background-color: Moccasin;
+            }
+        </style>
+    
+       </head>
+    
+       <body>
+          <h1>Welcome to WEAVE-Apertif quality control data</h1>
+          <p>
+             Here you can find the links to quality control plots of the WEAVE LIFU data observed.
+          </p>
+          <p>
+             For details on WEAVE, please take a look into the 
+             <a href="https://ingconfluence.ing.iac.es/confluence/display/WEAV/The+WEAVE+Project" 
+             target="_blank">WEAVE main website</a>.
+          </p>
+          <p>
+             Below you can find the links for the quality control plots of each galaxy observed so far using LIFU data.
+             <a href="WA_QC_plots_doc.pdf" target="_blank">In this document</a> 
+             you can find further information about these plots.
+          </p>
+          
+          
+    <label for="cpsSelect"><b>Select CPS version:</b></label>
+    <select id="cpsSelect" onchange="location = this.value;">
+        <option value="index.html">All versions</option><option value="index_CPSv0.90_APSv1.3.html">CPSv0.90_APSv1.3</option><option value="index_CPSv0.91_APSv1.3.html">CPSv0.91_APSv1.3</option><option value="index_CPSv0.92_APSv1.3.html">CPSv0.92_APSv1.3</option><option value="index_CPSv0.93_APSv1.62.html" selected>CPSv0.93_APSv1.62</option>
+    </select>
+    
+    
+    
+    
+        <table>
+        <colgroup>
+        <col style="width:250px">
+        <col style="width:300px">
+        <col style="width:250px">
+        <col style="width:250px">
+        <col style="width:250px">
+        <col style="width:300px">
+        </colgroup>
+        <tr>
+        <th><b>WEAVE ID (CNAME)</b></th>
+        <th><b>Galaxy name (NED)</b></th>
+        <th><b>OB ID</b></th>
+        <th><b>LIFU MODE</b></th>
+        <th><b>Observation date</b></th>
+        <th><b>Trimester</b></th>
+        <th><b>Notes</b></th>
+        </tr>
+        
+        
+        <tr>
+            <td><a href="./CPSv0.93_APSv1.62/15285_2025-10-30_WVE_02161280+3238583_LOWRES.html" target="_blank">WVE_02161280+3238583</a></td>
+            <td>IC 1784</td>
+            <td>15285</td>
+            <td>LOWRES</td>
+            <td>2025-10-30</td>
+            <td>2025A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.93_APSv1.62/15294_2025-10-28_WVE_02260518+4208384_LOWRES.html" target="_blank">WVE_02260518+4208384</a></td>
+            <td>NGC 0914</td>
+            <td>15294</td>
+            <td>LOWRES</td>
+            <td>2025-10-28</td>
+            <td>2025A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.93_APSv1.62/19186_2025-08-17_WVE_22235863+3742038_LOWRES.html" target="_blank">WVE_22235863+3742038</a></td>
+            <td>WISEA J222358.68+374204.5</td>
+            <td>19186</td>
+            <td>LOWRES</td>
+            <td>2025-08-17</td>
+            <td>2025B1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.93_APSv1.62/20520_2025-10-28_WVE_02541654+4243334_LOWRES.html" target="_blank">WVE_02541654+4243334</a></td>
+            <td>CGCG 539-121</td>
+            <td>20520</td>
+            <td>LOWRES</td>
+            <td>2025-10-28</td>
+            <td>2025B1</td>
+            <td></td>
+        </tr>
+        
+        
+        </table>
+    
+          <p>
+            &nbsp
+          </p>
+          <p>
+             If you have any questions, please send an email to gcouto at aip.de
+          </p>
+    
+       </body>
+    </html>
+    
