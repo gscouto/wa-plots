@@ -1,0 +1,285 @@
+
+<script>
+  if (localStorage.getItem("loggedIn") !== "true") {
+    window.location.href = "login.html";
+  }
+</script>
+
+<button id="logout-btn" onclick="logout()">Logout</button>
+
+<style>
+  #logout-btn {
+    position: fixed;
+    top: 12px;
+    right: 16px;
+    padding: 6px 12px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+</style>
+
+<script>
+  function logout() {
+    localStorage.removeItem("loggedIn");
+    localStorage.removeItem("loginTime");
+    window.location.href = "login.html";
+  }
+</script>
+
+    <html>
+       <head>
+          <title>WEAVE Apertif Quality Assurance</title>
+    
+        <!-- CSS style to set alternate table
+                row using color -->
+        <style>
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+    
+            th, td {
+                text-align: left;
+                padding: 8px;
+            }
+    
+            tr:nth-child(even) {
+                background-color: Moccasin;
+            }
+        </style>
+    
+       </head>
+    
+       <body>
+          <h1>Welcome to WEAVE-Apertif quality control data</h1>
+          <p>
+             Here you can find the links to quality control plots of the WEAVE LIFU data observed.
+          </p>
+          <p>
+             For details on WEAVE, please take a look into the 
+             <a href="https://ingconfluence.ing.iac.es/confluence/display/WEAV/The+WEAVE+Project" 
+             target="_blank">WEAVE main website</a>.
+          </p>
+          <p>
+             Below you can find the links for the quality control plots of each galaxy observed so far using LIFU data.
+             <a href="WA_QC_plots_doc.pdf" target="_blank">In this document</a> 
+             you can find further information about these plots.
+          </p>
+          
+          
+    <label for="cpsSelect"><b>Select CPS version:</b></label>
+    <select id="cpsSelect" onchange="location = this.value;">
+        <option value="index.html">All versions</option><option value="index_CPSv0.90_APSv1.3.html">CPSv0.90_APSv1.3</option><option value="index_CPSv0.91_APSv1.3.html">CPSv0.91_APSv1.3</option><option value="index_CPSv0.92_APSv1.3.html">CPSv0.92_APSv1.3</option><option value="index_CPSv0.93_APSv1.62.html">CPSv0.93_APSv1.62</option><option value="index_CPSv0.94_APSv1.7.html" selected>CPSv0.94_APSv1.7</option>
+    </select>
+    
+    
+    
+    
+        <table>
+        <colgroup>
+        <col style="width:250px">
+        <col style="width:300px">
+        <col style="width:250px">
+        <col style="width:250px">
+        <col style="width:250px">
+        <col style="width:300px">
+        </colgroup>
+        <tr>
+        <th><b>WEAVE ID (CNAME)</b></th>
+        <th><b>Galaxy name (NED)</b></th>
+        <th><b>OB ID</b></th>
+        <th><b>LIFU MODE</b></th>
+        <th><b>Observation date</b></th>
+        <th><b>Trimester</b></th>
+        <th><b>Notes</b></th>
+        </tr>
+        
+        
+        <tr>
+            <td><a href="./CPSv0.94_APSv1.7/12311_2025-12-29_WVE_09471545+6754587_LOWRES.html" target="_blank">WVE_09471545+6754587</a></td>
+            <td>NGC 2976</td>
+            <td>12311</td>
+            <td>LOWRES</td>
+            <td>2025-12-29</td>
+            <td>2024A1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.94_APSv1.7/16062_2026-01-23_WVE_12154481+5451272_HIGHRES.html" target="_blank">WVE_12154481+5451272</a></td>
+            <td>CGCG 269-048</td>
+            <td>16062</td>
+            <td>HIGHRES</td>
+            <td>2026-01-23</td>
+            <td>2025A2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.94_APSv1.7/16077_2026-01-22_WVE_10321971+5605069_LOWRES.html" target="_blank">WVE_10321971+5605069</a></td>
+            <td>NGC 3264</td>
+            <td>16077</td>
+            <td>LOWRES</td>
+            <td>2026-01-22</td>
+            <td>2025A2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.94_APSv1.7/19200_2026-01-14_WVE_03073815+3916139_LOWRES.html" target="_blank">WVE_03073815+3916139</a></td>
+            <td>UGC 02546</td>
+            <td>19200</td>
+            <td>LOWRES</td>
+            <td>2026-01-14</td>
+            <td>2025B1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.94_APSv1.7/19204_2026-01-10_WVE_03011326+4457196_HIGHRES.html" target="_blank">WVE_03011326+4457196</a></td>
+            <td>NGC 1160</td>
+            <td>19204</td>
+            <td>HIGHRES</td>
+            <td>2026-01-10</td>
+            <td>2025B1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.94_APSv1.7/19221_2025-12-20_WVE_01240390+1255027_LOWRES.html" target="_blank">WVE_01240390+1255027</a></td>
+            <td>NGC 0514</td>
+            <td>19221</td>
+            <td>LOWRES</td>
+            <td>2025-12-20</td>
+            <td>2025B1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.94_APSv1.7/19226_2026-01-08_WVE_02271690+3334442_LOWRES.html" target="_blank">WVE_02271690+3334442</a></td>
+            <td>NGC 0925</td>
+            <td>19226</td>
+            <td>LOWRES</td>
+            <td>2026-01-08</td>
+            <td>2025B1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.94_APSv1.7/19230_2025-12-29_WVE_07403930+3913598_LOWRES.html" target="_blank">WVE_07403930+3913598</a></td>
+            <td>DESI J115.1637+39.2330</td>
+            <td>19230</td>
+            <td>LOWRES</td>
+            <td>2025-12-29</td>
+            <td>2025B1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.94_APSv1.7/19231_2025-12-28_WVE_08491182+6013164_LOWRES.html" target="_blank">WVE_08491182+6013164</a></td>
+            <td>NGC 2654</td>
+            <td>19231</td>
+            <td>LOWRES</td>
+            <td>2025-12-28</td>
+            <td>2025B1</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.94_APSv1.7/20826_2026-02-09_WVE_10384318+5633148_LOWRES.html" target="_blank">WVE_10384318+5633148</a></td>
+            <td>CGCG 290-061</td>
+            <td>20826</td>
+            <td>LOWRES</td>
+            <td>2026-02-09</td>
+            <td>2025B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.94_APSv1.7/20827_2025-12-24_WVE_10543572+5659266_LOWRES.html" target="_blank">WVE_10543572+5659266</a></td>
+            <td>WISEA J105435.60+565926.3</td>
+            <td>20827</td>
+            <td>LOWRES</td>
+            <td>2025-12-24</td>
+            <td>2025B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.94_APSv1.7/20865_2025-12-20_WVE_01253138+0145327_LOWRES.html" target="_blank">WVE_01253138+0145327</a></td>
+            <td>NGC 0533</td>
+            <td>20865</td>
+            <td>LOWRES</td>
+            <td>2025-12-20</td>
+            <td>2025B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.94_APSv1.7/20867_2025-12-21_WVE_08491182+6013164_LOWRES.html" target="_blank">WVE_08491182+6013164</a></td>
+            <td>NGC 2654</td>
+            <td>20867</td>
+            <td>LOWRES</td>
+            <td>2025-12-21</td>
+            <td>2025B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.94_APSv1.7/20872_2026-01-15_WVE_09530715+1640396_LOWRES.html" target="_blank">WVE_09530715+1640396</a></td>
+            <td>NGC 3041</td>
+            <td>20872</td>
+            <td>LOWRES</td>
+            <td>2026-01-15</td>
+            <td>2025B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.94_APSv1.7/20874_2025-12-30_WVE_11183611+5759597_LOWRES.html" target="_blank">WVE_11183611+5759597</a></td>
+            <td>NGC 3613</td>
+            <td>20874</td>
+            <td>LOWRES</td>
+            <td>2025-12-30</td>
+            <td>2025B2</td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.94_APSv1.7/20877_2026-01-14_WVE_11405875+1128161_LOWRES.html" target="_blank">WVE_11405875+1128161</a></td>
+            <td>NGC 3810</td>
+            <td>20877</td>
+            <td>LOWRES</td>
+            <td>2026-01-14</td>
+            <td>2025B2</td>
+            <td></td>
+        </tr>
+        
+        
+        </table>
+    
+          <p>
+            &nbsp
+          </p>
+          <p>
+             If you have any questions, please send an email to gcouto at aip.de
+          </p>
+    
+       </body>
+    </html>
+    
