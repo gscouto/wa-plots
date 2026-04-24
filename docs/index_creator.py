@@ -82,11 +82,50 @@ def make_table_rows(objects):
             <td>{o['mode']}</td>
             <td>{o['date']}</td>
             <td>{o['trimester']}</td>
+            <td>{overall_badge(overall_score(o))}</td>
+            <td>{resolution_badge(o['blue_res'])}</td>
+            <td>{resolution_badge(o['red_res'])}</td>
+            <td>{throughput_badge(o['blue_thr'])}</td>
+            <td>{throughput_badge(o['red_thr'])}</td>
+            <td>{wavelength_badge(o['blue_wave'])}</td>
+            <td>{wavelength_badge(o['red_wave'])}</td>
             <td></td>
         </tr>
         """)
 
     return "\n".join(rows)
+
+
+def overall_badge(value):
+    if value is None:
+        return '<span class="res-unknown overall-box">?</span>'
+
+    v = float(value)
+
+    if v >= 70:
+        cls = "res-good"
+    elif v >= 40:
+        cls = "res-passable"
+    else:
+        cls = "res-bad"
+
+    return f'<span class="res-box overall-box {cls}">{int(v)}</span>'
+
+
+def overall_score(o):
+    values = [
+        o["blue_res"], o["red_res"],
+        o["blue_thr"], o["red_thr"],
+        o["blue_wave"], o["red_wave"]
+    ]
+
+    # remove invalid values if needed
+    vals = [v for v in values if v is not None]
+
+    if not vals:
+        return None
+
+    return sum(vals) / len(vals)
 
 
 def parse_cps_version(cps_name):
@@ -114,7 +153,7 @@ def read_objects(txtfile, txt_dir):
     with open(txtfile, 'r') as f:
         lines = [l.strip() for l in f if l.strip()]
 
-    if len(lines) % 6 != 0:
+    if len(lines) < 12:
         raise ValueError("Input file does not have enough information")
 
     base = os.path.splitext(os.path.basename(txtfile))[0]
@@ -127,6 +166,12 @@ def read_objects(txtfile, txt_dir):
         "mode": lines[3],
         "date": lines[4],
         "trimester": lines[5],
+        "blue_res": int(float(lines[6])),
+        "red_res": int(float(lines[7])),
+        "blue_thr": int(float(lines[8])),
+        "red_thr": int(float(lines[9])),
+        "blue_wave": int(float(lines[10])),
+        "red_wave": int(float(lines[11])),
         "html_file": html_path,
         "cps_dir": os.path.basename(txt_dir),
     }
@@ -145,11 +190,59 @@ def read_txt_dir(txt_dir):
     return objects
 
 
+def resolution_badge(value):
+    try:
+        v = float(value)
+    except:
+        return '<span class="res-unknown">?</span>'
+
+    if v >= 50:
+        cls = "res-good"
+    elif v >= 30:
+        cls = "res-passable"
+    else:
+        cls = "res-bad"
+
+    return f'<span class="res-box {cls}">{int(v)}</span>'
+
+
 def sort_objects(objects):
     return sorted(
         objects,
         key=lambda o: (o["trimester"], int(o["ob_id"]))
     )
+
+
+def throughput_badge(value):
+    try:
+        v = float(value)
+    except:
+        return '<span class="res-unknown">?</span>'
+
+    if v >= 50:
+        cls = "res-good"
+    elif v >= 30:
+        cls = "res-passable"
+    else:
+        cls = "res-bad"
+
+    return f'<span class="res-box {cls}">{int(v)}</span>'
+
+
+def wavelength_badge(value):
+    try:
+        v = float(value)
+    except:
+        return '<span class="res-unknown">?</span>'
+
+    if v >= 50:
+        cls = "res-good"
+    elif v >= 30:
+        cls = "res-passable"
+    else:
+        cls = "res-bad"
+
+    return f'<span class="res-box {cls}">{int(v)}</span>'
 
 
 def write_cps_pages(grouped_objects, html_template, cps_pages):
@@ -186,21 +279,87 @@ def write_main_index(objects, html_template, cps_pages):
 
 text = f'''
 <script>
-  if (localStorage.getItem("loggedIn") !== "true") {{
+  const TIMEOUT_MINUTES = 30;
+
+  const loggedIn = localStorage.getItem("loggedIn") === "true";
+  const loginTime = localStorage.getItem("loginTime");
+
+  if (!loggedIn || !loginTime) {{
     window.location.href = "login.html";
+  }} else {{
+    const elapsed = (Date.now() - parseInt(loginTime, 10)) / 1000 / 60;
+
+    if (elapsed > TIMEOUT_MINUTES) {{
+      localStorage.clear();
+      window.location.href = "login.html";
+    }}
   }}
 </script>
 
 <button id="logout-btn" onclick="logout()">Logout</button>
 
 <style>
-  #logout-btn {{
-    position: fixed;
-    top: 12px;
-    right: 16px;
-    padding: 6px 12px;
+  /* Center columns */
+  td:nth-child(7),
+  td:nth-child(8),
+  td:nth-child(9),
+  td:nth-child(10),
+  td:nth-child(11),
+  td:nth-child(12),
+  td:nth-child(13),
+  th:nth-child(7),
+  th:nth-child(8),
+  th:nth-child(9),
+  th:nth-child(10),
+  th:nth-child(11),
+  th:nth-child(12),
+  th:nth-child(13) {{
+    text-align: center;
+  }}
+
+  /* Base box */
+  .res-box {{
+    display: inline-block;
+    min-width: 32px;
+    padding: 4px 6px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
     font-size: 14px;
-    cursor: pointer;
+  }}
+  
+  /* Overall score styling */
+  .overall-box {{
+    font-size: 16px;
+    min-width: 40px;
+    padding: 6px 8px;
+    border: 2px solid black;
+    box-shadow: 0 0 6px rgba(0,0,0,0.3);
+    transform: scale(1.1);
+  }}
+
+  /* Colors */
+  .res-good {{
+    background-color: #2ecc71;  /* green */
+  }}
+
+  .res-passable {{
+    background-color: #f1c40f;  /* yellow */
+    color: black;
+  }}
+
+  .res-bad {{
+    background-color: #e74c3c;  /* red */
+  }}
+
+  .res-unknown {{
+    background-color: gray;
+    color: white;
+  }}
+
+  th {{
+  cursor: pointer;
   }}
 </style>
 
@@ -210,6 +369,66 @@ text = f'''
     localStorage.removeItem("loginTime");
     window.location.href = "login.html";
   }}
+</script>
+
+<script>
+  function refreshSession() {{
+    localStorage.setItem("loginTime", Date.now());
+  }}
+
+  document.addEventListener("click", refreshSession);
+  document.addEventListener("keydown", refreshSession);
+</script>
+
+<script>
+let sortDirection = {{}};
+let currentSortedCol = null;
+
+function getCellValue(td) {{
+  const text = td.textContent.trim();
+  const num = parseFloat(text);
+  if (!isNaN(num)) return num;
+  return text.toLowerCase();
+}}
+
+function sortTable(colIndex) {{
+  const table = document.getElementById("qc-table");
+  const tbody = table.tBodies[0];
+  const rows = Array.from(tbody.rows);
+
+  // toggle direction
+  sortDirection[colIndex] = !sortDirection[colIndex];
+  const dir = sortDirection[colIndex] ? 1 : -1;
+
+  // sort rows
+  rows.sort((a, b) => {{
+    const A = getCellValue(a.cells[colIndex]);
+    const B = getCellValue(b.cells[colIndex]);
+
+    if (A < B) return -1 * dir;
+    if (A > B) return 1 * dir;
+    return 0;
+  }});
+
+  rows.forEach(row => tbody.appendChild(row));
+
+  // 🔽 UPDATE ARROWS
+  updateSortIndicators(colIndex, dir);
+}}
+
+function updateSortIndicators(colIndex, dir) {{
+  const headers = document.querySelectorAll("#qc-table th");
+
+  headers.forEach((th, i) => {{
+    // remove existing arrows
+    th.innerHTML = th.textContent.replace(/[\u2191\u2193]/g, "").trim();
+
+    if (i === colIndex) {{
+      const arrow = dir === 1 ? " ↑" : " ↓";
+      th.innerHTML += arrow;
+    }}
+  }});
+}}
 </script>
 
     <html>
@@ -228,9 +447,17 @@ text = f'''
                 text-align: left;
                 padding: 8px;
             }}
-    
-            tr:nth-child(even) {{
-                background-color: Moccasin;
+            
+            tbody tr:nth-child(odd) {{
+              background-color: #f7f7f7;
+            }}
+            
+            tbody tr:nth-child(even) {{
+              background-color: #eaeaea;
+            }}
+            
+            tr:hover {{
+              background-color: #dcdcdc;
             }}
         </style>
     
@@ -239,48 +466,129 @@ text = f'''
        <body>
           <h1>Welcome to WEAVE-Apertif quality control data</h1>
           <p>
-             Here you can find the links to quality control plots of the WEAVE LIFU data observed.
-          </p>
-          <p>
+             Here you can find the links to quality control plots of the WEAVE LIFU data observed. <br>
              For details on WEAVE, please take a look into the 
              <a href="https://ingconfluence.ing.iac.es/confluence/display/WEAV/The+WEAVE+Project" 
-             target="_blank">WEAVE main website</a>.
-          </p>
-          <p>
-             Below you can find the links for the quality control plots of each galaxy observed so far using LIFU data.
-             <a href="WA_QC_plots_doc.pdf" target="_blank">In this document</a> 
-             you can find further information about these plots.
+             target="_blank">WEAVE main website</a>. <br>
+             Below you can find the links for the quality control plots of each galaxy OB observed so far using LIFU 
+             data. <a href="WA_QC_plots_doc.pdf" target="_blank">In this document</a> you can find further information 
+             about these plots. <br>
+             Details on the values shown in the table columns are given in the bottom of this page. 
           </p>
           
           <!-- CPS_DROPDOWN -->
     
     
     
-        <table>
-        <colgroup>
-        <col style="width:250px">
-        <col style="width:300px">
-        <col style="width:250px">
-        <col style="width:250px">
-        <col style="width:250px">
-        <col style="width:300px">
-        </colgroup>
-        <tr>
-        <th><b>WEAVE ID (CNAME)</b></th>
-        <th><b>Galaxy name (NED)</b></th>
-        <th><b>OB ID</b></th>
-        <th><b>LIFU MODE</b></th>
-        <th><b>Observation date</b></th>
-        <th><b>Trimester</b></th>
-        <th><b>Notes</b></th>
-        </tr>
+        <table id="qc-table">
+            <colgroup>
+            <col style="width:200px">
+            <col style="width:200px">
+            <col style="width:100px">
+            <col style="width:100px">
+            <col style="width:100px">
+            <col style="width:100px">
+            <col style="width:60px">
+            <col style="width:60px">
+            <col style="width:60px">
+            <col style="width:60px">
+            <col style="width:60px">
+            <col style="width:60px">
+            <col style="width:60px">
+            <col style="width:200px">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th onclick="sortTable(0)">WEAVE ID (CNAME)</th>
+                    <th onclick="sortTable(1)">Galaxy name (NED)</th>
+                    <th onclick="sortTable(2)">OB ID</th>
+                    <th onclick="sortTable(3)">LIFU Mode</th>
+                    <th onclick="sortTable(4)">Observation date</th>
+                    <th onclick="sortTable(5)">Trimester</th>
+                    <th onclick="sortTable(6)">QC score</th>
+                    <th onclick="sortTable(7)">Blue Res</th>
+                    <th onclick="sortTable(8)">Red Res</th>
+                    <th onclick="sortTable(9)">Blue Thr</th>
+                    <th onclick="sortTable(10)">Red Thr</th>
+                    <th onclick="sortTable(11)">Blue Wave</th>
+                    <th onclick="sortTable(12)">Red Wave</th>
+                    <th onclick="sortTable(13)">Notes</th>
+                </tr>
+            </thead>
         
-        <!-- TABLE_ROWS -->
+            <tbody>
+            <!-- TABLE_ROWS -->
+            </tbody>
         
         </table>
     
           <p>
             &nbsp
+          </p>
+          <p>
+            <div style="margin-top: 15px; margin-bottom: 15px;">
+              <b>QC Score:</b>
+              <p>
+              These values represent the overall score of the quality control parameters used to analyse the data. <br>
+              They are given as the values average of all parameters listed below (shown in the numbered columns). <br>
+              Color-coded classification follows the values below:
+              </p>
+              <ul style="margin-top: 5px;">
+                <li><span class="res-box res-good">70+</span> Good</li>
+                <li><span class="res-box res-passable">40–69</span> Passable</li>
+                <li><span class="res-box res-bad">0–39</span> Bad</li>
+              </ul>
+            </div>
+          </p>
+          <p>
+            <div style="margin-top: 15px; margin-bottom: 15px;">
+              <b>Spectral Resolution Values (Blue/Red Res):</b>
+              <p>
+              These values represent the percentage of measured sky lines resolution (R) above 90% of the nominal value 
+              along all wavelengths and fiber positions. <br>
+              For example: in low resolution mode, where the nominal resolution is R = 2500, this number represents the 
+              percentage of measured sky lines with R > 2350. <br>
+              Color-coded classification follows the values below:
+              </p>
+              <ul style="margin-top: 5px;">
+                <li><span class="res-box res-good">50+</span> Good</li>
+                <li><span class="res-box res-passable">30–49</span> Passable</li>
+                <li><span class="res-box res-bad">0–29</span> Bad</li>
+              </ul>
+            </div>
+          </p>
+          <p>
+            <div style="margin-top: 15px; margin-bottom: 15px;">
+              <b>Fiber Throughput Values (Blue/Red Thr):</b>
+              <p>
+              These values represent the percentage of fiber presenting median integrated sky flux within 1% of the 
+              overall median sky fluxes (measured within all fibers). <br>
+              Color-coded classification follows the values below:
+              </p>
+              <ul style="margin-top: 5px;">
+                <li><span class="res-box res-good">50+</span> Good</li>
+                <li><span class="res-box res-passable">30–49</span> Passable</li>
+                <li><span class="res-box res-bad">0–29</span> Bad</li>
+              </ul>
+            </div>
+          </p>
+          <p>
+            <div style="margin-top: 15px; margin-bottom: 15px;">
+              <b>Wavelength Calibration Values (Blue/Red Wave):</b>
+              <p>
+              These values represent the percentage of fibers showing median sky lines wavelength offsets lower than 
+              20% of the spectral pixel size. <br>
+              For example: in low resolution mode (with spectral pixes size of 0.5A), the value shows the percentage of 
+              fibers with median (calculate over all measured sky lines) wavelength offsets below 0.1A (in absolute 
+              numbers). <br>
+              Color-coded classification follows the values below:
+              </p>
+              <ul style="margin-top: 5px;">
+                <li><span class="res-box res-good">50+</span> Good</li>
+                <li><span class="res-box res-passable">30–49</span> Passable</li>
+                <li><span class="res-box res-bad">0–29</span> Bad</li>
+              </ul>
+            </div>
           </p>
           <p>
              If you have any questions, please send an email to gcouto at aip.de
@@ -304,6 +612,3 @@ cps_pages = sorted(
 
 write_cps_pages(grouped, text, cps_pages)
 write_main_index(objects, text, cps_pages)
-
-# with open("index.html", "w") as f:
-#     f.write(index_html)

@@ -1,20 +1,86 @@
 
 <script>
-  if (localStorage.getItem("loggedIn") !== "true") {
+  const TIMEOUT_MINUTES = 30;
+
+  const loggedIn = localStorage.getItem("loggedIn") === "true";
+  const loginTime = localStorage.getItem("loginTime");
+
+  if (!loggedIn || !loginTime) {
     window.location.href = "login.html";
+  } else {
+    const elapsed = (Date.now() - parseInt(loginTime, 10)) / 1000 / 60;
+
+    if (elapsed > TIMEOUT_MINUTES) {
+      localStorage.clear();
+      window.location.href = "login.html";
+    }
   }
 </script>
 
 <button id="logout-btn" onclick="logout()">Logout</button>
 
 <style>
-  #logout-btn {
-    position: fixed;
-    top: 12px;
-    right: 16px;
-    padding: 6px 12px;
+  /* Center columns */
+  td:nth-child(7),
+  td:nth-child(8),
+  td:nth-child(9),
+  td:nth-child(10),
+  td:nth-child(11),
+  td:nth-child(12),
+  td:nth-child(13),
+  th:nth-child(7),
+  th:nth-child(8),
+  th:nth-child(9),
+  th:nth-child(10),
+  th:nth-child(11),
+  th:nth-child(12),
+  th:nth-child(13) {
+    text-align: center;
+  }
+
+  /* Base box */
+  .res-box {
+    display: inline-block;
+    min-width: 32px;
+    padding: 4px 6px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
     font-size: 14px;
-    cursor: pointer;
+  }
+  
+  /* Overall score styling */
+  .overall-box {
+    font-size: 16px;
+    min-width: 40px;
+    padding: 6px 8px;
+    border: 2px solid black;
+    box-shadow: 0 0 6px rgba(0,0,0,0.3);
+    transform: scale(1.1);
+  }
+
+  /* Colors */
+  .res-good {
+    background-color: #2ecc71;  /* green */
+  }
+
+  .res-passable {
+    background-color: #f1c40f;  /* yellow */
+    color: black;
+  }
+
+  .res-bad {
+    background-color: #e74c3c;  /* red */
+  }
+
+  .res-unknown {
+    background-color: gray;
+    color: white;
+  }
+
+  th {
+  cursor: pointer;
   }
 </style>
 
@@ -24,6 +90,66 @@
     localStorage.removeItem("loginTime");
     window.location.href = "login.html";
   }
+</script>
+
+<script>
+  function refreshSession() {
+    localStorage.setItem("loginTime", Date.now());
+  }
+
+  document.addEventListener("click", refreshSession);
+  document.addEventListener("keydown", refreshSession);
+</script>
+
+<script>
+let sortDirection = {};
+let currentSortedCol = null;
+
+function getCellValue(td) {
+  const text = td.textContent.trim();
+  const num = parseFloat(text);
+  if (!isNaN(num)) return num;
+  return text.toLowerCase();
+}
+
+function sortTable(colIndex) {
+  const table = document.getElementById("qc-table");
+  const tbody = table.tBodies[0];
+  const rows = Array.from(tbody.rows);
+
+  // toggle direction
+  sortDirection[colIndex] = !sortDirection[colIndex];
+  const dir = sortDirection[colIndex] ? 1 : -1;
+
+  // sort rows
+  rows.sort((a, b) => {
+    const A = getCellValue(a.cells[colIndex]);
+    const B = getCellValue(b.cells[colIndex]);
+
+    if (A < B) return -1 * dir;
+    if (A > B) return 1 * dir;
+    return 0;
+  });
+
+  rows.forEach(row => tbody.appendChild(row));
+
+  // 🔽 UPDATE ARROWS
+  updateSortIndicators(colIndex, dir);
+}
+
+function updateSortIndicators(colIndex, dir) {
+  const headers = document.querySelectorAll("#qc-table th");
+
+  headers.forEach((th, i) => {
+    // remove existing arrows
+    th.innerHTML = th.textContent.replace(/[↑↓]/g, "").trim();
+
+    if (i === colIndex) {
+      const arrow = dir === 1 ? " ↑" : " ↓";
+      th.innerHTML += arrow;
+    }
+  });
+}
 </script>
 
     <html>
@@ -42,9 +168,17 @@
                 text-align: left;
                 padding: 8px;
             }
-    
-            tr:nth-child(even) {
-                background-color: Moccasin;
+            
+            tbody tr:nth-child(odd) {
+              background-color: #f7f7f7;
+            }
+            
+            tbody tr:nth-child(even) {
+              background-color: #eaeaea;
+            }
+            
+            tr:hover {
+              background-color: #dcdcdc;
             }
         </style>
     
@@ -53,17 +187,14 @@
        <body>
           <h1>Welcome to WEAVE-Apertif quality control data</h1>
           <p>
-             Here you can find the links to quality control plots of the WEAVE LIFU data observed.
-          </p>
-          <p>
+             Here you can find the links to quality control plots of the WEAVE LIFU data observed. <br>
              For details on WEAVE, please take a look into the 
              <a href="https://ingconfluence.ing.iac.es/confluence/display/WEAV/The+WEAVE+Project" 
-             target="_blank">WEAVE main website</a>.
-          </p>
-          <p>
-             Below you can find the links for the quality control plots of each galaxy observed so far using LIFU data.
-             <a href="WA_QC_plots_doc.pdf" target="_blank">In this document</a> 
-             you can find further information about these plots.
+             target="_blank">WEAVE main website</a>. <br>
+             Below you can find the links for the quality control plots of each galaxy OB observed so far using LIFU 
+             data. <a href="WA_QC_plots_doc.pdf" target="_blank">In this document</a> you can find further information 
+             about these plots. <br>
+             Details on the values shown in the table columns are given in the bottom of this page. 
           </p>
           
           
@@ -75,26 +206,44 @@
     
     
     
-        <table>
-        <colgroup>
-        <col style="width:250px">
-        <col style="width:300px">
-        <col style="width:250px">
-        <col style="width:250px">
-        <col style="width:250px">
-        <col style="width:300px">
-        </colgroup>
-        <tr>
-        <th><b>WEAVE ID (CNAME)</b></th>
-        <th><b>Galaxy name (NED)</b></th>
-        <th><b>OB ID</b></th>
-        <th><b>LIFU MODE</b></th>
-        <th><b>Observation date</b></th>
-        <th><b>Trimester</b></th>
-        <th><b>Notes</b></th>
-        </tr>
+        <table id="qc-table">
+            <colgroup>
+            <col style="width:200px">
+            <col style="width:200px">
+            <col style="width:100px">
+            <col style="width:100px">
+            <col style="width:100px">
+            <col style="width:100px">
+            <col style="width:60px">
+            <col style="width:60px">
+            <col style="width:60px">
+            <col style="width:60px">
+            <col style="width:60px">
+            <col style="width:60px">
+            <col style="width:60px">
+            <col style="width:200px">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th onclick="sortTable(0)">WEAVE ID (CNAME)</th>
+                    <th onclick="sortTable(1)">Galaxy name (NED)</th>
+                    <th onclick="sortTable(2)">OB ID</th>
+                    <th onclick="sortTable(3)">LIFU Mode</th>
+                    <th onclick="sortTable(4)">Observation date</th>
+                    <th onclick="sortTable(5)">Trimester</th>
+                    <th onclick="sortTable(6)">QC score</th>
+                    <th onclick="sortTable(7)">Blue Res</th>
+                    <th onclick="sortTable(8)">Red Res</th>
+                    <th onclick="sortTable(9)">Blue Thr</th>
+                    <th onclick="sortTable(10)">Red Thr</th>
+                    <th onclick="sortTable(11)">Blue Wave</th>
+                    <th onclick="sortTable(12)">Red Wave</th>
+                    <th onclick="sortTable(13)">Notes</th>
+                </tr>
+            </thead>
         
-        
+            <tbody>
+            
         <tr>
             <td><a href="./CPSv0.91_APSv1.3/11103_2024-01-05_WVE_10151144+5640197_LOWRES.html" target="_blank">WVE_10151144+5640197</a></td>
             <td>NGC 3164</td>
@@ -102,6 +251,13 @@
             <td>LOWRES</td>
             <td>2024-01-05</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-good">88</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">93</span></td>
+            <td><span class="res-box res-good">96</span></td>
+            <td><span class="res-box res-good">77</span></td>
+            <td><span class="res-box res-good">64</span></td>
             <td></td>
         </tr>
         
@@ -113,6 +269,13 @@
             <td>LOWRES</td>
             <td>2024-02-04</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-good">85</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">74</span></td>
+            <td><span class="res-box res-good">97</span></td>
+            <td><span class="res-box res-good">78</span></td>
+            <td><span class="res-box res-good">64</span></td>
             <td></td>
         </tr>
         
@@ -124,6 +287,13 @@
             <td>LOWRES</td>
             <td>2024-01-10</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-good">83</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">68</span></td>
+            <td><span class="res-box res-good">94</span></td>
+            <td><span class="res-box res-good">76</span></td>
+            <td><span class="res-box res-good">63</span></td>
             <td></td>
         </tr>
         
@@ -135,6 +305,13 @@
             <td>LOWRES</td>
             <td>2024-02-06</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-good">84</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">66</span></td>
+            <td><span class="res-box res-good">97</span></td>
+            <td><span class="res-box res-good">77</span></td>
+            <td><span class="res-box res-good">64</span></td>
             <td></td>
         </tr>
         
@@ -146,6 +323,13 @@
             <td>LOWRES</td>
             <td>2024-02-07</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-good">83</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">62</span></td>
+            <td><span class="res-box res-good">96</span></td>
+            <td><span class="res-box res-good">77</span></td>
+            <td><span class="res-box res-good">63</span></td>
             <td></td>
         </tr>
         
@@ -157,6 +341,13 @@
             <td>LOWRES</td>
             <td>2024-02-08</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-good">86</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">84</span></td>
+            <td><span class="res-box res-good">97</span></td>
+            <td><span class="res-box res-good">76</span></td>
+            <td><span class="res-box res-good">63</span></td>
             <td></td>
         </tr>
         
@@ -168,6 +359,13 @@
             <td>LOWRES</td>
             <td>2024-02-11</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-good">84</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">73</span></td>
+            <td><span class="res-box res-good">96</span></td>
+            <td><span class="res-box res-good">77</span></td>
+            <td><span class="res-box res-good">62</span></td>
             <td></td>
         </tr>
         
@@ -179,6 +377,13 @@
             <td>LOWRES</td>
             <td>2024-02-07</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-good">82</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">60</span></td>
+            <td><span class="res-box res-good">94</span></td>
+            <td><span class="res-box res-good">77</span></td>
+            <td><span class="res-box res-good">62</span></td>
             <td></td>
         </tr>
         
@@ -190,6 +395,13 @@
             <td>LOWRES</td>
             <td>2024-03-10</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-passable">61</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-bad">9</span></td>
+            <td><span class="res-box res-bad">26</span></td>
+            <td><span class="res-box res-good">73</span></td>
+            <td><span class="res-box res-good">63</span></td>
             <td></td>
         </tr>
         
@@ -201,6 +413,13 @@
             <td>LOWRES</td>
             <td>2024-01-06</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-good">81</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">62</span></td>
+            <td><span class="res-box res-good">87</span></td>
+            <td><span class="res-box res-good">77</span></td>
+            <td><span class="res-box res-good">64</span></td>
             <td></td>
         </tr>
         
@@ -212,6 +431,13 @@
             <td>HIGHRES</td>
             <td>2024-03-16</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-passable">47</span></td>
+            <td><span class="res-box res-good">67</span></td>
+            <td><span class="res-box res-passable">37</span></td>
+            <td><span class="res-box res-bad">13</span></td>
+            <td><span class="res-box res-bad">29</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-passable">37</span></td>
             <td></td>
         </tr>
         
@@ -223,6 +449,13 @@
             <td>HIGHRES</td>
             <td>2024-03-07</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-passable">42</span></td>
+            <td><span class="res-box res-good">71</span></td>
+            <td><span class="res-box res-passable">38</span></td>
+            <td><span class="res-box res-bad">17</span></td>
+            <td><span class="res-box res-passable">32</span></td>
+            <td><span class="res-box res-good">61</span></td>
+            <td><span class="res-box res-passable">38</span></td>
             <td></td>
         </tr>
         
@@ -234,6 +467,13 @@
             <td>HIGHRES</td>
             <td>2024-03-06</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-bad">38</span></td>
+            <td><span class="res-box res-good">54</span></td>
+            <td><span class="res-box res-passable">40</span></td>
+            <td><span class="res-box res-bad">8</span></td>
+            <td><span class="res-box res-bad">26</span></td>
+            <td><span class="res-box res-good">64</span></td>
+            <td><span class="res-box res-passable">38</span></td>
             <td></td>
         </tr>
         
@@ -245,6 +485,13 @@
             <td>LOWRES</td>
             <td>2024-04-08</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-good">77</span></td>
+            <td><span class="res-box res-good">68</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">75</span></td>
+            <td><span class="res-box res-good">88</span></td>
+            <td><span class="res-box res-good">74</span></td>
+            <td><span class="res-box res-good">60</span></td>
             <td></td>
         </tr>
         
@@ -256,6 +503,13 @@
             <td>HIGHRES</td>
             <td>2024-04-05</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-bad">38</span></td>
+            <td><span class="res-box res-bad">0</span></td>
+            <td><span class="res-box res-good">67</span></td>
+            <td><span class="res-box res-bad">11</span></td>
+            <td><span class="res-box res-bad">14</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-passable">40</span></td>
             <td></td>
         </tr>
         
@@ -267,6 +521,13 @@
             <td>HIGHRES</td>
             <td>2024-04-01</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-passable">42</span></td>
+            <td><span class="res-box res-bad">0</span></td>
+            <td><span class="res-box res-good">65</span></td>
+            <td><span class="res-box res-bad">14</span></td>
+            <td><span class="res-box res-passable">31</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-passable">44</span></td>
             <td></td>
         </tr>
         
@@ -278,6 +539,13 @@
             <td>HIGHRES</td>
             <td>2024-03-07</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-passable">48</span></td>
+            <td><span class="res-box res-good">85</span></td>
+            <td><span class="res-box res-passable">40</span></td>
+            <td><span class="res-box res-bad">15</span></td>
+            <td><span class="res-box res-passable">31</span></td>
+            <td><span class="res-box res-good">78</span></td>
+            <td><span class="res-box res-passable">40</span></td>
             <td></td>
         </tr>
         
@@ -289,6 +557,13 @@
             <td>LOWRES</td>
             <td>2024-02-14</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-good">81</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">58</span></td>
+            <td><span class="res-box res-good">94</span></td>
+            <td><span class="res-box res-good">77</span></td>
+            <td><span class="res-box res-good">62</span></td>
             <td></td>
         </tr>
         
@@ -300,6 +575,13 @@
             <td>LOWRES</td>
             <td>2024-04-08</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-good">79</span></td>
+            <td><span class="res-box res-good">67</span></td>
+            <td><span class="res-box res-good">99</span></td>
+            <td><span class="res-box res-good">82</span></td>
+            <td><span class="res-box res-good">96</span></td>
+            <td><span class="res-box res-good">74</span></td>
+            <td><span class="res-box res-good">59</span></td>
             <td></td>
         </tr>
         
@@ -311,6 +593,13 @@
             <td>LOWRES</td>
             <td>2024-02-03</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-good">84</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">68</span></td>
+            <td><span class="res-box res-good">95</span></td>
+            <td><span class="res-box res-good">78</span></td>
+            <td><span class="res-box res-good">64</span></td>
             <td></td>
         </tr>
         
@@ -322,6 +611,13 @@
             <td>LOWRES</td>
             <td>2024-03-18</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-passable">62</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-bad">10</span></td>
+            <td><span class="res-box res-bad">29</span></td>
+            <td><span class="res-box res-good">72</span></td>
+            <td><span class="res-box res-good">61</span></td>
             <td></td>
         </tr>
         
@@ -333,6 +629,13 @@
             <td>LOWRES</td>
             <td>2024-04-14</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-good">74</span></td>
+            <td><span class="res-box res-good">68</span></td>
+            <td><span class="res-box res-good">99</span></td>
+            <td><span class="res-box res-good">69</span></td>
+            <td><span class="res-box res-good">78</span></td>
+            <td><span class="res-box res-good">73</span></td>
+            <td><span class="res-box res-good">58</span></td>
             <td></td>
         </tr>
         
@@ -344,6 +647,13 @@
             <td>LOWRES</td>
             <td>2024-02-11</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-good">82</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">62</span></td>
+            <td><span class="res-box res-good">92</span></td>
+            <td><span class="res-box res-good">77</span></td>
+            <td><span class="res-box res-good">62</span></td>
             <td></td>
         </tr>
         
@@ -355,6 +665,13 @@
             <td>HIGHRES</td>
             <td>2024-04-16</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-passable">48</span></td>
+            <td><span class="res-box res-passable">33</span></td>
+            <td><span class="res-box res-good">68</span></td>
+            <td><span class="res-box res-bad">16</span></td>
+            <td><span class="res-box res-passable">34</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-passable">40</span></td>
             <td></td>
         </tr>
         
@@ -366,6 +683,13 @@
             <td>HIGHRES</td>
             <td>2024-04-07</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-passable">43</span></td>
+            <td><span class="res-box res-passable">33</span></td>
+            <td><span class="res-box res-good">64</span></td>
+            <td><span class="res-box res-bad">8</span></td>
+            <td><span class="res-box res-bad">10</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-passable">44</span></td>
             <td></td>
         </tr>
         
@@ -377,6 +701,13 @@
             <td>HIGHRES</td>
             <td>2024-05-04</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-passable">45</span></td>
+            <td><span class="res-box res-passable">33</span></td>
+            <td><span class="res-box res-good">67</span></td>
+            <td><span class="res-box res-bad">8</span></td>
+            <td><span class="res-box res-bad">24</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-passable">41</span></td>
             <td></td>
         </tr>
         
@@ -388,6 +719,13 @@
             <td>LOWRES</td>
             <td>2024-02-05</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-good">83</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">67</span></td>
+            <td><span class="res-box res-good">92</span></td>
+            <td><span class="res-box res-good">78</span></td>
+            <td><span class="res-box res-good">65</span></td>
             <td></td>
         </tr>
         
@@ -399,6 +737,13 @@
             <td>HIGHRES</td>
             <td>2024-03-16</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-passable">45</span></td>
+            <td><span class="res-box res-good">79</span></td>
+            <td><span class="res-box res-passable">39</span></td>
+            <td><span class="res-box res-bad">21</span></td>
+            <td><span class="res-box res-bad">18</span></td>
+            <td><span class="res-box res-good">80</span></td>
+            <td><span class="res-box res-passable">38</span></td>
             <td></td>
         </tr>
         
@@ -410,6 +755,13 @@
             <td>HIGHRES</td>
             <td>2024-03-07</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-bad">37</span></td>
+            <td><span class="res-box res-passable">47</span></td>
+            <td><span class="res-box res-passable">36</span></td>
+            <td><span class="res-box res-bad">13</span></td>
+            <td><span class="res-box res-bad">14</span></td>
+            <td><span class="res-box res-good">78</span></td>
+            <td><span class="res-box res-passable">38</span></td>
             <td></td>
         </tr>
         
@@ -421,6 +773,13 @@
             <td>HIGHRES</td>
             <td>2024-03-31</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-passable">52</span></td>
+            <td><span class="res-box res-good">59</span></td>
+            <td><span class="res-box res-good">64</span></td>
+            <td><span class="res-box res-good">58</span></td>
+            <td><span class="res-box res-passable">38</span></td>
+            <td><span class="res-box res-good">54</span></td>
+            <td><span class="res-box res-passable">41</span></td>
             <td></td>
         </tr>
         
@@ -432,6 +791,13 @@
             <td>LOWRES</td>
             <td>2024-02-14</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-good">82</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">63</span></td>
+            <td><span class="res-box res-good">93</span></td>
+            <td><span class="res-box res-good">77</span></td>
+            <td><span class="res-box res-good">62</span></td>
             <td></td>
         </tr>
         
@@ -443,6 +809,13 @@
             <td>HIGHRES</td>
             <td>2024-04-15</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-passable">43</span></td>
+            <td><span class="res-box res-passable">33</span></td>
+            <td><span class="res-box res-good">65</span></td>
+            <td><span class="res-box res-bad">9</span></td>
+            <td><span class="res-box res-bad">12</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-passable">40</span></td>
             <td></td>
         </tr>
         
@@ -454,6 +827,13 @@
             <td>HIGHRES</td>
             <td>2024-04-07</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-passable">63</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">67</span></td>
+            <td><span class="res-box res-bad">9</span></td>
+            <td><span class="res-box res-good">60</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-passable">43</span></td>
             <td></td>
         </tr>
         
@@ -465,6 +845,13 @@
             <td>LOWRES</td>
             <td>2024-05-28</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-good">76</span></td>
+            <td><span class="res-box res-good">67</span></td>
+            <td><span class="res-box res-good">99</span></td>
+            <td><span class="res-box res-good">66</span></td>
+            <td><span class="res-box res-good">95</span></td>
+            <td><span class="res-box res-good">74</span></td>
+            <td><span class="res-box res-good">56</span></td>
             <td></td>
         </tr>
         
@@ -476,6 +863,13 @@
             <td>LOWRES</td>
             <td>2024-02-07</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-good">80</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">54</span></td>
+            <td><span class="res-box res-good">91</span></td>
+            <td><span class="res-box res-good">77</span></td>
+            <td><span class="res-box res-good">63</span></td>
             <td></td>
         </tr>
         
@@ -487,17 +881,13 @@
             <td>HIGHRES</td>
             <td>2024-04-08</td>
             <td>2023B2</td>
-            <td></td>
-        </tr>
-        
-
-        <tr>
-            <td><a href="./CPSv0.91_APSv1.3/11157_2024-04-14_WVE_13565101+3747501_HIGHRES.html" target="_blank">WVE_13565101+3747501</a></td>
-            <td>NGC 5378</td>
-            <td>11157</td>
-            <td>HIGHRES</td>
-            <td>2024-04-14</td>
-            <td>2023B2</td>
+            <td><span class="res-box overall-box res-passable">47</span></td>
+            <td><span class="res-box res-passable">33</span></td>
+            <td><span class="res-box res-good">66</span></td>
+            <td><span class="res-box res-bad">20</span></td>
+            <td><span class="res-box res-bad">22</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-passable">41</span></td>
             <td></td>
         </tr>
         
@@ -509,6 +899,13 @@
             <td>HIGHRES</td>
             <td>2024-04-07</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-bad">39</span></td>
+            <td><span class="res-box res-bad">0</span></td>
+            <td><span class="res-box res-good">66</span></td>
+            <td><span class="res-box res-bad">8</span></td>
+            <td><span class="res-box res-bad">20</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-passable">44</span></td>
             <td></td>
         </tr>
         
@@ -520,6 +917,13 @@
             <td>LOWRES</td>
             <td>2024-04-02</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-good">77</span></td>
+            <td><span class="res-box res-good">67</span></td>
+            <td><span class="res-box res-good">99</span></td>
+            <td><span class="res-box res-good">72</span></td>
+            <td><span class="res-box res-good">96</span></td>
+            <td><span class="res-box res-good">74</span></td>
+            <td><span class="res-box res-good">58</span></td>
             <td></td>
         </tr>
         
@@ -531,6 +935,13 @@
             <td>LOWRES</td>
             <td>2024-06-11</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-good">79</span></td>
+            <td><span class="res-box res-good">68</span></td>
+            <td><span class="res-box res-good">99</span></td>
+            <td><span class="res-box res-good">79</span></td>
+            <td><span class="res-box res-good">95</span></td>
+            <td><span class="res-box res-good">74</span></td>
+            <td><span class="res-box res-good">60</span></td>
             <td></td>
         </tr>
         
@@ -542,6 +953,13 @@
             <td>HIGHRES</td>
             <td>2024-04-15</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-bad">38</span></td>
+            <td><span class="res-box res-passable">47</span></td>
+            <td><span class="res-box res-good">68</span></td>
+            <td><span class="res-box res-bad">9</span></td>
+            <td><span class="res-box res-bad">20</span></td>
+            <td><span class="res-box res-passable">46</span></td>
+            <td><span class="res-box res-passable">40</span></td>
             <td></td>
         </tr>
         
@@ -553,6 +971,13 @@
             <td>LOWRES</td>
             <td>2024-05-28</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-good">74</span></td>
+            <td><span class="res-box res-good">68</span></td>
+            <td><span class="res-box res-good">99</span></td>
+            <td><span class="res-box res-good">55</span></td>
+            <td><span class="res-box res-good">98</span></td>
+            <td><span class="res-box res-good">71</span></td>
+            <td><span class="res-box res-good">57</span></td>
             <td></td>
         </tr>
         
@@ -564,6 +989,13 @@
             <td>LOWRES</td>
             <td>2024-03-05</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-passable">61</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-bad">10</span></td>
+            <td><span class="res-box res-bad">26</span></td>
+            <td><span class="res-box res-good">71</span></td>
+            <td><span class="res-box res-good">63</span></td>
             <td></td>
         </tr>
         
@@ -575,6 +1007,13 @@
             <td>LOWRES</td>
             <td>2024-05-14</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-good">77</span></td>
+            <td><span class="res-box res-good">68</span></td>
+            <td><span class="res-box res-good">99</span></td>
+            <td><span class="res-box res-good">78</span></td>
+            <td><span class="res-box res-good">89</span></td>
+            <td><span class="res-box res-good">74</span></td>
+            <td><span class="res-box res-good">58</span></td>
             <td></td>
         </tr>
         
@@ -586,6 +1025,13 @@
             <td>LOWRES</td>
             <td>2024-04-05</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-good">75</span></td>
+            <td><span class="res-box res-good">66</span></td>
+            <td><span class="res-box res-good">99</span></td>
+            <td><span class="res-box res-good">61</span></td>
+            <td><span class="res-box res-good">93</span></td>
+            <td><span class="res-box res-good">74</span></td>
+            <td><span class="res-box res-good">58</span></td>
             <td></td>
         </tr>
         
@@ -597,6 +1043,13 @@
             <td>LOWRES</td>
             <td>2024-03-11</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-passable">61</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-bad">8</span></td>
+            <td><span class="res-box res-bad">26</span></td>
+            <td><span class="res-box res-good">73</span></td>
+            <td><span class="res-box res-good">63</span></td>
             <td></td>
         </tr>
         
@@ -608,6 +1061,13 @@
             <td>LOWRES</td>
             <td>2024-06-13</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-good">75</span></td>
+            <td><span class="res-box res-good">68</span></td>
+            <td><span class="res-box res-good">98</span></td>
+            <td><span class="res-box res-good">60</span></td>
+            <td><span class="res-box res-good">93</span></td>
+            <td><span class="res-box res-good">74</span></td>
+            <td><span class="res-box res-good">59</span></td>
             <td></td>
         </tr>
         
@@ -619,6 +1079,13 @@
             <td>LOWRES</td>
             <td>2024-04-16</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-good">78</span></td>
+            <td><span class="res-box res-good">68</span></td>
+            <td><span class="res-box res-good">99</span></td>
+            <td><span class="res-box res-good">81</span></td>
+            <td><span class="res-box res-good">96</span></td>
+            <td><span class="res-box res-good">72</span></td>
+            <td><span class="res-box res-good">56</span></td>
             <td></td>
         </tr>
         
@@ -630,6 +1097,13 @@
             <td>LOWRES</td>
             <td>2024-08-08</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-good">77</span></td>
+            <td><span class="res-box res-good">67</span></td>
+            <td><span class="res-box res-good">98</span></td>
+            <td><span class="res-box res-good">74</span></td>
+            <td><span class="res-box res-good">96</span></td>
+            <td><span class="res-box res-good">72</span></td>
+            <td><span class="res-box res-good">57</span></td>
             <td></td>
         </tr>
         
@@ -641,6 +1115,13 @@
             <td>HIGHRES</td>
             <td>2024-06-08</td>
             <td>2023B2</td>
+            <td><span class="res-box overall-box res-bad">39</span></td>
+            <td><span class="res-box res-bad">0</span></td>
+            <td><span class="res-box res-good">69</span></td>
+            <td><span class="res-box res-bad">12</span></td>
+            <td><span class="res-box res-bad">13</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-passable">44</span></td>
             <td></td>
         </tr>
         
@@ -652,6 +1133,13 @@
             <td>LOWRES</td>
             <td>2024-08-30</td>
             <td>2024A1</td>
+            <td><span class="res-box overall-box res-good">75</span></td>
+            <td><span class="res-box res-good">67</span></td>
+            <td><span class="res-box res-good">97</span></td>
+            <td><span class="res-box res-good">68</span></td>
+            <td><span class="res-box res-good">91</span></td>
+            <td><span class="res-box res-good">71</span></td>
+            <td><span class="res-box res-good">60</span></td>
             <td></td>
         </tr>
         
@@ -663,6 +1151,13 @@
             <td>HIGHRES</td>
             <td>2024-09-11</td>
             <td>2024A1</td>
+            <td><span class="res-box overall-box res-bad">37</span></td>
+            <td><span class="res-box res-bad">27</span></td>
+            <td><span class="res-box res-good">57</span></td>
+            <td><span class="res-box res-bad">5</span></td>
+            <td><span class="res-box res-bad">12</span></td>
+            <td><span class="res-box res-good">81</span></td>
+            <td><span class="res-box res-passable">41</span></td>
             <td></td>
         </tr>
         
@@ -674,6 +1169,13 @@
             <td>LOWRES</td>
             <td>2024-01-30</td>
             <td>2024A1</td>
+            <td><span class="res-box overall-box res-good">82</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">69</span></td>
+            <td><span class="res-box res-good">82</span></td>
+            <td><span class="res-box res-good">78</span></td>
+            <td><span class="res-box res-good">64</span></td>
             <td></td>
         </tr>
         
@@ -685,17 +1187,13 @@
             <td>LOWRES</td>
             <td>2024-08-10</td>
             <td>2024A1</td>
-            <td></td>
-        </tr>
-        
-
-        <tr>
-            <td><a href="./CPSv0.91_APSv1.3/12029_2024-02-11_WVE_16214230+5505098_LOWRES.html" target="_blank">WVE_16214230+5505098</a></td>
-            <td>NGC 6143</td>
-            <td>12029</td>
-            <td>LOWRES</td>
-            <td>2024-02-11</td>
-            <td>2024A1</td>
+            <td><span class="res-box overall-box res-good">75</span></td>
+            <td><span class="res-box res-good">66</span></td>
+            <td><span class="res-box res-good">97</span></td>
+            <td><span class="res-box res-good">77</span></td>
+            <td><span class="res-box res-good">89</span></td>
+            <td><span class="res-box res-good">66</span></td>
+            <td><span class="res-box res-good">57</span></td>
             <td></td>
         </tr>
         
@@ -707,6 +1205,13 @@
             <td>LOWRES</td>
             <td>2024-04-02</td>
             <td>2024A1</td>
+            <td><span class="res-box overall-box res-good">79</span></td>
+            <td><span class="res-box res-good">67</span></td>
+            <td><span class="res-box res-good">99</span></td>
+            <td><span class="res-box res-good">85</span></td>
+            <td><span class="res-box res-good">93</span></td>
+            <td><span class="res-box res-good">74</span></td>
+            <td><span class="res-box res-good">58</span></td>
             <td></td>
         </tr>
         
@@ -718,6 +1223,13 @@
             <td>LOWRES</td>
             <td>2024-03-10</td>
             <td>2024A1</td>
+            <td><span class="res-box overall-box res-passable">61</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-bad">8</span></td>
+            <td><span class="res-box res-bad">24</span></td>
+            <td><span class="res-box res-good">72</span></td>
+            <td><span class="res-box res-good">63</span></td>
             <td></td>
         </tr>
         
@@ -729,6 +1241,13 @@
             <td>LOWRES</td>
             <td>2024-03-08</td>
             <td>2024A1</td>
+            <td><span class="res-box overall-box res-passable">61</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-bad">9</span></td>
+            <td><span class="res-box res-bad">23</span></td>
+            <td><span class="res-box res-good">72</span></td>
+            <td><span class="res-box res-good">64</span></td>
             <td></td>
         </tr>
         
@@ -740,6 +1259,13 @@
             <td>LOWRES</td>
             <td>2024-04-08</td>
             <td>2024A1</td>
+            <td><span class="res-box overall-box res-passable">59</span></td>
+            <td><span class="res-box res-good">67</span></td>
+            <td><span class="res-box res-good">99</span></td>
+            <td><span class="res-box res-passable">39</span></td>
+            <td><span class="res-box res-bad">12</span></td>
+            <td><span class="res-box res-good">76</span></td>
+            <td><span class="res-box res-good">63</span></td>
             <td></td>
         </tr>
         
@@ -751,6 +1277,13 @@
             <td>LOWRES</td>
             <td>2024-02-15</td>
             <td>2024A1</td>
+            <td><span class="res-box overall-box res-passable">69</span></td>
+            <td><span class="res-box res-good">99</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-bad">27</span></td>
+            <td><span class="res-box res-passable">48</span></td>
+            <td><span class="res-box res-good">77</span></td>
+            <td><span class="res-box res-good">63</span></td>
             <td></td>
         </tr>
         
@@ -762,6 +1295,13 @@
             <td>LOWRES</td>
             <td>2024-03-09</td>
             <td>2024A1</td>
+            <td><span class="res-box overall-box res-passable">61</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-bad">9</span></td>
+            <td><span class="res-box res-bad">23</span></td>
+            <td><span class="res-box res-good">73</span></td>
+            <td><span class="res-box res-good">65</span></td>
             <td></td>
         </tr>
         
@@ -773,6 +1313,13 @@
             <td>LOWRES</td>
             <td>2024-03-10</td>
             <td>2024A1</td>
+            <td><span class="res-box overall-box res-passable">62</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-bad">10</span></td>
+            <td><span class="res-box res-bad">25</span></td>
+            <td><span class="res-box res-good">72</span></td>
+            <td><span class="res-box res-good">65</span></td>
             <td></td>
         </tr>
         
@@ -784,6 +1331,13 @@
             <td>LOWRES</td>
             <td>2024-03-17</td>
             <td>2024A1</td>
+            <td><span class="res-box overall-box res-passable">62</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-bad">10</span></td>
+            <td><span class="res-box res-passable">31</span></td>
+            <td><span class="res-box res-good">71</span></td>
+            <td><span class="res-box res-good">63</span></td>
             <td></td>
         </tr>
         
@@ -795,6 +1349,13 @@
             <td>LOWRES</td>
             <td>2024-04-29</td>
             <td>2024A1</td>
+            <td><span class="res-box overall-box res-good">71</span></td>
+            <td><span class="res-box res-good">68</span></td>
+            <td><span class="res-box res-good">98</span></td>
+            <td><span class="res-box res-passable">46</span></td>
+            <td><span class="res-box res-good">79</span></td>
+            <td><span class="res-box res-good">76</span></td>
+            <td><span class="res-box res-good">61</span></td>
             <td></td>
         </tr>
         
@@ -806,6 +1367,13 @@
             <td>LOWRES</td>
             <td>2024-02-08</td>
             <td>2024A1</td>
+            <td><span class="res-box overall-box res-good">78</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-passable">49</span></td>
+            <td><span class="res-box res-good">84</span></td>
+            <td><span class="res-box res-good">77</span></td>
+            <td><span class="res-box res-good">63</span></td>
             <td></td>
         </tr>
         
@@ -817,6 +1385,13 @@
             <td>LOWRES</td>
             <td>2024-04-09</td>
             <td>2024A1</td>
+            <td><span class="res-box overall-box res-good">74</span></td>
+            <td><span class="res-box res-good">67</span></td>
+            <td><span class="res-box res-good">99</span></td>
+            <td><span class="res-box res-good">77</span></td>
+            <td><span class="res-box res-good">75</span></td>
+            <td><span class="res-box res-good">72</span></td>
+            <td><span class="res-box res-good">59</span></td>
             <td></td>
         </tr>
         
@@ -828,6 +1403,13 @@
             <td>LOWRES</td>
             <td>2024-04-09</td>
             <td>2024A1</td>
+            <td><span class="res-box overall-box res-good">74</span></td>
+            <td><span class="res-box res-good">68</span></td>
+            <td><span class="res-box res-good">99</span></td>
+            <td><span class="res-box res-good">53</span></td>
+            <td><span class="res-box res-good">91</span></td>
+            <td><span class="res-box res-good">74</span></td>
+            <td><span class="res-box res-good">60</span></td>
             <td></td>
         </tr>
         
@@ -839,6 +1421,13 @@
             <td>LOWRES</td>
             <td>2024-04-04</td>
             <td>2024A1</td>
+            <td><span class="res-box overall-box res-passable">69</span></td>
+            <td><span class="res-box res-good">67</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">67</span></td>
+            <td><span class="res-box res-passable">48</span></td>
+            <td><span class="res-box res-good">74</span></td>
+            <td><span class="res-box res-good">59</span></td>
             <td></td>
         </tr>
         
@@ -850,6 +1439,13 @@
             <td>LOWRES</td>
             <td>2024-04-04</td>
             <td>2024A1</td>
+            <td><span class="res-box overall-box res-good">73</span></td>
+            <td><span class="res-box res-good">67</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">64</span></td>
+            <td><span class="res-box res-good">76</span></td>
+            <td><span class="res-box res-good">73</span></td>
+            <td><span class="res-box res-good">60</span></td>
             <td></td>
         </tr>
         
@@ -861,6 +1457,13 @@
             <td>LOWRES</td>
             <td>2024-03-09</td>
             <td>2024A1</td>
+            <td><span class="res-box overall-box res-passable">61</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-bad">10</span></td>
+            <td><span class="res-box res-bad">23</span></td>
+            <td><span class="res-box res-good">73</span></td>
+            <td><span class="res-box res-good">65</span></td>
             <td></td>
         </tr>
         
@@ -872,6 +1475,13 @@
             <td>LOWRES</td>
             <td>2024-03-17</td>
             <td>2024A1</td>
+            <td><span class="res-box overall-box res-passable">62</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-bad">10</span></td>
+            <td><span class="res-box res-passable">31</span></td>
+            <td><span class="res-box res-good">72</span></td>
+            <td><span class="res-box res-good">63</span></td>
             <td></td>
         </tr>
         
@@ -883,6 +1493,13 @@
             <td>LOWRES</td>
             <td>2024-04-09</td>
             <td>2024A1</td>
+            <td><span class="res-box overall-box res-passable">65</span></td>
+            <td><span class="res-box res-good">67</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">57</span></td>
+            <td><span class="res-box res-passable">33</span></td>
+            <td><span class="res-box res-good">75</span></td>
+            <td><span class="res-box res-good">58</span></td>
             <td></td>
         </tr>
         
@@ -894,6 +1511,13 @@
             <td>LOWRES</td>
             <td>2024-03-06</td>
             <td>2024A1</td>
+            <td><span class="res-box overall-box res-passable">61</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-bad">10</span></td>
+            <td><span class="res-box res-bad">25</span></td>
+            <td><span class="res-box res-good">72</span></td>
+            <td><span class="res-box res-good">64</span></td>
             <td></td>
         </tr>
         
@@ -905,6 +1529,13 @@
             <td>LOWRES</td>
             <td>2024-03-17</td>
             <td>2024A1</td>
+            <td><span class="res-box overall-box res-passable">61</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-bad">10</span></td>
+            <td><span class="res-box res-bad">24</span></td>
+            <td><span class="res-box res-good">70</span></td>
+            <td><span class="res-box res-good">63</span></td>
             <td></td>
         </tr>
         
@@ -916,6 +1547,13 @@
             <td>LOWRES</td>
             <td>2024-02-13</td>
             <td>2024A1</td>
+            <td><span class="res-box overall-box res-passable">68</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-bad">28</span></td>
+            <td><span class="res-box res-passable">46</span></td>
+            <td><span class="res-box res-good">76</span></td>
+            <td><span class="res-box res-good">62</span></td>
             <td></td>
         </tr>
         
@@ -927,6 +1565,13 @@
             <td>LOWRES</td>
             <td>2024-02-08</td>
             <td>2024A1</td>
+            <td><span class="res-box overall-box res-good">82</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">64</span></td>
+            <td><span class="res-box res-good">90</span></td>
+            <td><span class="res-box res-good">77</span></td>
+            <td><span class="res-box res-good">63</span></td>
             <td></td>
         </tr>
         
@@ -938,6 +1583,13 @@
             <td>LOWRES</td>
             <td>2024-03-06</td>
             <td>2024A1</td>
+            <td><span class="res-box overall-box res-passable">61</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-bad">9</span></td>
+            <td><span class="res-box res-bad">24</span></td>
+            <td><span class="res-box res-good">73</span></td>
+            <td><span class="res-box res-good">64</span></td>
             <td></td>
         </tr>
         
@@ -949,6 +1601,13 @@
             <td>LOWRES</td>
             <td>2024-03-09</td>
             <td>2024A1</td>
+            <td><span class="res-box overall-box res-passable">62</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-bad">8</span></td>
+            <td><span class="res-box res-bad">28</span></td>
+            <td><span class="res-box res-good">74</span></td>
+            <td><span class="res-box res-good">65</span></td>
             <td></td>
         </tr>
         
@@ -960,6 +1619,13 @@
             <td>LOWRES</td>
             <td>2024-03-17</td>
             <td>2024A1</td>
+            <td><span class="res-box overall-box res-passable">61</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-bad">10</span></td>
+            <td><span class="res-box res-bad">26</span></td>
+            <td><span class="res-box res-good">69</span></td>
+            <td><span class="res-box res-good">63</span></td>
             <td></td>
         </tr>
         
@@ -971,6 +1637,13 @@
             <td>LOWRES</td>
             <td>2024-04-03</td>
             <td>2024A1</td>
+            <td><span class="res-box overall-box res-good">72</span></td>
+            <td><span class="res-box res-good">66</span></td>
+            <td><span class="res-box res-good">99</span></td>
+            <td><span class="res-box res-good">68</span></td>
+            <td><span class="res-box res-good">63</span></td>
+            <td><span class="res-box res-good">74</span></td>
+            <td><span class="res-box res-good">62</span></td>
             <td></td>
         </tr>
         
@@ -982,17 +1655,13 @@
             <td>LOWRES</td>
             <td>2024-04-04</td>
             <td>2024A1</td>
-            <td></td>
-        </tr>
-        
-
-        <tr>
-            <td><a href="./CPSv0.91_APSv1.3/12066_2024-03-12_WVE_15512523+6218361_LOWRES.html" target="_blank">WVE_15512523+6218361</a></td>
-            <td>NGC 6015</td>
-            <td>12066</td>
-            <td>LOWRES</td>
-            <td>2024-03-12</td>
-            <td>2024A1</td>
+            <td><span class="res-box overall-box res-good">79</span></td>
+            <td><span class="res-box res-good">68</span></td>
+            <td><span class="res-box res-good">99</span></td>
+            <td><span class="res-box res-good">74</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">73</span></td>
+            <td><span class="res-box res-good">60</span></td>
             <td></td>
         </tr>
         
@@ -1004,6 +1673,13 @@
             <td>LOWRES</td>
             <td>2024-03-10</td>
             <td>2024A1</td>
+            <td><span class="res-box overall-box res-passable">61</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-bad">8</span></td>
+            <td><span class="res-box res-bad">22</span></td>
+            <td><span class="res-box res-good">74</span></td>
+            <td><span class="res-box res-good">63</span></td>
             <td></td>
         </tr>
         
@@ -1015,6 +1691,13 @@
             <td>LOWRES</td>
             <td>2024-02-05</td>
             <td>2024A1</td>
+            <td><span class="res-box overall-box res-good">83</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">61</span></td>
+            <td><span class="res-box res-good">95</span></td>
+            <td><span class="res-box res-good">78</span></td>
+            <td><span class="res-box res-good">65</span></td>
             <td></td>
         </tr>
         
@@ -1026,6 +1709,13 @@
             <td>LOWRES</td>
             <td>2024-04-09</td>
             <td>2024A1</td>
+            <td><span class="res-box overall-box res-good">72</span></td>
+            <td><span class="res-box res-good">66</span></td>
+            <td><span class="res-box res-good">99</span></td>
+            <td><span class="res-box res-good">65</span></td>
+            <td><span class="res-box res-good">68</span></td>
+            <td><span class="res-box res-good">77</span></td>
+            <td><span class="res-box res-good">59</span></td>
             <td></td>
         </tr>
         
@@ -1037,6 +1727,13 @@
             <td>LOWRES</td>
             <td>2024-05-09</td>
             <td>2024A1</td>
+            <td><span class="res-box overall-box res-passable">67</span></td>
+            <td><span class="res-box res-good">67</span></td>
+            <td><span class="res-box res-good">99</span></td>
+            <td><span class="res-box res-good">56</span></td>
+            <td><span class="res-box res-good">53</span></td>
+            <td><span class="res-box res-good">72</span></td>
+            <td><span class="res-box res-good">56</span></td>
             <td></td>
         </tr>
         
@@ -1048,6 +1745,13 @@
             <td>LOWRES</td>
             <td>2024-06-09</td>
             <td>2024A1</td>
+            <td><span class="res-box overall-box res-good">78</span></td>
+            <td><span class="res-box res-good">67</span></td>
+            <td><span class="res-box res-good">99</span></td>
+            <td><span class="res-box res-good">78</span></td>
+            <td><span class="res-box res-good">94</span></td>
+            <td><span class="res-box res-good">73</span></td>
+            <td><span class="res-box res-good">58</span></td>
             <td></td>
         </tr>
         
@@ -1059,6 +1763,13 @@
             <td>HIGHRES</td>
             <td>2024-05-04</td>
             <td>2024A2</td>
+            <td><span class="res-box overall-box res-bad">35</span></td>
+            <td><span class="res-box res-good">54</span></td>
+            <td><span class="res-box res-good">63</span></td>
+            <td><span class="res-box res-bad">9</span></td>
+            <td><span class="res-box res-bad">15</span></td>
+            <td><span class="res-box res-passable">33</span></td>
+            <td><span class="res-box res-passable">41</span></td>
             <td></td>
         </tr>
         
@@ -1070,6 +1781,13 @@
             <td>HIGHRES</td>
             <td>2024-05-06</td>
             <td>2024A2</td>
+            <td><span class="res-box overall-box res-passable">41</span></td>
+            <td><span class="res-box res-passable">46</span></td>
+            <td><span class="res-box res-good">65</span></td>
+            <td><span class="res-box res-bad">13</span></td>
+            <td><span class="res-box res-passable">45</span></td>
+            <td><span class="res-box res-passable">37</span></td>
+            <td><span class="res-box res-passable">41</span></td>
             <td></td>
         </tr>
         
@@ -1081,6 +1799,13 @@
             <td>LOWRES</td>
             <td>2024-06-05</td>
             <td>2024A2</td>
+            <td><span class="res-box overall-box res-good">76</span></td>
+            <td><span class="res-box res-good">68</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">66</span></td>
+            <td><span class="res-box res-good">93</span></td>
+            <td><span class="res-box res-good">74</span></td>
+            <td><span class="res-box res-good">58</span></td>
             <td></td>
         </tr>
         
@@ -1092,6 +1817,13 @@
             <td>LOWRES</td>
             <td>2024-05-13</td>
             <td>2024A2</td>
+            <td><span class="res-box overall-box res-good">73</span></td>
+            <td><span class="res-box res-good">68</span></td>
+            <td><span class="res-box res-good">99</span></td>
+            <td><span class="res-box res-good">58</span></td>
+            <td><span class="res-box res-good">87</span></td>
+            <td><span class="res-box res-good">73</span></td>
+            <td><span class="res-box res-good">57</span></td>
             <td></td>
         </tr>
         
@@ -1103,6 +1835,13 @@
             <td>HIGHRES</td>
             <td>2024-05-12</td>
             <td>2024A2</td>
+            <td><span class="res-box overall-box res-passable">44</span></td>
+            <td><span class="res-box res-passable">48</span></td>
+            <td><span class="res-box res-good">68</span></td>
+            <td><span class="res-box res-bad">10</span></td>
+            <td><span class="res-box res-passable">44</span></td>
+            <td><span class="res-box res-good">59</span></td>
+            <td><span class="res-box res-passable">38</span></td>
             <td></td>
         </tr>
         
@@ -1114,6 +1853,13 @@
             <td>HIGHRES</td>
             <td>2024-05-27</td>
             <td>2024A2</td>
+            <td><span class="res-box overall-box res-passable">58</span></td>
+            <td><span class="res-box res-passable">35</span></td>
+            <td><span class="res-box res-good">65</span></td>
+            <td><span class="res-box res-good">98</span></td>
+            <td><span class="res-box res-passable">47</span></td>
+            <td><span class="res-box res-good">65</span></td>
+            <td><span class="res-box res-passable">40</span></td>
             <td></td>
         </tr>
         
@@ -1125,6 +1871,13 @@
             <td>HIGHRES</td>
             <td>2024-06-06</td>
             <td>2024A2</td>
+            <td><span class="res-box overall-box res-passable">42</span></td>
+            <td><span class="res-box res-good">65</span></td>
+            <td><span class="res-box res-good">68</span></td>
+            <td><span class="res-box res-bad">6</span></td>
+            <td><span class="res-box res-bad">25</span></td>
+            <td><span class="res-box res-passable">45</span></td>
+            <td><span class="res-box res-passable">43</span></td>
             <td></td>
         </tr>
         
@@ -1136,6 +1889,13 @@
             <td>LOWRES</td>
             <td>2024-05-03</td>
             <td>2024A2</td>
+            <td><span class="res-box overall-box res-good">73</span></td>
+            <td><span class="res-box res-good">68</span></td>
+            <td><span class="res-box res-good">99</span></td>
+            <td><span class="res-box res-good">51</span></td>
+            <td><span class="res-box res-good">89</span></td>
+            <td><span class="res-box res-good">72</span></td>
+            <td><span class="res-box res-good">59</span></td>
             <td></td>
         </tr>
         
@@ -1147,6 +1907,13 @@
             <td>HIGHRES</td>
             <td>2024-05-27</td>
             <td>2024A2</td>
+            <td><span class="res-box overall-box res-bad">36</span></td>
+            <td><span class="res-box res-passable">40</span></td>
+            <td><span class="res-box res-good">67</span></td>
+            <td><span class="res-box res-bad">9</span></td>
+            <td><span class="res-box res-bad">14</span></td>
+            <td><span class="res-box res-passable">48</span></td>
+            <td><span class="res-box res-passable">40</span></td>
             <td></td>
         </tr>
         
@@ -1158,6 +1925,13 @@
             <td>HIGHRES</td>
             <td>2024-05-12</td>
             <td>2024A2</td>
+            <td><span class="res-box overall-box res-passable">44</span></td>
+            <td><span class="res-box res-passable">33</span></td>
+            <td><span class="res-box res-good">67</span></td>
+            <td><span class="res-box res-bad">11</span></td>
+            <td><span class="res-box res-bad">12</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-passable">46</span></td>
             <td></td>
         </tr>
         
@@ -1169,6 +1943,13 @@
             <td>LOWRES</td>
             <td>2024-07-30</td>
             <td>2024A2</td>
+            <td><span class="res-box overall-box res-good">76</span></td>
+            <td><span class="res-box res-good">66</span></td>
+            <td><span class="res-box res-good">96</span></td>
+            <td><span class="res-box res-good">63</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">72</span></td>
+            <td><span class="res-box res-good">59</span></td>
             <td></td>
         </tr>
         
@@ -1180,6 +1961,13 @@
             <td>LOWRES</td>
             <td>2024-06-02</td>
             <td>2024A2</td>
+            <td><span class="res-box overall-box res-good">74</span></td>
+            <td><span class="res-box res-good">67</span></td>
+            <td><span class="res-box res-good">99</span></td>
+            <td><span class="res-box res-good">74</span></td>
+            <td><span class="res-box res-good">84</span></td>
+            <td><span class="res-box res-good">68</span></td>
+            <td><span class="res-box res-good">57</span></td>
             <td></td>
         </tr>
         
@@ -1191,6 +1979,13 @@
             <td>LOWRES</td>
             <td>2024-08-27</td>
             <td>2024A2</td>
+            <td><span class="res-box overall-box res-good">76</span></td>
+            <td><span class="res-box res-good">66</span></td>
+            <td><span class="res-box res-good">98</span></td>
+            <td><span class="res-box res-good">71</span></td>
+            <td><span class="res-box res-good">96</span></td>
+            <td><span class="res-box res-good">72</span></td>
+            <td><span class="res-box res-good">56</span></td>
             <td></td>
         </tr>
         
@@ -1202,6 +1997,13 @@
             <td>HIGHRES</td>
             <td>2024-08-06</td>
             <td>2024A2</td>
+            <td><span class="res-box overall-box res-bad">36</span></td>
+            <td><span class="res-box res-bad">0</span></td>
+            <td><span class="res-box res-passable">49</span></td>
+            <td><span class="res-box res-bad">11</span></td>
+            <td><span class="res-box res-bad">20</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-passable">40</span></td>
             <td></td>
         </tr>
         
@@ -1213,6 +2015,13 @@
             <td>HIGHRES</td>
             <td>2024-08-13</td>
             <td>2024A2</td>
+            <td><span class="res-box overall-box res-bad">38</span></td>
+            <td><span class="res-box res-passable">35</span></td>
+            <td><span class="res-box res-good">53</span></td>
+            <td><span class="res-box res-bad">10</span></td>
+            <td><span class="res-box res-good">55</span></td>
+            <td><span class="res-box res-passable">39</span></td>
+            <td><span class="res-box res-passable">39</span></td>
             <td></td>
         </tr>
         
@@ -1224,6 +2033,13 @@
             <td>HIGHRES</td>
             <td>2024-07-29</td>
             <td>2024A2</td>
+            <td><span class="res-box overall-box res-passable">40</span></td>
+            <td><span class="res-box res-good">52</span></td>
+            <td><span class="res-box res-good">54</span></td>
+            <td><span class="res-box res-bad">8</span></td>
+            <td><span class="res-box res-bad">22</span></td>
+            <td><span class="res-box res-good">68</span></td>
+            <td><span class="res-box res-passable">41</span></td>
             <td></td>
         </tr>
         
@@ -1235,6 +2051,13 @@
             <td>HIGHRES</td>
             <td>2024-07-30</td>
             <td>2024A2</td>
+            <td><span class="res-box overall-box res-passable">43</span></td>
+            <td><span class="res-box res-passable">33</span></td>
+            <td><span class="res-box res-good">51</span></td>
+            <td><span class="res-box res-bad">14</span></td>
+            <td><span class="res-box res-bad">18</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-passable">42</span></td>
             <td></td>
         </tr>
         
@@ -1246,6 +2069,13 @@
             <td>HIGHRES</td>
             <td>2024-08-11</td>
             <td>2024A2</td>
+            <td><span class="res-box overall-box res-bad">39</span></td>
+            <td><span class="res-box res-bad">0</span></td>
+            <td><span class="res-box res-good">57</span></td>
+            <td><span class="res-box res-bad">9</span></td>
+            <td><span class="res-box res-passable">33</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-passable">37</span></td>
             <td></td>
         </tr>
         
@@ -1257,6 +2087,13 @@
             <td>LOWRES</td>
             <td>2024-08-31</td>
             <td>2024A2</td>
+            <td><span class="res-box overall-box res-good">77</span></td>
+            <td><span class="res-box res-good">66</span></td>
+            <td><span class="res-box res-good">97</span></td>
+            <td><span class="res-box res-good">71</span></td>
+            <td><span class="res-box res-good">97</span></td>
+            <td><span class="res-box res-good">73</span></td>
+            <td><span class="res-box res-good">59</span></td>
             <td></td>
         </tr>
         
@@ -1268,6 +2105,13 @@
             <td>HIGHRES</td>
             <td>2024-08-29</td>
             <td>2024A2</td>
+            <td><span class="res-box overall-box res-bad">39</span></td>
+            <td><span class="res-box res-passable">46</span></td>
+            <td><span class="res-box res-good">56</span></td>
+            <td><span class="res-box res-bad">12</span></td>
+            <td><span class="res-box res-passable">39</span></td>
+            <td><span class="res-box res-passable">43</span></td>
+            <td><span class="res-box res-passable">40</span></td>
             <td></td>
         </tr>
         
@@ -1279,6 +2123,13 @@
             <td>HIGHRES</td>
             <td>2024-08-30</td>
             <td>2024A2</td>
+            <td><span class="res-box overall-box res-bad">37</span></td>
+            <td><span class="res-box res-bad">22</span></td>
+            <td><span class="res-box res-good">58</span></td>
+            <td><span class="res-box res-bad">24</span></td>
+            <td><span class="res-box res-bad">28</span></td>
+            <td><span class="res-box res-good">55</span></td>
+            <td><span class="res-box res-passable">40</span></td>
             <td></td>
         </tr>
         
@@ -1290,6 +2141,13 @@
             <td>HIGHRES</td>
             <td>2024-08-12</td>
             <td>2024A2</td>
+            <td><span class="res-box overall-box res-bad">39</span></td>
+            <td><span class="res-box res-passable">42</span></td>
+            <td><span class="res-box res-good">51</span></td>
+            <td><span class="res-box res-bad">25</span></td>
+            <td><span class="res-box res-passable">32</span></td>
+            <td><span class="res-box res-passable">49</span></td>
+            <td><span class="res-box res-passable">39</span></td>
             <td></td>
         </tr>
         
@@ -1301,6 +2159,13 @@
             <td>LOWRES</td>
             <td>2024-08-01</td>
             <td>2024A2</td>
+            <td><span class="res-box overall-box res-good">74</span></td>
+            <td><span class="res-box res-good">67</span></td>
+            <td><span class="res-box res-good">97</span></td>
+            <td><span class="res-box res-good">64</span></td>
+            <td><span class="res-box res-good">96</span></td>
+            <td><span class="res-box res-good">69</span></td>
+            <td><span class="res-box res-good">56</span></td>
             <td></td>
         </tr>
         
@@ -1312,6 +2177,13 @@
             <td>HIGHRES</td>
             <td>2024-06-09</td>
             <td>2024A2</td>
+            <td><span class="res-box overall-box res-passable">43</span></td>
+            <td><span class="res-box res-passable">45</span></td>
+            <td><span class="res-box res-good">65</span></td>
+            <td><span class="res-box res-bad">20</span></td>
+            <td><span class="res-box res-passable">47</span></td>
+            <td><span class="res-box res-passable">41</span></td>
+            <td><span class="res-box res-passable">43</span></td>
             <td></td>
         </tr>
         
@@ -1323,6 +2195,13 @@
             <td>HIGHRES</td>
             <td>2024-07-31</td>
             <td>2024A2</td>
+            <td><span class="res-box overall-box res-bad">37</span></td>
+            <td><span class="res-box res-passable">44</span></td>
+            <td><span class="res-box res-good">52</span></td>
+            <td><span class="res-box res-passable">32</span></td>
+            <td><span class="res-box res-bad">10</span></td>
+            <td><span class="res-box res-passable">45</span></td>
+            <td><span class="res-box res-passable">41</span></td>
             <td></td>
         </tr>
         
@@ -1334,6 +2213,13 @@
             <td>HIGHRES</td>
             <td>2024-08-29</td>
             <td>2024A2</td>
+            <td><span class="res-box overall-box res-bad">31</span></td>
+            <td><span class="res-box res-passable">34</span></td>
+            <td><span class="res-box res-good">53</span></td>
+            <td><span class="res-box res-bad">7</span></td>
+            <td><span class="res-box res-bad">19</span></td>
+            <td><span class="res-box res-passable">35</span></td>
+            <td><span class="res-box res-passable">40</span></td>
             <td></td>
         </tr>
         
@@ -1345,6 +2231,13 @@
             <td>LOWRES</td>
             <td>2024-08-12</td>
             <td>2024A2</td>
+            <td><span class="res-box overall-box res-good">78</span></td>
+            <td><span class="res-box res-good">66</span></td>
+            <td><span class="res-box res-good">96</span></td>
+            <td><span class="res-box res-good">83</span></td>
+            <td><span class="res-box res-good">99</span></td>
+            <td><span class="res-box res-good">70</span></td>
+            <td><span class="res-box res-good">56</span></td>
             <td></td>
         </tr>
         
@@ -1356,6 +2249,13 @@
             <td>LOWRES</td>
             <td>2024-09-01</td>
             <td>2024A2</td>
+            <td><span class="res-box overall-box res-good">75</span></td>
+            <td><span class="res-box res-good">66</span></td>
+            <td><span class="res-box res-good">97</span></td>
+            <td><span class="res-box res-good">66</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">69</span></td>
+            <td><span class="res-box res-good">57</span></td>
             <td></td>
         </tr>
         
@@ -1367,6 +2267,13 @@
             <td>LOWRES</td>
             <td>2024-05-15</td>
             <td>2024A2</td>
+            <td><span class="res-box overall-box res-good">73</span></td>
+            <td><span class="res-box res-good">67</span></td>
+            <td><span class="res-box res-good">99</span></td>
+            <td><span class="res-box res-good">66</span></td>
+            <td><span class="res-box res-good">80</span></td>
+            <td><span class="res-box res-good">71</span></td>
+            <td><span class="res-box res-good">59</span></td>
             <td></td>
         </tr>
         
@@ -1378,6 +2285,13 @@
             <td>LOWRES</td>
             <td>2024-07-13</td>
             <td>2024A2</td>
+            <td><span class="res-box overall-box res-good">73</span></td>
+            <td><span class="res-box res-good">67</span></td>
+            <td><span class="res-box res-good">98</span></td>
+            <td><span class="res-box res-good">54</span></td>
+            <td><span class="res-box res-good">96</span></td>
+            <td><span class="res-box res-good">70</span></td>
+            <td><span class="res-box res-good">56</span></td>
             <td></td>
         </tr>
         
@@ -1389,6 +2303,13 @@
             <td>LOWRES</td>
             <td>2024-09-03</td>
             <td>2024A2</td>
+            <td><span class="res-box overall-box res-good">78</span></td>
+            <td><span class="res-box res-good">67</span></td>
+            <td><span class="res-box res-good">98</span></td>
+            <td><span class="res-box res-good">81</span></td>
+            <td><span class="res-box res-good">95</span></td>
+            <td><span class="res-box res-good">72</span></td>
+            <td><span class="res-box res-good">60</span></td>
             <td></td>
         </tr>
         
@@ -1400,6 +2321,13 @@
             <td>LOWRES</td>
             <td>2024-07-14</td>
             <td>2024A2</td>
+            <td><span class="res-box overall-box res-good">70</span></td>
+            <td><span class="res-box res-good">66</span></td>
+            <td><span class="res-box res-good">98</span></td>
+            <td><span class="res-box res-good">53</span></td>
+            <td><span class="res-box res-good">77</span></td>
+            <td><span class="res-box res-good">69</span></td>
+            <td><span class="res-box res-good">57</span></td>
             <td></td>
         </tr>
         
@@ -1411,6 +2339,13 @@
             <td>LOWRES</td>
             <td>2024-08-27</td>
             <td>2024A2</td>
+            <td><span class="res-box overall-box res-good">79</span></td>
+            <td><span class="res-box res-good">67</span></td>
+            <td><span class="res-box res-good">97</span></td>
+            <td><span class="res-box res-good">86</span></td>
+            <td><span class="res-box res-good">95</span></td>
+            <td><span class="res-box res-good">70</span></td>
+            <td><span class="res-box res-good">60</span></td>
             <td></td>
         </tr>
         
@@ -1422,14 +2357,87 @@
             <td>LOWRES</td>
             <td>2024-06-08</td>
             <td>2024A2</td>
+            <td><span class="res-box overall-box res-good">75</span></td>
+            <td><span class="res-box res-good">68</span></td>
+            <td><span class="res-box res-good">99</span></td>
+            <td><span class="res-box res-good">59</span></td>
+            <td><span class="res-box res-good">96</span></td>
+            <td><span class="res-box res-good">70</span></td>
+            <td><span class="res-box res-good">59</span></td>
             <td></td>
         </tr>
         
+            </tbody>
         
         </table>
     
           <p>
             &nbsp
+          </p>
+          <p>
+            <div style="margin-top: 15px; margin-bottom: 15px;">
+              <b>QC Score:</b>
+              <p>
+              These values represent the overall score of the quality control parameters used to analyse the data. <br>
+              They are given as the values average of all parameters listed below (shown in the numbered columns). <br>
+              Color-coded classification follows the values below:
+              </p>
+              <ul style="margin-top: 5px;">
+                <li><span class="res-box res-good">70+</span> Good</li>
+                <li><span class="res-box res-passable">40–69</span> Passable</li>
+                <li><span class="res-box res-bad">0–39</span> Bad</li>
+              </ul>
+            </div>
+          </p>
+          <p>
+            <div style="margin-top: 15px; margin-bottom: 15px;">
+              <b>Spectral Resolution Values (Blue/Red Res):</b>
+              <p>
+              These values represent the percentage of measured sky lines resolution (R) above 90% of the nominal value 
+              along all wavelengths and fiber positions. <br>
+              For example: in low resolution mode, where the nominal resolution is R = 2500, this number represents the 
+              percentage of measured sky lines with R > 2350. <br>
+              Color-coded classification follows the values below:
+              </p>
+              <ul style="margin-top: 5px;">
+                <li><span class="res-box res-good">50+</span> Good</li>
+                <li><span class="res-box res-passable">30–49</span> Passable</li>
+                <li><span class="res-box res-bad">0–29</span> Bad</li>
+              </ul>
+            </div>
+          </p>
+          <p>
+            <div style="margin-top: 15px; margin-bottom: 15px;">
+              <b>Fiber Throughput Values (Blue/Red Thr):</b>
+              <p>
+              These values represent the percentage of fiber presenting median integrated sky flux within 1% of the 
+              overall median sky fluxes (measured within all fibers). <br>
+              Color-coded classification follows the values below:
+              </p>
+              <ul style="margin-top: 5px;">
+                <li><span class="res-box res-good">50+</span> Good</li>
+                <li><span class="res-box res-passable">30–49</span> Passable</li>
+                <li><span class="res-box res-bad">0–29</span> Bad</li>
+              </ul>
+            </div>
+          </p>
+          <p>
+            <div style="margin-top: 15px; margin-bottom: 15px;">
+              <b>Wavelength Calibration Values (Blue/Red Wave):</b>
+              <p>
+              These values represent the percentage of fibers showing median sky lines wavelength offsets lower than 
+              20% of the spectral pixel size. <br>
+              For example: in low resolution mode (with spectral pixes size of 0.5A), the value shows the percentage of 
+              fibers with median (calculate over all measured sky lines) wavelength offsets below 0.1A (in absolute 
+              numbers). <br>
+              Color-coded classification follows the values below:
+              </p>
+              <ul style="margin-top: 5px;">
+                <li><span class="res-box res-good">50+</span> Good</li>
+                <li><span class="res-box res-passable">30–49</span> Passable</li>
+                <li><span class="res-box res-bad">0–29</span> Bad</li>
+              </ul>
+            </div>
           </p>
           <p>
              If you have any questions, please send an email to gcouto at aip.de
