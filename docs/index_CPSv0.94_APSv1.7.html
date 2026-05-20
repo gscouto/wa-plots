@@ -200,7 +200,7 @@ function updateSortIndicators(colIndex, dir) {
           
     <label for="cpsSelect"><b>Select CPS version:</b></label>
     <select id="cpsSelect" onchange="location = this.value;">
-        <option value="index.html">All versions</option><option value="index_CPSv0.90_APSv1.3.html">CPSv0.90_APSv1.3</option><option value="index_CPSv0.91_APSv1.3.html">CPSv0.91_APSv1.3</option><option value="index_CPSv0.92_APSv1.3.html">CPSv0.92_APSv1.3</option><option value="index_CPSv0.93_APSv1.62.html">CPSv0.93_APSv1.62</option><option value="index_CPSv0.94_APSv1.7.html" selected>CPSv0.94_APSv1.7</option>
+        <option value="index.html">All versions</option><option value="index_CPSv0.91_APSv1.3.html">CPSv0.91_APSv1.3</option><option value="index_CPSv0.92_APSv1.3.html">CPSv0.92_APSv1.3</option><option value="index_CPSv0.93_APSv1.62.html">CPSv0.93_APSv1.62</option><option value="index_CPSv0.94_APSv1.7.html" selected>CPSv0.94_APSv1.7</option>
     </select>
     
     
@@ -208,6 +208,7 @@ function updateSortIndicators(colIndex, dir) {
     
         <table id="qc-table">
             <colgroup>
+            <col style="width:200px">
             <col style="width:200px">
             <col style="width:200px">
             <col style="width:100px">
@@ -226,19 +227,20 @@ function updateSortIndicators(colIndex, dir) {
             <thead>
                 <tr>
                     <th onclick="sortTable(0)">WEAVE ID (CNAME)</th>
-                    <th onclick="sortTable(1)">Galaxy name (NED)</th>
-                    <th onclick="sortTable(2)">OB ID</th>
-                    <th onclick="sortTable(3)">LIFU Mode</th>
-                    <th onclick="sortTable(4)">Observation date</th>
-                    <th onclick="sortTable(5)">Trimester</th>
-                    <th onclick="sortTable(6)">QC score</th>
-                    <th onclick="sortTable(7)">Blue Res</th>
-                    <th onclick="sortTable(8)">Red Res</th>
-                    <th onclick="sortTable(9)">Blue Thr</th>
-                    <th onclick="sortTable(10)">Red Thr</th>
-                    <th onclick="sortTable(11)">Blue Wave</th>
-                    <th onclick="sortTable(12)">Red Wave</th>
-                    <th onclick="sortTable(13)">Notes</th>
+                    <th onclick="sortTable(1)">WA_ID</th>
+                    <th onclick="sortTable(2)">Galaxy name (NED)</th>
+                    <th onclick="sortTable(3)">OB ID</th>
+                    <th onclick="sortTable(4)">LIFU Mode</th>
+                    <th onclick="sortTable(5)">Observation date</th>
+                    <th onclick="sortTable(6)">Trimester</th>
+                    <th onclick="sortTable(7)">QC score</th>
+                    <th onclick="sortTable(8)">Blue Res</th>
+                    <th onclick="sortTable(9)">Red Res</th>
+                    <th onclick="sortTable(10)">Blue Thr</th>
+                    <th onclick="sortTable(11)">Red Thr</th>
+                    <th onclick="sortTable(12)">Blue Wave</th>
+                    <th onclick="sortTable(13)">Red Wave</th>
+                    <th onclick="sortTable(14)">Notes</th>
                 </tr>
             </thead>
         
@@ -246,6 +248,7 @@ function updateSortIndicators(colIndex, dir) {
             
         <tr>
             <td><a href="./CPSv0.94_APSv1.7/12311_2025-12-29_WVE_09471545+6754587_LOWRES.html" target="_blank">WVE_09471545+6754587</a></td>
+            <td>_</td>
             <td>NGC 2976</td>
             <td>12311</td>
             <td>LOWRES</td>
@@ -263,7 +266,65 @@ function updateSortIndicators(colIndex, dir) {
         
 
         <tr>
+            <td><a href="./CPSv0.94_APSv1.7/15285_2025-10-30_WVE_02161280+3238583_LOWRES.html" target="_blank">WVE_02161280+3238583</a></td>
+            <td>J021612.79+323858.20</td>
+            <td>IC 1784</td>
+            <td>15285</td>
+            <td>LOWRES</td>
+            <td>2025-10-30</td>
+            <td>2025A1</td>
+            <td><span class="res-box overall-box res-good">92</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">96</span></td>
+            <td><span class="res-box res-good">97</span></td>
+            <td><span class="res-box res-good">90</span></td>
+            <td><span class="res-box res-good">74</span></td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.94_APSv1.7/15294_2025-10-28_WVE_02260518+4208384_LOWRES.html" target="_blank">WVE_02260518+4208384</a></td>
+            <td>J022605.18+420838.70</td>
+            <td>NGC 0914</td>
+            <td>15294</td>
+            <td>LOWRES</td>
+            <td>2025-10-28</td>
+            <td>2025A1</td>
+            <td><span class="res-box overall-box res-good">91</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">94</span></td>
+            <td><span class="res-box res-good">89</span></td>
+            <td><span class="res-box res-good">90</span></td>
+            <td><span class="res-box res-good">74</span></td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.94_APSv1.7/16056_2026-01-23_WVE_14575635+5347058_LOWRES.html" target="_blank">WVE_14575635+5347058</a></td>
+            <td>J145756.35+534705.92</td>
+            <td>UGC 09632</td>
+            <td>16056</td>
+            <td>LOWRES</td>
+            <td>2026-01-23</td>
+            <td>2025A2</td>
+            <td><span class="res-box overall-box res-good">93</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">99</span></td>
+            <td><span class="res-box res-good">96</span></td>
+            <td><span class="res-box res-good">90</span></td>
+            <td><span class="res-box res-good">76</span></td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
             <td><a href="./CPSv0.94_APSv1.7/16062_2026-01-23_WVE_12154481+5451272_HIGHRES.html" target="_blank">WVE_12154481+5451272</a></td>
+            <td>J121544.82+545127.34</td>
             <td>CGCG 269-048</td>
             <td>16062</td>
             <td>HIGHRES</td>
@@ -282,6 +343,7 @@ function updateSortIndicators(colIndex, dir) {
 
         <tr>
             <td><a href="./CPSv0.94_APSv1.7/16077_2026-01-22_WVE_10321971+5605069_LOWRES.html" target="_blank">WVE_10321971+5605069</a></td>
+            <td>J103219.70+560507.00</td>
             <td>NGC 3264</td>
             <td>16077</td>
             <td>LOWRES</td>
@@ -299,7 +361,122 @@ function updateSortIndicators(colIndex, dir) {
         
 
         <tr>
+            <td><a href="./CPSv0.94_APSv1.7/19186_2025-08-17_WVE_22235863+3742038_LOWRES.html" target="_blank">WVE_22235863+3742038</a></td>
+            <td>J222358.62+374204.00</td>
+            <td>WISEA J222358.68+374204.5</td>
+            <td>19186</td>
+            <td>LOWRES</td>
+            <td>2025-08-17</td>
+            <td>2025B1</td>
+            <td><span class="res-box overall-box res-good">92</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">94</span></td>
+            <td><span class="res-box res-good">99</span></td>
+            <td><span class="res-box res-good">87</span></td>
+            <td><span class="res-box res-good">72</span></td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.94_APSv1.7/19187_2025-10-02_WVE_03205376+3752015_LOWRES.html" target="_blank">WVE_03205376+3752015</a></td>
+            <td>J032053.75+375201.60</td>
+            <td>CGCG 525-022</td>
+            <td>19187</td>
+            <td>LOWRES</td>
+            <td>2025-10-02</td>
+            <td>2025B1</td>
+            <td><span class="res-box overall-box res-good">90</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">80</span></td>
+            <td><span class="res-box res-good">98</span></td>
+            <td><span class="res-box res-good">89</span></td>
+            <td><span class="res-box res-good">73</span></td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.94_APSv1.7/19189_2025-10-27_WVE_02243410+3310065_LOWRES.html" target="_blank">WVE_02243410+3310065</a></td>
+            <td>J022434.11+331006.70</td>
+            <td>UGC 01857</td>
+            <td>19189</td>
+            <td>LOWRES</td>
+            <td>2025-10-27</td>
+            <td>2025B1</td>
+            <td><span class="res-box overall-box res-good">92</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">93</span></td>
+            <td><span class="res-box res-good">98</span></td>
+            <td><span class="res-box res-good">89</span></td>
+            <td><span class="res-box res-good">74</span></td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.94_APSv1.7/19190_2025-11-18_WVE_02243410+3310065_HIGHRES.html" target="_blank">WVE_02243410+3310065</a></td>
+            <td>J022434.11+331006.70</td>
+            <td>UGC 01857</td>
+            <td>19190</td>
+            <td>HIGHRES</td>
+            <td>2025-11-18</td>
+            <td>2025B1</td>
+            <td><span class="res-box overall-box res-passable">66</span></td>
+            <td><span class="res-box res-passable">31</span></td>
+            <td><span class="res-box res-good">98</span></td>
+            <td><span class="res-box res-passable">43</span></td>
+            <td><span class="res-box res-good">99</span></td>
+            <td><span class="res-box res-good">71</span></td>
+            <td><span class="res-box res-good">59</span></td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.94_APSv1.7/19192_2025-11-18_WVE_02243419+3310084_HIGHRES.html" target="_blank">WVE_02243419+3310084</a></td>
+            <td>J022434.11+331006.70</td>
+            <td>UGC 01857</td>
+            <td>19192</td>
+            <td>HIGHRES</td>
+            <td>2025-11-18</td>
+            <td>2025B1</td>
+            <td><span class="res-box overall-box res-passable">62</span></td>
+            <td><span class="res-box res-passable">33</span></td>
+            <td><span class="res-box res-good">97</span></td>
+            <td><span class="res-box res-passable">30</span></td>
+            <td><span class="res-box res-good">98</span></td>
+            <td><span class="res-box res-good">59</span></td>
+            <td><span class="res-box res-good">59</span></td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.94_APSv1.7/19194_2025-09-14_WVE_02185125+3343275_LOWRES.html" target="_blank">WVE_02185125+3343275</a></td>
+            <td>J021851.25+334327.70</td>
+            <td>UGC 01778</td>
+            <td>19194</td>
+            <td>LOWRES</td>
+            <td>2025-09-14</td>
+            <td>2025B1</td>
+            <td><span class="res-box overall-box res-good">93</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">96</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">89</span></td>
+            <td><span class="res-box res-good">74</span></td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
             <td><a href="./CPSv0.94_APSv1.7/19200_2026-01-14_WVE_03073815+3916139_LOWRES.html" target="_blank">WVE_03073815+3916139</a></td>
+            <td>J030738.15+391613.90</td>
             <td>UGC 02546</td>
             <td>19200</td>
             <td>LOWRES</td>
@@ -317,7 +494,27 @@ function updateSortIndicators(colIndex, dir) {
         
 
         <tr>
+            <td><a href="./CPSv0.94_APSv1.7/19203_2025-11-15_WVE_03011326+4457196_LOWRES.html" target="_blank">WVE_03011326+4457196</a></td>
+            <td>J030113.25+445719.50</td>
+            <td>NGC 1160</td>
+            <td>19203</td>
+            <td>LOWRES</td>
+            <td>2025-11-15</td>
+            <td>2025B1</td>
+            <td><span class="res-box overall-box res-good">92</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">96</span></td>
+            <td><span class="res-box res-good">94</span></td>
+            <td><span class="res-box res-good">90</span></td>
+            <td><span class="res-box res-good">76</span></td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
             <td><a href="./CPSv0.94_APSv1.7/19204_2026-01-10_WVE_03011326+4457196_HIGHRES.html" target="_blank">WVE_03011326+4457196</a></td>
+            <td>J030113.25+445719.50</td>
             <td>NGC 1160</td>
             <td>19204</td>
             <td>HIGHRES</td>
@@ -335,7 +532,84 @@ function updateSortIndicators(colIndex, dir) {
         
 
         <tr>
+            <td><a href="./CPSv0.94_APSv1.7/19207_2025-10-23_WVE_03101293+4045564_LOWRES.html" target="_blank">WVE_03101293+4045564</a></td>
+            <td>J031012.92+404556.40</td>
+            <td>IC 0292</td>
+            <td>19207</td>
+            <td>LOWRES</td>
+            <td>2025-10-23</td>
+            <td>2025B1</td>
+            <td><span class="res-box overall-box res-good">93</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">98</span></td>
+            <td><span class="res-box res-good">97</span></td>
+            <td><span class="res-box res-good">89</span></td>
+            <td><span class="res-box res-good">74</span></td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.94_APSv1.7/19208_2025-10-20_WVE_03101293+4045564_HIGHRES.html" target="_blank">WVE_03101293+4045564</a></td>
+            <td>J031012.92+404556.40</td>
+            <td>IC 0292</td>
+            <td>19208</td>
+            <td>HIGHRES</td>
+            <td>2025-10-20</td>
+            <td>2025B1</td>
+            <td><span class="res-box overall-box res-passable">62</span></td>
+            <td><span class="res-box res-passable">37</span></td>
+            <td><span class="res-box res-good">97</span></td>
+            <td><span class="res-box res-passable">47</span></td>
+            <td><span class="res-box res-good">84</span></td>
+            <td><span class="res-box res-good">50</span></td>
+            <td><span class="res-box res-good">58</span></td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.94_APSv1.7/19210_2025-10-30_WVE_03101300+4045581_HIGHRES.html" target="_blank">WVE_03101300+4045581</a></td>
+            <td>J031012.92+404556.40</td>
+            <td>IC 0292</td>
+            <td>19210</td>
+            <td>HIGHRES</td>
+            <td>2025-10-30</td>
+            <td>2025B1</td>
+            <td><span class="res-box overall-box res-passable">67</span></td>
+            <td><span class="res-box res-passable">48</span></td>
+            <td><span class="res-box res-good">96</span></td>
+            <td><span class="res-box res-good">58</span></td>
+            <td><span class="res-box res-good">86</span></td>
+            <td><span class="res-box res-good">60</span></td>
+            <td><span class="res-box res-good">58</span></td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.94_APSv1.7/19214_2026-01-14_WVE_03072338+3750099_LOWRES.html" target="_blank">WVE_03072338+3750099</a></td>
+            <td>J030723.37+375009.90</td>
+            <td>UGC 02543</td>
+            <td>19214</td>
+            <td>LOWRES</td>
+            <td>2026-01-14</td>
+            <td>2025B1</td>
+            <td><span class="res-box overall-box res-good">91</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">92</span></td>
+            <td><span class="res-box res-good">89</span></td>
+            <td><span class="res-box res-good">91</span></td>
+            <td><span class="res-box res-good">76</span></td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
             <td><a href="./CPSv0.94_APSv1.7/19221_2025-12-20_WVE_01240390+1255027_LOWRES.html" target="_blank">WVE_01240390+1255027</a></td>
+            <td>_</td>
             <td>NGC 0514</td>
             <td>19221</td>
             <td>LOWRES</td>
@@ -353,7 +627,46 @@ function updateSortIndicators(colIndex, dir) {
         
 
         <tr>
+            <td><a href="./CPSv0.94_APSv1.7/19224_2025-09-21_WVE_01511755+2221286_LOWRES.html" target="_blank">WVE_01511755+2221286</a></td>
+            <td>_</td>
+            <td>NGC 0674</td>
+            <td>19224</td>
+            <td>LOWRES</td>
+            <td>2025-09-21</td>
+            <td>2025B1</td>
+            <td><span class="res-box overall-box res-good">93</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">97</span></td>
+            <td><span class="res-box res-good">98</span></td>
+            <td><span class="res-box res-good">90</span></td>
+            <td><span class="res-box res-good">75</span></td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.94_APSv1.7/19225_2025-08-25_WVE_02223349+4220512_LOWRES.html" target="_blank">WVE_02223349+4220512</a></td>
+            <td>_</td>
+            <td>NGC 0891</td>
+            <td>19225</td>
+            <td>LOWRES</td>
+            <td>2025-08-25</td>
+            <td>2025B1</td>
+            <td><span class="res-box overall-box res-good">87</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">71</span></td>
+            <td><span class="res-box res-good">95</span></td>
+            <td><span class="res-box res-good">88</span></td>
+            <td><span class="res-box res-good">73</span></td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
             <td><a href="./CPSv0.94_APSv1.7/19226_2026-01-08_WVE_02271690+3334442_LOWRES.html" target="_blank">WVE_02271690+3334442</a></td>
+            <td>_</td>
             <td>NGC 0925</td>
             <td>19226</td>
             <td>LOWRES</td>
@@ -371,7 +684,46 @@ function updateSortIndicators(colIndex, dir) {
         
 
         <tr>
+            <td><a href="./CPSv0.94_APSv1.7/19227_2025-11-27_WVE_02342007+3230203_LOWRES.html" target="_blank">WVE_02342007+3230203</a></td>
+            <td>_</td>
+            <td>NGC 0973</td>
+            <td>19227</td>
+            <td>LOWRES</td>
+            <td>2025-11-27</td>
+            <td>2025B1</td>
+            <td><span class="res-box overall-box res-good">90</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">76</span></td>
+            <td><span class="res-box res-good">98</span></td>
+            <td><span class="res-box res-good">91</span></td>
+            <td><span class="res-box res-good">76</span></td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.94_APSv1.7/19228_2025-12-16_WVE_02342576+3257160_LOWRES.html" target="_blank">WVE_02342576+3257160</a></td>
+            <td>_</td>
+            <td>NGC 0974</td>
+            <td>19228</td>
+            <td>LOWRES</td>
+            <td>2025-12-16</td>
+            <td>2025B1</td>
+            <td><span class="res-box overall-box res-good">90</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">77</span></td>
+            <td><span class="res-box res-good">97</span></td>
+            <td><span class="res-box res-good">90</span></td>
+            <td><span class="res-box res-good">76</span></td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
             <td><a href="./CPSv0.94_APSv1.7/19230_2025-12-29_WVE_07403930+3913598_LOWRES.html" target="_blank">WVE_07403930+3913598</a></td>
+            <td>_</td>
             <td>DESI J115.1637+39.2330</td>
             <td>19230</td>
             <td>LOWRES</td>
@@ -390,6 +742,7 @@ function updateSortIndicators(colIndex, dir) {
 
         <tr>
             <td><a href="./CPSv0.94_APSv1.7/19231_2025-12-28_WVE_08491182+6013164_LOWRES.html" target="_blank">WVE_08491182+6013164</a></td>
+            <td>_</td>
             <td>NGC 2654</td>
             <td>19231</td>
             <td>LOWRES</td>
@@ -407,7 +760,46 @@ function updateSortIndicators(colIndex, dir) {
         
 
         <tr>
+            <td><a href="./CPSv0.94_APSv1.7/20520_2025-10-28_WVE_02541654+4243334_LOWRES.html" target="_blank">WVE_02541654+4243334</a></td>
+            <td>J025416.55+424333.30</td>
+            <td>CGCG 539-121</td>
+            <td>20520</td>
+            <td>LOWRES</td>
+            <td>2025-10-28</td>
+            <td>2025B1</td>
+            <td><span class="res-box overall-box res-good">91</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">94</span></td>
+            <td><span class="res-box res-good">90</span></td>
+            <td><span class="res-box res-good">90</span></td>
+            <td><span class="res-box res-good">75</span></td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.94_APSv1.7/20823_2025-12-26_WVE_02554640+3345599_LOWRES.html" target="_blank">WVE_02554640+3345599</a></td>
+            <td>J025546.42+334559.86</td>
+            <td>UGC 02392</td>
+            <td>20823</td>
+            <td>LOWRES</td>
+            <td>2025-12-26</td>
+            <td>2025B2</td>
+            <td><span class="res-box overall-box res-good">92</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">86</span></td>
+            <td><span class="res-box res-good">98</span></td>
+            <td><span class="res-box res-good">91</span></td>
+            <td><span class="res-box res-good">77</span></td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
             <td><a href="./CPSv0.94_APSv1.7/20826_2026-02-09_WVE_10384318+5633148_LOWRES.html" target="_blank">WVE_10384318+5633148</a></td>
+            <td>J103843.16+563314.70</td>
             <td>CGCG 290-061</td>
             <td>20826</td>
             <td>LOWRES</td>
@@ -426,6 +818,7 @@ function updateSortIndicators(colIndex, dir) {
 
         <tr>
             <td><a href="./CPSv0.94_APSv1.7/20827_2025-12-24_WVE_10543572+5659266_LOWRES.html" target="_blank">WVE_10543572+5659266</a></td>
+            <td>J105435.70+565926.49</td>
             <td>WISEA J105435.60+565926.3</td>
             <td>20827</td>
             <td>LOWRES</td>
@@ -444,6 +837,7 @@ function updateSortIndicators(colIndex, dir) {
 
         <tr>
             <td><a href="./CPSv0.94_APSv1.7/20865_2025-12-20_WVE_01253138+0145327_LOWRES.html" target="_blank">WVE_01253138+0145327</a></td>
+            <td>_</td>
             <td>NGC 0533</td>
             <td>20865</td>
             <td>LOWRES</td>
@@ -462,6 +856,7 @@ function updateSortIndicators(colIndex, dir) {
 
         <tr>
             <td><a href="./CPSv0.94_APSv1.7/20867_2025-12-21_WVE_08491182+6013164_LOWRES.html" target="_blank">WVE_08491182+6013164</a></td>
+            <td>_</td>
             <td>NGC 2654</td>
             <td>20867</td>
             <td>LOWRES</td>
@@ -480,6 +875,7 @@ function updateSortIndicators(colIndex, dir) {
 
         <tr>
             <td><a href="./CPSv0.94_APSv1.7/20872_2026-01-15_WVE_09530715+1640396_LOWRES.html" target="_blank">WVE_09530715+1640396</a></td>
+            <td>_</td>
             <td>NGC 3041</td>
             <td>20872</td>
             <td>LOWRES</td>
@@ -498,6 +894,7 @@ function updateSortIndicators(colIndex, dir) {
 
         <tr>
             <td><a href="./CPSv0.94_APSv1.7/20874_2025-12-30_WVE_11183611+5759597_LOWRES.html" target="_blank">WVE_11183611+5759597</a></td>
+            <td>_</td>
             <td>NGC 3613</td>
             <td>20874</td>
             <td>LOWRES</td>
@@ -516,6 +913,7 @@ function updateSortIndicators(colIndex, dir) {
 
         <tr>
             <td><a href="./CPSv0.94_APSv1.7/20877_2026-01-14_WVE_11405875+1128161_LOWRES.html" target="_blank">WVE_11405875+1128161</a></td>
+            <td>_</td>
             <td>NGC 3810</td>
             <td>20877</td>
             <td>LOWRES</td>
@@ -557,6 +955,7 @@ function updateSortIndicators(colIndex, dir) {
             <div style="margin-top: 15px; margin-bottom: 15px;">
               <b>Spectral Resolution Values (Blue/Red Res):</b>
               <p>
+              This parameter is estimated using L0 (singles) files. <br>
               These values represent the percentage of measured sky lines resolution (R) above 90% of the nominal value 
               along all wavelengths and fiber positions. <br>
               For example: in low resolution mode, where the nominal resolution is R = 2500, this number represents the 
@@ -574,6 +973,7 @@ function updateSortIndicators(colIndex, dir) {
             <div style="margin-top: 15px; margin-bottom: 15px;">
               <b>Fiber Throughput Values (Blue/Red Thr):</b>
               <p>
+              This parameter is estimated using L0 (singles) files. <br>
               These values represent the percentage of fiber presenting median integrated sky flux within 1% of the 
               overall median sky fluxes (measured within all fibers). <br>
               Color-coded classification follows the values below:
@@ -589,6 +989,7 @@ function updateSortIndicators(colIndex, dir) {
             <div style="margin-top: 15px; margin-bottom: 15px;">
               <b>Wavelength Calibration Values (Blue/Red Wave):</b>
               <p>
+              This parameter is estimated using L0 (singles) files. <br>
               These values represent the percentage of fibers showing median sky lines wavelength offsets lower than 
               20% of the spectral pixel size. <br>
               For example: in low resolution mode (with spectral pixes size of 0.5A), the value shows the percentage of 

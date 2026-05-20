@@ -200,7 +200,7 @@ function updateSortIndicators(colIndex, dir) {
           
     <label for="cpsSelect"><b>Select CPS version:</b></label>
     <select id="cpsSelect" onchange="location = this.value;">
-        <option value="index.html">All versions</option><option value="index_CPSv0.90_APSv1.3.html">CPSv0.90_APSv1.3</option><option value="index_CPSv0.91_APSv1.3.html">CPSv0.91_APSv1.3</option><option value="index_CPSv0.92_APSv1.3.html" selected>CPSv0.92_APSv1.3</option><option value="index_CPSv0.93_APSv1.62.html">CPSv0.93_APSv1.62</option><option value="index_CPSv0.94_APSv1.7.html">CPSv0.94_APSv1.7</option>
+        <option value="index.html">All versions</option><option value="index_CPSv0.91_APSv1.3.html">CPSv0.91_APSv1.3</option><option value="index_CPSv0.92_APSv1.3.html" selected>CPSv0.92_APSv1.3</option><option value="index_CPSv0.93_APSv1.62.html">CPSv0.93_APSv1.62</option><option value="index_CPSv0.94_APSv1.7.html">CPSv0.94_APSv1.7</option>
     </select>
     
     
@@ -208,6 +208,7 @@ function updateSortIndicators(colIndex, dir) {
     
         <table id="qc-table">
             <colgroup>
+            <col style="width:200px">
             <col style="width:200px">
             <col style="width:200px">
             <col style="width:100px">
@@ -226,26 +227,47 @@ function updateSortIndicators(colIndex, dir) {
             <thead>
                 <tr>
                     <th onclick="sortTable(0)">WEAVE ID (CNAME)</th>
-                    <th onclick="sortTable(1)">Galaxy name (NED)</th>
-                    <th onclick="sortTable(2)">OB ID</th>
-                    <th onclick="sortTable(3)">LIFU Mode</th>
-                    <th onclick="sortTable(4)">Observation date</th>
-                    <th onclick="sortTable(5)">Trimester</th>
-                    <th onclick="sortTable(6)">QC score</th>
-                    <th onclick="sortTable(7)">Blue Res</th>
-                    <th onclick="sortTable(8)">Red Res</th>
-                    <th onclick="sortTable(9)">Blue Thr</th>
-                    <th onclick="sortTable(10)">Red Thr</th>
-                    <th onclick="sortTable(11)">Blue Wave</th>
-                    <th onclick="sortTable(12)">Red Wave</th>
-                    <th onclick="sortTable(13)">Notes</th>
+                    <th onclick="sortTable(1)">WA_ID</th>
+                    <th onclick="sortTable(2)">Galaxy name (NED)</th>
+                    <th onclick="sortTable(3)">OB ID</th>
+                    <th onclick="sortTable(4)">LIFU Mode</th>
+                    <th onclick="sortTable(5)">Observation date</th>
+                    <th onclick="sortTable(6)">Trimester</th>
+                    <th onclick="sortTable(7)">QC score</th>
+                    <th onclick="sortTable(8)">Blue Res</th>
+                    <th onclick="sortTable(9)">Red Res</th>
+                    <th onclick="sortTable(10)">Blue Thr</th>
+                    <th onclick="sortTable(11)">Red Thr</th>
+                    <th onclick="sortTable(12)">Blue Wave</th>
+                    <th onclick="sortTable(13)">Red Wave</th>
+                    <th onclick="sortTable(14)">Notes</th>
                 </tr>
             </thead>
         
             <tbody>
             
         <tr>
+            <td><a href="./CPSv0.92_APSv1.3/11152_2024-05-01_WVE_13531785+3329270_HIGHRES.html" target="_blank">WVE_13531785+3329270</a></td>
+            <td>J135318.06+332928.2</td>
+            <td>NGC 5347</td>
+            <td>11152</td>
+            <td>HIGHRES</td>
+            <td>2024-05-01</td>
+            <td>2023B2</td>
+            <td><span class="res-box overall-box res-passable">43</span></td>
+            <td><span class="res-box res-good">55</span></td>
+            <td><span class="res-box res-good">52</span></td>
+            <td><span class="res-box res-bad">10</span></td>
+            <td><span class="res-box res-passable">36</span></td>
+            <td><span class="res-box res-good">67</span></td>
+            <td><span class="res-box res-passable">41</span></td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
             <td><a href="./CPSv0.92_APSv1.3/12005_2024-09-10_WVE_02260048+3928152_HIGHRES.html" target="_blank">WVE_02260048+3928152</a></td>
+            <td>J022600.49+392815.30</td>
             <td>UGC 01886</td>
             <td>12005</td>
             <td>HIGHRES</td>
@@ -264,6 +286,7 @@ function updateSortIndicators(colIndex, dir) {
 
         <tr>
             <td><a href="./CPSv0.92_APSv1.3/12006_2024-09-06_WVE_02260042+3928169_HIGHRES.html" target="_blank">WVE_02260042+3928169</a></td>
+            <td>J022600.49+392815.30</td>
             <td>UGC 01886</td>
             <td>12006</td>
             <td>HIGHRES</td>
@@ -282,6 +305,7 @@ function updateSortIndicators(colIndex, dir) {
 
         <tr>
             <td><a href="./CPSv0.92_APSv1.3/12012_2024-09-08_WVE_02342580+3257160_HIGHRES.html" target="_blank">WVE_02342580+3257160</a></td>
+            <td>J023425.80+325716.18</td>
             <td>NGC 0974</td>
             <td>12012</td>
             <td>HIGHRES</td>
@@ -300,6 +324,7 @@ function updateSortIndicators(colIndex, dir) {
 
         <tr>
             <td><a href="./CPSv0.92_APSv1.3/12013_2024-09-06_WVE_02342580+3257160_HIGHRES.html" target="_blank">WVE_02342580+3257160</a></td>
+            <td>J023425.80+325716.18</td>
             <td>NGC 0974</td>
             <td>12013</td>
             <td>HIGHRES</td>
@@ -318,6 +343,7 @@ function updateSortIndicators(colIndex, dir) {
 
         <tr>
             <td><a href="./CPSv0.92_APSv1.3/12019_2024-09-06_WVE_02423551+3445505_HIGHRES.html" target="_blank">WVE_02423551+3445505</a></td>
+            <td>J024235.59+344548.60</td>
             <td>NGC 1050</td>
             <td>12019</td>
             <td>HIGHRES</td>
@@ -335,7 +361,27 @@ function updateSortIndicators(colIndex, dir) {
         
 
         <tr>
+            <td><a href="./CPSv0.92_APSv1.3/12704_2024-04-30_WVE_15015092+4752315_LOWRES.html" target="_blank">WVE_15015092+4752315</a></td>
+            <td>J150150.91+475231.43</td>
+            <td>NGC 5830</td>
+            <td>12704</td>
+            <td>LOWRES</td>
+            <td>2024-04-30</td>
+            <td>2024A2</td>
+            <td><span class="res-box overall-box res-good">77</span></td>
+            <td><span class="res-box res-good">68</span></td>
+            <td><span class="res-box res-good">97</span></td>
+            <td><span class="res-box res-good">67</span></td>
+            <td><span class="res-box res-good">99</span></td>
+            <td><span class="res-box res-good">76</span></td>
+            <td><span class="res-box res-good">60</span></td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
             <td><a href="./CPSv0.92_APSv1.3/12705_2024-05-10_WVE_15015092+4752315_HIGHRES.html" target="_blank">WVE_15015092+4752315</a></td>
+            <td>J150150.91+475231.43</td>
             <td>NGC 5830</td>
             <td>12705</td>
             <td>HIGHRES</td>
@@ -354,6 +400,7 @@ function updateSortIndicators(colIndex, dir) {
 
         <tr>
             <td><a href="./CPSv0.92_APSv1.3/12715_2024-05-11_WVE_15332784+5633349_HIGHRES.html" target="_blank">WVE_15332784+5633349</a></td>
+            <td>J153327.86+563334.90</td>
             <td>NGC 5963</td>
             <td>12715</td>
             <td>HIGHRES</td>
@@ -371,7 +418,27 @@ function updateSortIndicators(colIndex, dir) {
         
 
         <tr>
+            <td><a href="./CPSv0.92_APSv1.3/12717_2024-05-01_WVE_15353690+5627423_LOWRES.html" target="_blank">WVE_15353690+5627423</a></td>
+            <td>J153536.89+562742.07</td>
+            <td>NGC 5971</td>
+            <td>12717</td>
+            <td>LOWRES</td>
+            <td>2024-05-01</td>
+            <td>2024A2</td>
+            <td><span class="res-box overall-box res-good">72</span></td>
+            <td><span class="res-box res-good">67</span></td>
+            <td><span class="res-box res-good">96</span></td>
+            <td><span class="res-box res-good">58</span></td>
+            <td><span class="res-box res-good">83</span></td>
+            <td><span class="res-box res-good">75</span></td>
+            <td><span class="res-box res-good">58</span></td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
             <td><a href="./CPSv0.92_APSv1.3/12741_2024-09-09_WVE_17271155+1132370_LOWRES.html" target="_blank">WVE_17271155+1132370</a></td>
+            <td>_</td>
             <td>NGC 6368</td>
             <td>12741</td>
             <td>LOWRES</td>
@@ -413,6 +480,7 @@ function updateSortIndicators(colIndex, dir) {
             <div style="margin-top: 15px; margin-bottom: 15px;">
               <b>Spectral Resolution Values (Blue/Red Res):</b>
               <p>
+              This parameter is estimated using L0 (singles) files. <br>
               These values represent the percentage of measured sky lines resolution (R) above 90% of the nominal value 
               along all wavelengths and fiber positions. <br>
               For example: in low resolution mode, where the nominal resolution is R = 2500, this number represents the 
@@ -430,6 +498,7 @@ function updateSortIndicators(colIndex, dir) {
             <div style="margin-top: 15px; margin-bottom: 15px;">
               <b>Fiber Throughput Values (Blue/Red Thr):</b>
               <p>
+              This parameter is estimated using L0 (singles) files. <br>
               These values represent the percentage of fiber presenting median integrated sky flux within 1% of the 
               overall median sky fluxes (measured within all fibers). <br>
               Color-coded classification follows the values below:
@@ -445,6 +514,7 @@ function updateSortIndicators(colIndex, dir) {
             <div style="margin-top: 15px; margin-bottom: 15px;">
               <b>Wavelength Calibration Values (Blue/Red Wave):</b>
               <p>
+              This parameter is estimated using L0 (singles) files. <br>
               These values represent the percentage of fibers showing median sky lines wavelength offsets lower than 
               20% of the spectral pixel size. <br>
               For example: in low resolution mode (with spectral pixes size of 0.5A), the value shows the percentage of 

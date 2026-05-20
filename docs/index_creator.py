@@ -77,6 +77,7 @@ def make_table_rows(objects):
         rows.append(f"""
         <tr>
             <td><a href="{o['html_file']}" target="_blank">{o['weave_id']}</a></td>
+            <td>{o['wa_id']}</td>
             <td>{o['galaxy']}</td>
             <td>{o['ob_id']}</td>
             <td>{o['mode']}</td>
@@ -163,6 +164,7 @@ def read_objects(txtfile, txt_dir):
         "weave_id": lines[0],
         "galaxy": lines[1],
         "ob_id": lines[2],
+        "wa_id": lines[12],
         "mode": lines[3],
         "date": lines[4],
         "trimester": lines[5],
@@ -484,6 +486,7 @@ function updateSortIndicators(colIndex, dir) {{
             <colgroup>
             <col style="width:200px">
             <col style="width:200px">
+            <col style="width:200px">
             <col style="width:100px">
             <col style="width:100px">
             <col style="width:100px">
@@ -500,19 +503,20 @@ function updateSortIndicators(colIndex, dir) {{
             <thead>
                 <tr>
                     <th onclick="sortTable(0)">WEAVE ID (CNAME)</th>
-                    <th onclick="sortTable(1)">Galaxy name (NED)</th>
-                    <th onclick="sortTable(2)">OB ID</th>
-                    <th onclick="sortTable(3)">LIFU Mode</th>
-                    <th onclick="sortTable(4)">Observation date</th>
-                    <th onclick="sortTable(5)">Trimester</th>
-                    <th onclick="sortTable(6)">QC score</th>
-                    <th onclick="sortTable(7)">Blue Res</th>
-                    <th onclick="sortTable(8)">Red Res</th>
-                    <th onclick="sortTable(9)">Blue Thr</th>
-                    <th onclick="sortTable(10)">Red Thr</th>
-                    <th onclick="sortTable(11)">Blue Wave</th>
-                    <th onclick="sortTable(12)">Red Wave</th>
-                    <th onclick="sortTable(13)">Notes</th>
+                    <th onclick="sortTable(1)">WA_ID</th>
+                    <th onclick="sortTable(2)">Galaxy name (NED)</th>
+                    <th onclick="sortTable(3)">OB ID</th>
+                    <th onclick="sortTable(4)">LIFU Mode</th>
+                    <th onclick="sortTable(5)">Observation date</th>
+                    <th onclick="sortTable(6)">Trimester</th>
+                    <th onclick="sortTable(7)">QC score</th>
+                    <th onclick="sortTable(8)">Blue Res</th>
+                    <th onclick="sortTable(9)">Red Res</th>
+                    <th onclick="sortTable(10)">Blue Thr</th>
+                    <th onclick="sortTable(11)">Red Thr</th>
+                    <th onclick="sortTable(12)">Blue Wave</th>
+                    <th onclick="sortTable(13)">Red Wave</th>
+                    <th onclick="sortTable(14)">Notes</th>
                 </tr>
             </thead>
         
@@ -544,6 +548,7 @@ function updateSortIndicators(colIndex, dir) {{
             <div style="margin-top: 15px; margin-bottom: 15px;">
               <b>Spectral Resolution Values (Blue/Red Res):</b>
               <p>
+              This parameter is estimated using L0 (singles) files. <br>
               These values represent the percentage of measured sky lines resolution (R) above 90% of the nominal value 
               along all wavelengths and fiber positions. <br>
               For example: in low resolution mode, where the nominal resolution is R = 2500, this number represents the 
@@ -561,6 +566,7 @@ function updateSortIndicators(colIndex, dir) {{
             <div style="margin-top: 15px; margin-bottom: 15px;">
               <b>Fiber Throughput Values (Blue/Red Thr):</b>
               <p>
+              This parameter is estimated using L0 (singles) files. <br>
               These values represent the percentage of fiber presenting median integrated sky flux within 1% of the 
               overall median sky fluxes (measured within all fibers). <br>
               Color-coded classification follows the values below:
@@ -576,6 +582,7 @@ function updateSortIndicators(colIndex, dir) {{
             <div style="margin-top: 15px; margin-bottom: 15px;">
               <b>Wavelength Calibration Values (Blue/Red Wave):</b>
               <p>
+              This parameter is estimated using L0 (singles) files. <br>
               These values represent the percentage of fibers showing median sky lines wavelength offsets lower than 
               20% of the spectral pixel size. <br>
               For example: in low resolution mode (with spectral pixes size of 0.5A), the value shows the percentage of 
