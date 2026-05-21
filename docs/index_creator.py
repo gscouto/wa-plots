@@ -387,9 +387,13 @@ let sortDirection = {{}};
 let currentSortedCol = null;
 
 function getCellValue(td) {{
+  const sortKey = td.getAttribute("data-sort");
+  if (sortKey !== null) return sortKey;
+
   const text = td.textContent.trim();
   const num = parseFloat(text);
-  if (!isNaN(num)) return num;
+  if (!isNaN(num) && text.match(/^\d+(\.\d+)?$/)) return num;
+
   return text.toLowerCase();
 }}
 

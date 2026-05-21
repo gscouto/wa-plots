@@ -106,9 +106,13 @@ let sortDirection = {};
 let currentSortedCol = null;
 
 function getCellValue(td) {
+  const sortKey = td.getAttribute("data-sort");
+  if (sortKey !== null) return sortKey;
+
   const text = td.textContent.trim();
   const num = parseFloat(text);
-  if (!isNaN(num)) return num;
+  if (!isNaN(num) && text.match(/^\d+(\.\d+)?$/)) return num;
+
   return text.toLowerCase();
 }
 
@@ -248,7 +252,7 @@ function updateSortIndicators(colIndex, dir) {
             
         <tr>
             <td><a href="./CPSv0.94_APSv1.7/12311_2025-12-29_WVE_09471545+6754587_LOWRES.html" target="_blank">WVE_09471545+6754587</a></td>
-            <td>_</td>
+            <td>NGC2976</td>
             <td>NGC 2976</td>
             <td>12311</td>
             <td>LOWRES</td>
@@ -609,7 +613,7 @@ function updateSortIndicators(colIndex, dir) {
 
         <tr>
             <td><a href="./CPSv0.94_APSv1.7/19221_2025-12-20_WVE_01240390+1255027_LOWRES.html" target="_blank">WVE_01240390+1255027</a></td>
-            <td>_</td>
+            <td>NGC0514</td>
             <td>NGC 0514</td>
             <td>19221</td>
             <td>LOWRES</td>
@@ -628,7 +632,7 @@ function updateSortIndicators(colIndex, dir) {
 
         <tr>
             <td><a href="./CPSv0.94_APSv1.7/19224_2025-09-21_WVE_01511755+2221286_LOWRES.html" target="_blank">WVE_01511755+2221286</a></td>
-            <td>_</td>
+            <td>NGC0697</td>
             <td>NGC 0674</td>
             <td>19224</td>
             <td>LOWRES</td>
@@ -647,7 +651,7 @@ function updateSortIndicators(colIndex, dir) {
 
         <tr>
             <td><a href="./CPSv0.94_APSv1.7/19225_2025-08-25_WVE_02223349+4220512_LOWRES.html" target="_blank">WVE_02223349+4220512</a></td>
-            <td>_</td>
+            <td>NGC0891</td>
             <td>NGC 0891</td>
             <td>19225</td>
             <td>LOWRES</td>
@@ -666,7 +670,7 @@ function updateSortIndicators(colIndex, dir) {
 
         <tr>
             <td><a href="./CPSv0.94_APSv1.7/19226_2026-01-08_WVE_02271690+3334442_LOWRES.html" target="_blank">WVE_02271690+3334442</a></td>
-            <td>_</td>
+            <td>NGC0925</td>
             <td>NGC 0925</td>
             <td>19226</td>
             <td>LOWRES</td>
@@ -685,7 +689,7 @@ function updateSortIndicators(colIndex, dir) {
 
         <tr>
             <td><a href="./CPSv0.94_APSv1.7/19227_2025-11-27_WVE_02342007+3230203_LOWRES.html" target="_blank">WVE_02342007+3230203</a></td>
-            <td>_</td>
+            <td>NGC0973</td>
             <td>NGC 0973</td>
             <td>19227</td>
             <td>LOWRES</td>
@@ -704,7 +708,7 @@ function updateSortIndicators(colIndex, dir) {
 
         <tr>
             <td><a href="./CPSv0.94_APSv1.7/19228_2025-12-16_WVE_02342576+3257160_LOWRES.html" target="_blank">WVE_02342576+3257160</a></td>
-            <td>_</td>
+            <td>NGC0974</td>
             <td>NGC 0974</td>
             <td>19228</td>
             <td>LOWRES</td>
@@ -723,7 +727,7 @@ function updateSortIndicators(colIndex, dir) {
 
         <tr>
             <td><a href="./CPSv0.94_APSv1.7/19230_2025-12-29_WVE_07403930+3913598_LOWRES.html" target="_blank">WVE_07403930+3913598</a></td>
-            <td>_</td>
+            <td>NGC2424</td>
             <td>DESI J115.1637+39.2330</td>
             <td>19230</td>
             <td>LOWRES</td>
@@ -742,7 +746,7 @@ function updateSortIndicators(colIndex, dir) {
 
         <tr>
             <td><a href="./CPSv0.94_APSv1.7/19231_2025-12-28_WVE_08491182+6013164_LOWRES.html" target="_blank">WVE_08491182+6013164</a></td>
-            <td>_</td>
+            <td>NGC2654</td>
             <td>NGC 2654</td>
             <td>19231</td>
             <td>LOWRES</td>
@@ -837,7 +841,7 @@ function updateSortIndicators(colIndex, dir) {
 
         <tr>
             <td><a href="./CPSv0.94_APSv1.7/20865_2025-12-20_WVE_01253138+0145327_LOWRES.html" target="_blank">WVE_01253138+0145327</a></td>
-            <td>_</td>
+            <td>NGC0533</td>
             <td>NGC 0533</td>
             <td>20865</td>
             <td>LOWRES</td>
@@ -856,7 +860,7 @@ function updateSortIndicators(colIndex, dir) {
 
         <tr>
             <td><a href="./CPSv0.94_APSv1.7/20867_2025-12-21_WVE_08491182+6013164_LOWRES.html" target="_blank">WVE_08491182+6013164</a></td>
-            <td>_</td>
+            <td>NGC2654</td>
             <td>NGC 2654</td>
             <td>20867</td>
             <td>LOWRES</td>
@@ -875,7 +879,7 @@ function updateSortIndicators(colIndex, dir) {
 
         <tr>
             <td><a href="./CPSv0.94_APSv1.7/20872_2026-01-15_WVE_09530715+1640396_LOWRES.html" target="_blank">WVE_09530715+1640396</a></td>
-            <td>_</td>
+            <td>NGC3041</td>
             <td>NGC 3041</td>
             <td>20872</td>
             <td>LOWRES</td>
@@ -894,7 +898,7 @@ function updateSortIndicators(colIndex, dir) {
 
         <tr>
             <td><a href="./CPSv0.94_APSv1.7/20874_2025-12-30_WVE_11183611+5759597_LOWRES.html" target="_blank">WVE_11183611+5759597</a></td>
-            <td>_</td>
+            <td>NGC3613</td>
             <td>NGC 3613</td>
             <td>20874</td>
             <td>LOWRES</td>
@@ -913,7 +917,7 @@ function updateSortIndicators(colIndex, dir) {
 
         <tr>
             <td><a href="./CPSv0.94_APSv1.7/20877_2026-01-14_WVE_11405875+1128161_LOWRES.html" target="_blank">WVE_11405875+1128161</a></td>
-            <td>_</td>
+            <td>NGC3810</td>
             <td>NGC 3810</td>
             <td>20877</td>
             <td>LOWRES</td>

@@ -106,9 +106,13 @@ let sortDirection = {};
 let currentSortedCol = null;
 
 function getCellValue(td) {
+  const sortKey = td.getAttribute("data-sort");
+  if (sortKey !== null) return sortKey;
+
   const text = td.textContent.trim();
   const num = parseFloat(text);
-  if (!isNaN(num)) return num;
+  if (!isNaN(num) && text.match(/^\d+(\.\d+)?$/)) return num;
+
   return text.toLowerCase();
 }
 
@@ -248,7 +252,7 @@ function updateSortIndicators(colIndex, dir) {
             
         <tr>
             <td><a href="./CPSv0.92_APSv1.3/11152_2024-05-01_WVE_13531785+3329270_HIGHRES.html" target="_blank">WVE_13531785+3329270</a></td>
-            <td>J135318.06+332928.2</td>
+            <td>J135317.83+332926.98</td>
             <td>NGC 5347</td>
             <td>11152</td>
             <td>HIGHRES</td>
@@ -438,7 +442,7 @@ function updateSortIndicators(colIndex, dir) {
 
         <tr>
             <td><a href="./CPSv0.92_APSv1.3/12741_2024-09-09_WVE_17271155+1132370_LOWRES.html" target="_blank">WVE_17271155+1132370</a></td>
-            <td>_</td>
+            <td>NGC6368</td>
             <td>NGC 6368</td>
             <td>12741</td>
             <td>LOWRES</td>
