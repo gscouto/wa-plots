@@ -28,13 +28,17 @@
   td:nth-child(11),
   td:nth-child(12),
   td:nth-child(13),
+  td:nth-child(14),
+  td:nth-child(15),
   th:nth-child(7),
   th:nth-child(8),
   th:nth-child(9),
   th:nth-child(10),
   th:nth-child(11),
   th:nth-child(12),
-  th:nth-child(13) {
+  th:nth-child(13),
+  th:nth-child(14),
+  th:nth-child(15) {
     text-align: center;
   }
 
@@ -226,7 +230,9 @@ function updateSortIndicators(colIndex, dir) {
             <col style="width:60px">
             <col style="width:60px">
             <col style="width:60px">
-            <col style="width:200px">
+            <col style="width:60px">
+            <col style="width:60px">
+            <col style="width:150px">
             </colgroup>
             <thead>
                 <tr>
@@ -244,12 +250,35 @@ function updateSortIndicators(colIndex, dir) {
                     <th onclick="sortTable(11)">Red Thr</th>
                     <th onclick="sortTable(12)">Blue Wave</th>
                     <th onclick="sortTable(13)">Red Wave</th>
-                    <th onclick="sortTable(14)">Notes</th>
+                    <th onclick="sortTable(14)">Flux Cal Median</th>
+                    <th onclick="sortTable(15)">Flux Cal Std</th>
+                    <th onclick="sortTable(16)">Notes</th>
                 </tr>
             </thead>
         
             <tbody>
             
+        <tr>
+            <td><a href="./CPSv0.94_APSv1.7/14026_2025-12-20_WVE_14030100+3445266_HIGHRES.html" target="_blank">WVE_14030100+3445266</a></td>
+            <td>J140301.04+344528.31</td>
+            <td>NGC 5440</td>
+            <td>14026</td>
+            <td>HIGHRES</td>
+            <td>2025-12-20</td>
+            <td>2023B2</td>
+            <td><span class="res-box overall-box res-passable">69</span></td>
+            <td><span class="res-box res-passable">48</span></td>
+            <td><span class="res-box res-good">97</span></td>
+            <td><span class="res-box res-good">57</span></td>
+            <td><span class="res-box res-good">98</span></td>
+            <td><span class="res-box res-good">56</span></td>
+            <td><span class="res-box res-good">60</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
+            <td></td>
+        </tr>
+        
+
         <tr>
             <td><a href="./CPSv0.94_APSv1.7/12311_2025-12-29_WVE_09471545+6754587_LOWRES.html" target="_blank">WVE_09471545+6754587</a></td>
             <td>NGC2976</td>
@@ -258,13 +287,15 @@ function updateSortIndicators(colIndex, dir) {
             <td>LOWRES</td>
             <td>2025-12-29</td>
             <td>2024A1</td>
-            <td><span class="res-box overall-box res-good">91</span></td>
+            <td><span class="res-box overall-box res-good">86</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">84</span></td>
             <td><span class="res-box res-good">96</span></td>
             <td><span class="res-box res-good">91</span></td>
             <td><span class="res-box res-good">78</span></td>
+            <td><span class="res-box res-good">63</span></td>
+            <td><span class="res-box res-good">77</span></td>
             <td></td>
         </tr>
         
@@ -277,13 +308,15 @@ function updateSortIndicators(colIndex, dir) {
             <td>LOWRES</td>
             <td>2025-10-30</td>
             <td>2025A1</td>
-            <td><span class="res-box overall-box res-good">92</span></td>
+            <td><span class="res-box overall-box res-good">78</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">96</span></td>
             <td><span class="res-box res-good">97</span></td>
             <td><span class="res-box res-good">90</span></td>
             <td><span class="res-box res-good">74</span></td>
+            <td><span class="res-box res-good">56</span></td>
+            <td><span class="res-box res-bad">15</span></td>
             <td></td>
         </tr>
         
@@ -296,13 +329,36 @@ function updateSortIndicators(colIndex, dir) {
             <td>LOWRES</td>
             <td>2025-10-28</td>
             <td>2025A1</td>
-            <td><span class="res-box overall-box res-good">91</span></td>
+            <td><span class="res-box overall-box res-good">82</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">94</span></td>
             <td><span class="res-box res-good">89</span></td>
             <td><span class="res-box res-good">90</span></td>
             <td><span class="res-box res-good">74</span></td>
+            <td><span class="res-box res-passable">41</span></td>
+            <td><span class="res-box res-good">75</span></td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.94_APSv1.7/15299_2025-10-19_WVE_02481614+3425112_LOWRES.html" target="_blank">WVE_02481614+3425112</a></td>
+            <td>J024816.15+342511.20</td>
+            <td>NGC 1093</td>
+            <td>15299</td>
+            <td>LOWRES</td>
+            <td>2025-10-19</td>
+            <td>2025A1</td>
+            <td><span class="res-box overall-box res-good">75</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">97</span></td>
+            <td><span class="res-box res-good">93</span></td>
+            <td><span class="res-box res-good">90</span></td>
+            <td><span class="res-box res-good">75</span></td>
+            <td><span class="res-box res-passable">46</span></td>
+            <td><span class="res-box res-bad">0</span></td>
             <td></td>
         </tr>
         
@@ -315,13 +371,15 @@ function updateSortIndicators(colIndex, dir) {
             <td>LOWRES</td>
             <td>2026-01-23</td>
             <td>2025A2</td>
-            <td><span class="res-box overall-box res-good">93</span></td>
+            <td><span class="res-box overall-box res-good">85</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">99</span></td>
             <td><span class="res-box res-good">96</span></td>
             <td><span class="res-box res-good">90</span></td>
             <td><span class="res-box res-good">76</span></td>
+            <td><span class="res-box res-passable">49</span></td>
+            <td><span class="res-box res-good">75</span></td>
             <td></td>
         </tr>
         
@@ -341,6 +399,8 @@ function updateSortIndicators(colIndex, dir) {
             <td><span class="res-box res-good">67</span></td>
             <td><span class="res-box res-passable">38</span></td>
             <td><span class="res-box res-good">58</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
             <td></td>
         </tr>
         
@@ -353,13 +413,15 @@ function updateSortIndicators(colIndex, dir) {
             <td>LOWRES</td>
             <td>2026-01-22</td>
             <td>2025A2</td>
-            <td><span class="res-box overall-box res-good">93</span></td>
+            <td><span class="res-box overall-box res-good">81</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">99</span></td>
             <td><span class="res-box res-good">96</span></td>
             <td><span class="res-box res-good">90</span></td>
             <td><span class="res-box res-good">76</span></td>
+            <td><span class="res-box res-good">57</span></td>
+            <td><span class="res-box res-passable">31</span></td>
             <td></td>
         </tr>
         
@@ -372,13 +434,15 @@ function updateSortIndicators(colIndex, dir) {
             <td>LOWRES</td>
             <td>2025-08-17</td>
             <td>2025B1</td>
-            <td><span class="res-box overall-box res-good">92</span></td>
+            <td><span class="res-box overall-box res-good">85</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">94</span></td>
             <td><span class="res-box res-good">99</span></td>
             <td><span class="res-box res-good">87</span></td>
             <td><span class="res-box res-good">72</span></td>
+            <td><span class="res-box res-passable">46</span></td>
+            <td><span class="res-box res-good">83</span></td>
             <td></td>
         </tr>
         
@@ -391,13 +455,15 @@ function updateSortIndicators(colIndex, dir) {
             <td>LOWRES</td>
             <td>2025-10-02</td>
             <td>2025B1</td>
-            <td><span class="res-box overall-box res-good">90</span></td>
+            <td><span class="res-box overall-box res-good">74</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">80</span></td>
             <td><span class="res-box res-good">98</span></td>
             <td><span class="res-box res-good">89</span></td>
             <td><span class="res-box res-good">73</span></td>
+            <td><span class="res-box res-good">60</span></td>
+            <td><span class="res-box res-bad">0</span></td>
             <td></td>
         </tr>
         
@@ -410,13 +476,15 @@ function updateSortIndicators(colIndex, dir) {
             <td>LOWRES</td>
             <td>2025-10-27</td>
             <td>2025B1</td>
-            <td><span class="res-box overall-box res-good">92</span></td>
+            <td><span class="res-box overall-box res-good">79</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">93</span></td>
             <td><span class="res-box res-good">98</span></td>
             <td><span class="res-box res-good">89</span></td>
             <td><span class="res-box res-good">74</span></td>
+            <td><span class="res-box res-good">53</span></td>
+            <td><span class="res-box res-passable">31</span></td>
             <td></td>
         </tr>
         
@@ -436,6 +504,29 @@ function updateSortIndicators(colIndex, dir) {
             <td><span class="res-box res-good">99</span></td>
             <td><span class="res-box res-good">71</span></td>
             <td><span class="res-box res-good">59</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.94_APSv1.7/19191_2025-09-23_WVE_02243410+3310065_HIGHRES.html" target="_blank">WVE_02243410+3310065</a></td>
+            <td>J022434.11+331006.70</td>
+            <td>UGC 01857</td>
+            <td>19191</td>
+            <td>HIGHRES</td>
+            <td>2025-09-23</td>
+            <td>2025B1</td>
+            <td><span class="res-box overall-box res-passable">58</span></td>
+            <td><span class="res-box res-passable">46</span></td>
+            <td><span class="res-box res-good">96</span></td>
+            <td><span class="res-box res-bad">26</span></td>
+            <td><span class="res-box res-good">84</span></td>
+            <td><span class="res-box res-passable">42</span></td>
+            <td><span class="res-box res-good">58</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
             <td></td>
         </tr>
         
@@ -455,6 +546,8 @@ function updateSortIndicators(colIndex, dir) {
             <td><span class="res-box res-good">98</span></td>
             <td><span class="res-box res-good">59</span></td>
             <td><span class="res-box res-good">59</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
             <td></td>
         </tr>
         
@@ -467,13 +560,15 @@ function updateSortIndicators(colIndex, dir) {
             <td>LOWRES</td>
             <td>2025-09-14</td>
             <td>2025B1</td>
-            <td><span class="res-box overall-box res-good">93</span></td>
+            <td><span class="res-box overall-box res-good">73</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">96</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">89</span></td>
             <td><span class="res-box res-good">74</span></td>
+            <td><span class="res-box res-bad">27</span></td>
+            <td><span class="res-box res-bad">0</span></td>
             <td></td>
         </tr>
         
@@ -486,13 +581,15 @@ function updateSortIndicators(colIndex, dir) {
             <td>LOWRES</td>
             <td>2026-01-14</td>
             <td>2025B1</td>
-            <td><span class="res-box overall-box res-good">93</span></td>
+            <td><span class="res-box overall-box res-good">80</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">96</span></td>
             <td><span class="res-box res-good">98</span></td>
             <td><span class="res-box res-good">91</span></td>
             <td><span class="res-box res-good">75</span></td>
+            <td><span class="res-box res-good">63</span></td>
+            <td><span class="res-box res-bad">21</span></td>
             <td></td>
         </tr>
         
@@ -505,13 +602,15 @@ function updateSortIndicators(colIndex, dir) {
             <td>LOWRES</td>
             <td>2025-11-15</td>
             <td>2025B1</td>
-            <td><span class="res-box overall-box res-good">92</span></td>
+            <td><span class="res-box overall-box res-good">78</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">96</span></td>
             <td><span class="res-box res-good">94</span></td>
             <td><span class="res-box res-good">90</span></td>
             <td><span class="res-box res-good">76</span></td>
+            <td><span class="res-box res-good">51</span></td>
+            <td><span class="res-box res-bad">23</span></td>
             <td></td>
         </tr>
         
@@ -531,6 +630,29 @@ function updateSortIndicators(colIndex, dir) {
             <td><span class="res-box res-good">72</span></td>
             <td><span class="res-box res-good">53</span></td>
             <td><span class="res-box res-good">59</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.94_APSv1.7/19205_2025-11-17_WVE_03011326+4457196_HIGHRES.html" target="_blank">WVE_03011326+4457196</a></td>
+            <td>J030113.25+445719.50</td>
+            <td>NGC 1160</td>
+            <td>19205</td>
+            <td>HIGHRES</td>
+            <td>2025-11-17</td>
+            <td>2025B1</td>
+            <td><span class="res-box overall-box res-passable">65</span></td>
+            <td><span class="res-box res-bad">20</span></td>
+            <td><span class="res-box res-good">96</span></td>
+            <td><span class="res-box res-passable">38</span></td>
+            <td><span class="res-box res-good">85</span></td>
+            <td><span class="res-box res-good">91</span></td>
+            <td><span class="res-box res-good">60</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
             <td></td>
         </tr>
         
@@ -543,13 +665,15 @@ function updateSortIndicators(colIndex, dir) {
             <td>LOWRES</td>
             <td>2025-10-23</td>
             <td>2025B1</td>
-            <td><span class="res-box overall-box res-good">93</span></td>
+            <td><span class="res-box overall-box res-good">76</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">98</span></td>
             <td><span class="res-box res-good">97</span></td>
             <td><span class="res-box res-good">89</span></td>
             <td><span class="res-box res-good">74</span></td>
+            <td><span class="res-box res-good">54</span></td>
+            <td><span class="res-box res-bad">0</span></td>
             <td></td>
         </tr>
         
@@ -569,6 +693,29 @@ function updateSortIndicators(colIndex, dir) {
             <td><span class="res-box res-good">84</span></td>
             <td><span class="res-box res-good">50</span></td>
             <td><span class="res-box res-good">58</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.94_APSv1.7/19209_2025-09-26_WVE_03101293+4045564_HIGHRES.html" target="_blank">WVE_03101293+4045564</a></td>
+            <td>J031012.92+404556.40</td>
+            <td>IC 0292</td>
+            <td>19209</td>
+            <td>HIGHRES</td>
+            <td>2025-09-26</td>
+            <td>2025B1</td>
+            <td><span class="res-box overall-box res-passable">65</span></td>
+            <td><span class="res-box res-passable">46</span></td>
+            <td><span class="res-box res-good">95</span></td>
+            <td><span class="res-box res-good">54</span></td>
+            <td><span class="res-box res-good">88</span></td>
+            <td><span class="res-box res-good">54</span></td>
+            <td><span class="res-box res-good">58</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
             <td></td>
         </tr>
         
@@ -588,6 +735,8 @@ function updateSortIndicators(colIndex, dir) {
             <td><span class="res-box res-good">86</span></td>
             <td><span class="res-box res-good">60</span></td>
             <td><span class="res-box res-good">58</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
             <td></td>
         </tr>
         
@@ -600,13 +749,15 @@ function updateSortIndicators(colIndex, dir) {
             <td>LOWRES</td>
             <td>2026-01-14</td>
             <td>2025B1</td>
-            <td><span class="res-box overall-box res-good">91</span></td>
+            <td><span class="res-box overall-box res-good">76</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">92</span></td>
             <td><span class="res-box res-good">89</span></td>
             <td><span class="res-box res-good">91</span></td>
             <td><span class="res-box res-good">76</span></td>
+            <td><span class="res-box res-good">68</span></td>
+            <td><span class="res-box res-bad">0</span></td>
             <td></td>
         </tr>
         
@@ -619,13 +770,15 @@ function updateSortIndicators(colIndex, dir) {
             <td>LOWRES</td>
             <td>2025-12-20</td>
             <td>2025B1</td>
-            <td><span class="res-box overall-box res-good">93</span></td>
+            <td><span class="res-box overall-box res-good">82</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">97</span></td>
             <td><span class="res-box res-good">90</span></td>
             <td><span class="res-box res-good">76</span></td>
+            <td><span class="res-box res-good">54</span></td>
+            <td><span class="res-box res-passable">43</span></td>
             <td></td>
         </tr>
         
@@ -638,13 +791,15 @@ function updateSortIndicators(colIndex, dir) {
             <td>LOWRES</td>
             <td>2025-09-21</td>
             <td>2025B1</td>
-            <td><span class="res-box overall-box res-good">93</span></td>
+            <td><span class="res-box overall-box res-good">83</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">97</span></td>
             <td><span class="res-box res-good">98</span></td>
             <td><span class="res-box res-good">90</span></td>
             <td><span class="res-box res-good">75</span></td>
+            <td><span class="res-box res-good">57</span></td>
+            <td><span class="res-box res-passable">48</span></td>
             <td></td>
         </tr>
         
@@ -657,13 +812,15 @@ function updateSortIndicators(colIndex, dir) {
             <td>LOWRES</td>
             <td>2025-08-25</td>
             <td>2025B1</td>
-            <td><span class="res-box overall-box res-good">87</span></td>
+            <td><span class="res-box overall-box res-good">79</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">71</span></td>
             <td><span class="res-box res-good">95</span></td>
             <td><span class="res-box res-good">88</span></td>
             <td><span class="res-box res-good">73</span></td>
+            <td><span class="res-box res-passable">49</span></td>
+            <td><span class="res-box res-good">59</span></td>
             <td></td>
         </tr>
         
@@ -676,13 +833,15 @@ function updateSortIndicators(colIndex, dir) {
             <td>LOWRES</td>
             <td>2026-01-08</td>
             <td>2025B1</td>
-            <td><span class="res-box overall-box res-good">84</span></td>
+            <td><span class="res-box overall-box res-good">79</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">75</span></td>
             <td><span class="res-box res-good">66</span></td>
             <td><span class="res-box res-good">90</span></td>
             <td><span class="res-box res-good">77</span></td>
+            <td><span class="res-box res-passable">45</span></td>
+            <td><span class="res-box res-good">79</span></td>
             <td></td>
         </tr>
         
@@ -695,13 +854,15 @@ function updateSortIndicators(colIndex, dir) {
             <td>LOWRES</td>
             <td>2025-11-27</td>
             <td>2025B1</td>
-            <td><span class="res-box overall-box res-good">90</span></td>
+            <td><span class="res-box overall-box res-good">75</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">76</span></td>
             <td><span class="res-box res-good">98</span></td>
             <td><span class="res-box res-good">91</span></td>
             <td><span class="res-box res-good">76</span></td>
+            <td><span class="res-box res-good">55</span></td>
+            <td><span class="res-box res-bad">9</span></td>
             <td></td>
         </tr>
         
@@ -714,13 +875,15 @@ function updateSortIndicators(colIndex, dir) {
             <td>LOWRES</td>
             <td>2025-12-16</td>
             <td>2025B1</td>
-            <td><span class="res-box overall-box res-good">90</span></td>
+            <td><span class="res-box overall-box res-good">76</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">77</span></td>
             <td><span class="res-box res-good">97</span></td>
             <td><span class="res-box res-good">90</span></td>
             <td><span class="res-box res-good">76</span></td>
+            <td><span class="res-box res-good">56</span></td>
+            <td><span class="res-box res-bad">13</span></td>
             <td></td>
         </tr>
         
@@ -733,13 +896,15 @@ function updateSortIndicators(colIndex, dir) {
             <td>LOWRES</td>
             <td>2025-12-29</td>
             <td>2025B1</td>
-            <td><span class="res-box overall-box res-good">89</span></td>
+            <td><span class="res-box overall-box res-good">76</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">74</span></td>
             <td><span class="res-box res-good">98</span></td>
             <td><span class="res-box res-good">91</span></td>
             <td><span class="res-box res-good">75</span></td>
+            <td><span class="res-box res-good">52</span></td>
+            <td><span class="res-box res-bad">21</span></td>
             <td></td>
         </tr>
         
@@ -752,13 +917,36 @@ function updateSortIndicators(colIndex, dir) {
             <td>LOWRES</td>
             <td>2025-12-28</td>
             <td>2025B1</td>
-            <td><span class="res-box overall-box res-good">93</span></td>
+            <td><span class="res-box overall-box res-good">81</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">92</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">90</span></td>
             <td><span class="res-box res-good">78</span></td>
+            <td><span class="res-box res-good">72</span></td>
+            <td><span class="res-box res-bad">24</span></td>
+            <td></td>
+        </tr>
+        
+
+        <tr>
+            <td><a href="./CPSv0.94_APSv1.7/20448_2025-10-06_WVE_02185125+3343275_LOWRES.html" target="_blank">WVE_02185125+3343275</a></td>
+            <td>J021851.25+334327.70</td>
+            <td>UGC 01778</td>
+            <td>20448</td>
+            <td>LOWRES</td>
+            <td>2025-10-06</td>
+            <td>2025B1</td>
+            <td><span class="res-box overall-box res-good">71</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">96</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">100</span></td>
+            <td><span class="res-box res-good">78</span></td>
+            <td><span class="res-box res-bad">0</span></td>
+            <td><span class="res-box res-bad">0</span></td>
             <td></td>
         </tr>
         
@@ -771,13 +959,15 @@ function updateSortIndicators(colIndex, dir) {
             <td>LOWRES</td>
             <td>2025-10-28</td>
             <td>2025B1</td>
-            <td><span class="res-box overall-box res-good">91</span></td>
+            <td><span class="res-box overall-box res-good">74</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">94</span></td>
             <td><span class="res-box res-good">90</span></td>
             <td><span class="res-box res-good">90</span></td>
             <td><span class="res-box res-good">75</span></td>
+            <td><span class="res-box res-passable">46</span></td>
+            <td><span class="res-box res-bad">3</span></td>
             <td></td>
         </tr>
         
@@ -790,13 +980,15 @@ function updateSortIndicators(colIndex, dir) {
             <td>LOWRES</td>
             <td>2025-12-26</td>
             <td>2025B2</td>
-            <td><span class="res-box overall-box res-good">92</span></td>
+            <td><span class="res-box overall-box res-good">73</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">86</span></td>
             <td><span class="res-box res-good">98</span></td>
             <td><span class="res-box res-good">91</span></td>
             <td><span class="res-box res-good">77</span></td>
+            <td><span class="res-box res-passable">36</span></td>
+            <td><span class="res-box res-bad">3</span></td>
             <td></td>
         </tr>
         
@@ -809,13 +1001,15 @@ function updateSortIndicators(colIndex, dir) {
             <td>LOWRES</td>
             <td>2026-02-09</td>
             <td>2025B2</td>
-            <td><span class="res-box overall-box res-good">91</span></td>
+            <td><span class="res-box overall-box res-good">79</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">86</span></td>
             <td><span class="res-box res-good">99</span></td>
             <td><span class="res-box res-good">91</span></td>
             <td><span class="res-box res-good">74</span></td>
+            <td><span class="res-box res-good">55</span></td>
+            <td><span class="res-box res-bad">30</span></td>
             <td></td>
         </tr>
         
@@ -828,13 +1022,15 @@ function updateSortIndicators(colIndex, dir) {
             <td>LOWRES</td>
             <td>2025-12-24</td>
             <td>2025B2</td>
-            <td><span class="res-box overall-box res-good">91</span></td>
+            <td><span class="res-box overall-box res-good">78</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">82</span></td>
             <td><span class="res-box res-good">97</span></td>
             <td><span class="res-box res-good">91</span></td>
             <td><span class="res-box res-good">78</span></td>
+            <td><span class="res-box res-good">56</span></td>
+            <td><span class="res-box res-bad">24</span></td>
             <td></td>
         </tr>
         
@@ -847,13 +1043,15 @@ function updateSortIndicators(colIndex, dir) {
             <td>LOWRES</td>
             <td>2025-12-20</td>
             <td>2025B2</td>
-            <td><span class="res-box overall-box res-good">88</span></td>
+            <td><span class="res-box overall-box res-good">81</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">77</span></td>
             <td><span class="res-box res-good">89</span></td>
             <td><span class="res-box res-good">90</span></td>
             <td><span class="res-box res-good">76</span></td>
+            <td><span class="res-box res-good">53</span></td>
+            <td><span class="res-box res-good">64</span></td>
             <td></td>
         </tr>
         
@@ -866,13 +1064,15 @@ function updateSortIndicators(colIndex, dir) {
             <td>LOWRES</td>
             <td>2025-12-21</td>
             <td>2025B2</td>
-            <td><span class="res-box overall-box res-good">91</span></td>
+            <td><span class="res-box overall-box res-good">83</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">85</span></td>
             <td><span class="res-box res-good">97</span></td>
             <td><span class="res-box res-good">91</span></td>
             <td><span class="res-box res-good">76</span></td>
+            <td><span class="res-box res-good">77</span></td>
+            <td><span class="res-box res-passable">39</span></td>
             <td></td>
         </tr>
         
@@ -885,13 +1085,15 @@ function updateSortIndicators(colIndex, dir) {
             <td>LOWRES</td>
             <td>2026-01-15</td>
             <td>2025B2</td>
-            <td><span class="res-box overall-box res-good">91</span></td>
+            <td><span class="res-box overall-box res-good">84</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">89</span></td>
             <td><span class="res-box res-good">91</span></td>
             <td><span class="res-box res-good">90</span></td>
             <td><span class="res-box res-good">76</span></td>
+            <td><span class="res-box res-good">51</span></td>
+            <td><span class="res-box res-good">81</span></td>
             <td></td>
         </tr>
         
@@ -904,13 +1106,15 @@ function updateSortIndicators(colIndex, dir) {
             <td>LOWRES</td>
             <td>2025-12-30</td>
             <td>2025B2</td>
-            <td><span class="res-box overall-box res-good">87</span></td>
+            <td><span class="res-box overall-box res-good">82</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">58</span></td>
             <td><span class="res-box res-good">97</span></td>
             <td><span class="res-box res-good">90</span></td>
             <td><span class="res-box res-good">77</span></td>
+            <td><span class="res-box res-good">63</span></td>
+            <td><span class="res-box res-good">79</span></td>
             <td></td>
         </tr>
         
@@ -923,13 +1127,15 @@ function updateSortIndicators(colIndex, dir) {
             <td>LOWRES</td>
             <td>2026-01-14</td>
             <td>2025B2</td>
-            <td><span class="res-box overall-box res-good">92</span></td>
+            <td><span class="res-box overall-box res-good">87</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">92</span></td>
             <td><span class="res-box res-good">97</span></td>
             <td><span class="res-box res-good">92</span></td>
             <td><span class="res-box res-good">76</span></td>
+            <td><span class="res-box res-good">53</span></td>
+            <td><span class="res-box res-good">89</span></td>
             <td></td>
         </tr>
         
@@ -999,6 +1205,31 @@ function updateSortIndicators(colIndex, dir) {
               For example: in low resolution mode (with spectral pixes size of 0.5A), the value shows the percentage of 
               fibers with median (calculate over all measured sky lines) wavelength offsets below 0.1A (in absolute 
               numbers). <br>
+              Color-coded classification follows the values below:
+              </p>
+              <ul style="margin-top: 5px;">
+                <li><span class="res-box res-good">50+</span> Good</li>
+                <li><span class="res-box res-passable">30–49</span> Passable</li>
+                <li><span class="res-box res-bad">0–29</span> Bad</li>
+              </ul>
+            </div>
+          </p>
+          <p>
+            <div style="margin-top: 15px; margin-bottom: 15px;">
+              <b>Flux Calibration Values (Flux Cal Median/Std):</b>
+              <p>
+              This parameter is estimated using L0 (singles) files. <br>
+              These values are obtained in the color magnitudes differences plots, which are calculated comparing the
+              estimated magnitudes in g, r and i bands within the single files with the values given in the input 
+              catalogues found the in the fibtables. <br>
+              Median values are represented by the dashed lines in these plots. In this table the parameter value is 
+              given by the equation: median = 100 * (1 - (Δ mag/0.5)), where Δ mag is the mean difference taking into 
+              account (g-r), (r-i) and (g-i) colors. <br>
+              This equation is = 0 when the median color difference is Δ mag = 0.5 dex (or above), while it has = 100 
+              when the difference is Δ mag = 0. <br>
+              Std values are represented by the gray filled region in these plots. The parameter values in this table 
+              follows the same equation as for the median values mentioned above, with 100 when std = 0 and 0 when 
+              std = 0.5 dex.<br>
               Color-coded classification follows the values below:
               </p>
               <ul style="margin-top: 5px;">

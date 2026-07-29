@@ -28,13 +28,17 @@
   td:nth-child(11),
   td:nth-child(12),
   td:nth-child(13),
+  td:nth-child(14),
+  td:nth-child(15),
   th:nth-child(7),
   th:nth-child(8),
   th:nth-child(9),
   th:nth-child(10),
   th:nth-child(11),
   th:nth-child(12),
-  th:nth-child(13) {
+  th:nth-child(13),
+  th:nth-child(14),
+  th:nth-child(15) {
     text-align: center;
   }
 
@@ -226,7 +230,9 @@ function updateSortIndicators(colIndex, dir) {
             <col style="width:60px">
             <col style="width:60px">
             <col style="width:60px">
-            <col style="width:200px">
+            <col style="width:60px">
+            <col style="width:60px">
+            <col style="width:150px">
             </colgroup>
             <thead>
                 <tr>
@@ -244,7 +250,9 @@ function updateSortIndicators(colIndex, dir) {
                     <th onclick="sortTable(11)">Red Thr</th>
                     <th onclick="sortTable(12)">Blue Wave</th>
                     <th onclick="sortTable(13)">Red Wave</th>
-                    <th onclick="sortTable(14)">Notes</th>
+                    <th onclick="sortTable(14)">Flux Cal Median</th>
+                    <th onclick="sortTable(15)">Flux Cal Std</th>
+                    <th onclick="sortTable(16)">Notes</th>
                 </tr>
             </thead>
         
@@ -265,6 +273,8 @@ function updateSortIndicators(colIndex, dir) {
             <td><span class="res-box res-passable">36</span></td>
             <td><span class="res-box res-good">67</span></td>
             <td><span class="res-box res-passable">41</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
             <td></td>
         </tr>
         
@@ -284,6 +294,8 @@ function updateSortIndicators(colIndex, dir) {
             <td><span class="res-box res-bad">13</span></td>
             <td><span class="res-box res-good">74</span></td>
             <td><span class="res-box res-passable">39</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
             <td></td>
         </tr>
         
@@ -303,6 +315,8 @@ function updateSortIndicators(colIndex, dir) {
             <td><span class="res-box res-bad">12</span></td>
             <td><span class="res-box res-good">88</span></td>
             <td><span class="res-box res-passable">38</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
             <td></td>
         </tr>
         
@@ -322,6 +336,8 @@ function updateSortIndicators(colIndex, dir) {
             <td><span class="res-box res-passable">40</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-passable">38</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
             <td></td>
         </tr>
         
@@ -341,6 +357,8 @@ function updateSortIndicators(colIndex, dir) {
             <td><span class="res-box res-bad">18</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-passable">38</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
             <td></td>
         </tr>
         
@@ -360,6 +378,8 @@ function updateSortIndicators(colIndex, dir) {
             <td><span class="res-box res-bad">24</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-passable">38</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
             <td></td>
         </tr>
         
@@ -372,13 +392,15 @@ function updateSortIndicators(colIndex, dir) {
             <td>LOWRES</td>
             <td>2024-04-30</td>
             <td>2024A2</td>
-            <td><span class="res-box overall-box res-good">77</span></td>
+            <td><span class="res-box overall-box res-good">70</span></td>
             <td><span class="res-box res-good">68</span></td>
             <td><span class="res-box res-good">97</span></td>
             <td><span class="res-box res-good">67</span></td>
             <td><span class="res-box res-good">99</span></td>
             <td><span class="res-box res-good">76</span></td>
             <td><span class="res-box res-good">60</span></td>
+            <td><span class="res-box res-good">70</span></td>
+            <td><span class="res-box res-bad">24</span></td>
             <td></td>
         </tr>
         
@@ -398,6 +420,8 @@ function updateSortIndicators(colIndex, dir) {
             <td><span class="res-box res-good">51</span></td>
             <td><span class="res-box res-passable">43</span></td>
             <td><span class="res-box res-passable">39</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
             <td></td>
         </tr>
         
@@ -417,6 +441,8 @@ function updateSortIndicators(colIndex, dir) {
             <td><span class="res-box res-passable">41</span></td>
             <td><span class="res-box res-good">57</span></td>
             <td><span class="res-box res-passable">39</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
+            <td><span class="res-box res-unknown">-</span></td>
             <td></td>
         </tr>
         
@@ -429,13 +455,15 @@ function updateSortIndicators(colIndex, dir) {
             <td>LOWRES</td>
             <td>2024-05-01</td>
             <td>2024A2</td>
-            <td><span class="res-box overall-box res-good">72</span></td>
+            <td><span class="res-box overall-box res-passable">69</span></td>
             <td><span class="res-box res-good">67</span></td>
             <td><span class="res-box res-good">96</span></td>
             <td><span class="res-box res-good">58</span></td>
             <td><span class="res-box res-good">83</span></td>
             <td><span class="res-box res-good">75</span></td>
             <td><span class="res-box res-good">58</span></td>
+            <td><span class="res-box res-good">80</span></td>
+            <td><span class="res-box res-passable">38</span></td>
             <td></td>
         </tr>
         
@@ -448,13 +476,15 @@ function updateSortIndicators(colIndex, dir) {
             <td>LOWRES</td>
             <td>2024-09-09</td>
             <td>2024A2</td>
-            <td><span class="res-box overall-box res-good">79</span></td>
+            <td><span class="res-box overall-box res-passable">68</span></td>
             <td><span class="res-box res-good">67</span></td>
             <td><span class="res-box res-good">97</span></td>
             <td><span class="res-box res-good">79</span></td>
             <td><span class="res-box res-good">100</span></td>
             <td><span class="res-box res-good">76</span></td>
             <td><span class="res-box res-good">58</span></td>
+            <td><span class="res-box res-good">73</span></td>
+            <td><span class="res-box res-bad">0</span></td>
             <td></td>
         </tr>
         
@@ -524,6 +554,31 @@ function updateSortIndicators(colIndex, dir) {
               For example: in low resolution mode (with spectral pixes size of 0.5A), the value shows the percentage of 
               fibers with median (calculate over all measured sky lines) wavelength offsets below 0.1A (in absolute 
               numbers). <br>
+              Color-coded classification follows the values below:
+              </p>
+              <ul style="margin-top: 5px;">
+                <li><span class="res-box res-good">50+</span> Good</li>
+                <li><span class="res-box res-passable">30–49</span> Passable</li>
+                <li><span class="res-box res-bad">0–29</span> Bad</li>
+              </ul>
+            </div>
+          </p>
+          <p>
+            <div style="margin-top: 15px; margin-bottom: 15px;">
+              <b>Flux Calibration Values (Flux Cal Median/Std):</b>
+              <p>
+              This parameter is estimated using L0 (singles) files. <br>
+              These values are obtained in the color magnitudes differences plots, which are calculated comparing the
+              estimated magnitudes in g, r and i bands within the single files with the values given in the input 
+              catalogues found the in the fibtables. <br>
+              Median values are represented by the dashed lines in these plots. In this table the parameter value is 
+              given by the equation: median = 100 * (1 - (Δ mag/0.5)), where Δ mag is the mean difference taking into 
+              account (g-r), (r-i) and (g-i) colors. <br>
+              This equation is = 0 when the median color difference is Δ mag = 0.5 dex (or above), while it has = 100 
+              when the difference is Δ mag = 0. <br>
+              Std values are represented by the gray filled region in these plots. The parameter values in this table 
+              follows the same equation as for the median values mentioned above, with 100 when std = 0 and 0 when 
+              std = 0.5 dex.<br>
               Color-coded classification follows the values below:
               </p>
               <ul style="margin-top: 5px;">

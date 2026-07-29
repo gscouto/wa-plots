@@ -1,6 +1,25 @@
 import os
 from collections import defaultdict
 import re
+import math
+
+
+def fluxcal_badge(value):
+    try:
+        v = float(value)
+        if math.isnan(v):
+            raise ValueError
+    except:
+        return '<span class="res-box res-unknown">-</span>'
+
+    if v >= 50:
+        cls = "res-good"
+    elif v >= 30:
+        cls = "res-passable"
+    else:
+        cls = "res-bad"
+
+    return f'<span class="res-box {cls}">{int(round(v))}</span>'
 
 
 def group_by_cps(objects):
@@ -90,6 +109,8 @@ def make_table_rows(objects):
             <td>{throughput_badge(o['red_thr'])}</td>
             <td>{wavelength_badge(o['blue_wave'])}</td>
             <td>{wavelength_badge(o['red_wave'])}</td>
+            <td>{fluxcal_badge(o['fluxcal_median'])}</td>
+            <td>{fluxcal_badge(o['fluxcal_std'])}</td>
             <td></td>
         </tr>
         """)
@@ -99,7 +120,7 @@ def make_table_rows(objects):
 
 def overall_badge(value):
     if value is None:
-        return '<span class="res-unknown overall-box">?</span>'
+        return '<span class="res-unknown overall-box">-</span>'
 
     v = float(value)
 
@@ -117,11 +138,12 @@ def overall_score(o):
     values = [
         o["blue_res"], o["red_res"],
         o["blue_thr"], o["red_thr"],
-        o["blue_wave"], o["red_wave"]
+        o["blue_wave"], o["red_wave"],
+        o["fluxcal_median"], o["fluxcal_std"]
     ]
 
     # remove invalid values if needed
-    vals = [v for v in values if v is not None]
+    vals = [v for v in values if v is not None and not math.isnan(v)]
 
     if not vals:
         return None
@@ -140,6 +162,13 @@ def parse_cps_version(cps_name):
     return float(m.group(1))
 
 
+def parse_float(value):
+    try:
+        return float(value)
+    except:
+        return None
+
+
 def read_all_cps_dirs(root_dir):
     all_objects = []
 
@@ -154,7 +183,7 @@ def read_objects(txtfile, txt_dir):
     with open(txtfile, 'r') as f:
         lines = [l.strip() for l in f if l.strip()]
 
-    if len(lines) < 12:
+    if len(lines) < 15:
         raise ValueError("Input file does not have enough information")
 
     base = os.path.splitext(os.path.basename(txtfile))[0]
@@ -164,7 +193,7 @@ def read_objects(txtfile, txt_dir):
         "weave_id": lines[0],
         "galaxy": lines[1],
         "ob_id": lines[2],
-        "wa_id": lines[12],
+        "wa_id": lines[14],
         "mode": lines[3],
         "date": lines[4],
         "trimester": lines[5],
@@ -174,6 +203,8 @@ def read_objects(txtfile, txt_dir):
         "red_thr": int(float(lines[9])),
         "blue_wave": int(float(lines[10])),
         "red_wave": int(float(lines[11])),
+        "fluxcal_median": parse_float(lines[12]),
+        "fluxcal_std": parse_float(lines[13]),
         "html_file": html_path,
         "cps_dir": os.path.basename(txt_dir),
     }
@@ -196,7 +227,7 @@ def resolution_badge(value):
     try:
         v = float(value)
     except:
-        return '<span class="res-unknown">?</span>'
+        return '<span class="res-unknown">-</span>'
 
     if v >= 50:
         cls = "res-good"
@@ -219,7 +250,7 @@ def throughput_badge(value):
     try:
         v = float(value)
     except:
-        return '<span class="res-unknown">?</span>'
+        return '<span class="res-unknown">-</span>'
 
     if v >= 50:
         cls = "res-good"
@@ -235,7 +266,7 @@ def wavelength_badge(value):
     try:
         v = float(value)
     except:
-        return '<span class="res-unknown">?</span>'
+        return '<span class="res-unknown">-</span>'
 
     if v >= 50:
         cls = "res-good"
@@ -309,13 +340,17 @@ text = f'''
   td:nth-child(11),
   td:nth-child(12),
   td:nth-child(13),
+  td:nth-child(14),
+  td:nth-child(15),
   th:nth-child(7),
   th:nth-child(8),
   th:nth-child(9),
   th:nth-child(10),
   th:nth-child(11),
   th:nth-child(12),
-  th:nth-child(13) {{
+  th:nth-child(13),
+  th:nth-child(14),
+  th:nth-child(15) {{
     text-align: center;
   }}
 
@@ -502,7 +537,9 @@ function updateSortIndicators(colIndex, dir) {{
             <col style="width:60px">
             <col style="width:60px">
             <col style="width:60px">
-            <col style="width:200px">
+            <col style="width:60px">
+            <col style="width:60px">
+            <col style="width:150px">
             </colgroup>
             <thead>
                 <tr>
@@ -520,7 +557,9 @@ function updateSortIndicators(colIndex, dir) {{
                     <th onclick="sortTable(11)">Red Thr</th>
                     <th onclick="sortTable(12)">Blue Wave</th>
                     <th onclick="sortTable(13)">Red Wave</th>
-                    <th onclick="sortTable(14)">Notes</th>
+                    <th onclick="sortTable(14)">Flux Cal Median</th>
+                    <th onclick="sortTable(15)">Flux Cal Std</th>
+                    <th onclick="sortTable(16)">Notes</th>
                 </tr>
             </thead>
         
@@ -592,6 +631,31 @@ function updateSortIndicators(colIndex, dir) {{
               For example: in low resolution mode (with spectral pixes size of 0.5A), the value shows the percentage of 
               fibers with median (calculate over all measured sky lines) wavelength offsets below 0.1A (in absolute 
               numbers). <br>
+              Color-coded classification follows the values below:
+              </p>
+              <ul style="margin-top: 5px;">
+                <li><span class="res-box res-good">50+</span> Good</li>
+                <li><span class="res-box res-passable">30–49</span> Passable</li>
+                <li><span class="res-box res-bad">0–29</span> Bad</li>
+              </ul>
+            </div>
+          </p>
+          <p>
+            <div style="margin-top: 15px; margin-bottom: 15px;">
+              <b>Flux Calibration Values (Flux Cal Median/Std):</b>
+              <p>
+              This parameter is estimated using L0 (singles) files. <br>
+              These values are obtained in the color magnitudes differences plots, which are calculated comparing the
+              estimated magnitudes in g, r and i bands within the single files with the values given in the input 
+              catalogues found the in the fibtables. <br>
+              Median values are represented by the dashed lines in these plots. In this table the parameter value is 
+              given by the equation: median = 100 * (1 - (Δ mag/0.5)), where Δ mag is the mean difference taking into 
+              account (g-r), (r-i) and (g-i) colors. <br>
+              This equation is = 0 when the median color difference is Δ mag = 0.5 dex (or above), while it has = 100 
+              when the difference is Δ mag = 0. <br>
+              Std values are represented by the gray filled region in these plots. The parameter values in this table 
+              follows the same equation as for the median values mentioned above, with 100 when std = 0 and 0 when 
+              std = 0.5 dex.<br>
               Color-coded classification follows the values below:
               </p>
               <ul style="margin-top: 5px;">
